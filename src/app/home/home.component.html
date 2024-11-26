@@ -1,0 +1,426 @@
+<div class="main">
+  <header>
+    <div class="inner-header">
+      <img src="https://c0.wallpaperflare.com/preview/440/715/681/dark-green-green-elaf-dark-background.jpg" alt="" />
+    </div>
+    <div class="outer-header">
+      <app-navbar></app-navbar>
+      <div class="helements">
+        <div class="nav2">
+          <div class="nav-element" *ngFor="let category of plantcategory">
+            <img [src]="category.image" alt="">
+            <a class="nav-link">{{ category.name }}</a>
+          </div>          
+        </div>
+      </div>
+      <div class="c1">
+        <div class="contents">
+          <div class="main-left">
+            <p class="headline">
+              Explore Nature's Healing Wisdom<br />
+              With Our<br />
+              <span>Virtual Herbal Garden</span>
+            </p>
+            <p>
+              Discover the diverse world of medicinal plants used in AYUSH with
+              our immersive Virtual Herbal Garden. Learn, interact, and experience
+              the ancient traditions of herbal medicine through 3D models,
+              detailed information, and intuitive features.
+            </p>
+            <div class="search">
+              <button class="searchBtn" (click)="openSearchPopup()">Search Plants&nbsp;<i class="fa-solid fa-leaf"></i></button>
+            </div>
+          </div>
+          <div class="main-right">
+            <model-viewer src="tulsi_lb.glb" camera-controls auto-rotate class="model3D"></model-viewer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="search-popup" *ngIf="showPopup">
+    <div class="popup-content">
+      <!-- Dropdown for selecting search fields -->
+      <div class="search-content-flex">
+        <select [(ngModel)]="selectedField" id="options">
+          <option value="all">All</option>
+          <option value="commonNames">Common Names</option>
+          <option value="botanicalName">Botanical Name</option>
+          <option value="partsUsed">Parts Used</option>
+          <option value="medicinalUses">Medicinal Uses</option>
+          <option value="cultivationMethods">Cultivation Methods</option>
+          <option value="category">Cure Type</option>
+          <option value="family">Plant Family</option>
+          <option value="region">Region Found</option>
+          <option value="type">Ayush Category</option>
+        </select>
+
+        <!-- Input field for search query -->
+        <input
+          type="text"
+          [placeholder]="placeholderText"
+          [(ngModel)]="searchQuery"
+          (input)="searchPlants()"
+          class="search-input"
+        />
+      </div>
+
+      <!-- Search results -->
+      <div class="search-results">
+        <!-- Loader while fetching results -->
+        <div *ngIf="isLoading" class="loader">Loading...</div>
+        <!-- No results found -->
+        <div
+          *ngIf="!isLoading && searchResults.length === 0 && searchQuery"
+          class="notFound"
+        >
+          Search not found&nbsp;<img
+            src="https://cdn3.iconfinder.com/data/icons/elastic-search-line/128/Elastic_Search_-_Line-10-512.png"
+            alt=""
+          />
+        </div>
+        <!-- Display results -->
+        <div
+          *ngFor="let plant of searchResults"
+          class="search-item"
+          (click)="openPlantDetails(plant.plantId)"
+        >
+          <div class="searched-item">
+            <h4 [innerHTML]="plant.highlightedCommonNames"></h4>
+            <img [src]="plant.images[0]" />
+          </div>
+          <div *ngFor="let match of getMatchingFields(plant)">
+            <strong>{{ match.key }}:</strong>
+            <span [innerHTML]="match.value"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Close button -->
+      <button class="close-btn" (click)="closeSearchPopup()">Close</button>
+    </div>
+  </div>
+  <div class="wrapper">
+    <h2 class="heading2" style="margin: 20px auto">
+      Take A Look On Some Plants
+    </h2>
+    <div class="plant-container">
+      <div class="plant" *ngFor="let plant of plants">
+        <div class="plant-card" (click)="openPlantDetails(plant._id)">
+          <!-- Display the first image from the images array -->
+          <div class="plant-image">
+            <img
+              *ngIf="plant.images.length > 0"
+              [src]="plant.images[0]"
+              alt="{{ plant.botanicalName }}"
+            />
+          </div>
+
+          <!-- Display the first common name -->
+          <h3 class="plant-common-name">
+            {{ plant.commonNames[0] || "Unknown Name" }}
+          </h3>
+
+          <!-- Display the botanical name -->
+          <h4 class="plant-botanical-name">
+            <i>{{ plant.botanicalName }}</i>
+          </h4>
+
+          <!-- Display the trimmed description -->
+          <p class="plant-description">
+            {{ trimDescription(plant.description, 180) }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="Viewer">
+    <video src="video.mp4" autoplay loop></video>
+  </div>
+  <div class="wrapper" id="wrapper">
+    <div class="overview">
+      <p class="heading1">Ayush Overview</p>
+      <div class="overviews">
+        <div class="overview-content" id="o1">
+          <div class="oi">
+            <img src="ayurveda.png" />
+          </div>
+          <div class="ot">
+            <h3>Ayurveda</h3>
+            <p>
+              Ayurveda is the time tested traditional system of medicine of
+              India. The term 'Ayurveda' meaning 'the knowledge of life'
+              comprises of two Sanskrit words viz 'Ayu' meaning 'Life' and
+              'Veda' meaning 'Knowledge' or 'Science'.
+            </p>
+          </div>
+        </div>
+        <div class="overview-content" id="o2">
+          <div class="oi">
+            <img src="yoga.png" />
+          </div>
+          <div class="ot">
+            <h3>Yoga & Naturopathy</h3>
+            <p>
+              The word 'Yoga' comes from the Sanskrit word 'yuj' which means 'to
+              unite or integrate'. Yoga is about the union of a person's own
+              consciousness and the universal consciousness. Naturopathy is a
+              cost effective drugless, non-invasive therapy involving the use of
+              natural materials for health care and healthy living.
+            </p>
+          </div>
+        </div>
+        <div class="overview-content" id="o3">
+          <div class="oi">
+            <img src="unani.png" />
+          </div>
+          <div class="ot">
+            <h3>Unani</h3>
+            <p>
+              Unani System of medicine is a comprehensive medical system, which
+              provides preventive, promotive, curative and rehabilitative health
+              care. The system is holistic in nature and takes into account the
+              whole personality of an individual rather than taking a
+              reductionist approach towards disease.
+            </p>
+          </div>
+        </div>
+        <div class="overview-content" id="o4">
+          <div class="oi">
+            <img src="siddha.png" />
+          </div>
+          <div class="ot">
+            <h3>Siddha</h3>
+            <p>
+              The Siddha system is an ancient system of medicine in India. The
+              word 'Siddha' is derived from the root word "Citti" meaning
+              attainment of perfection, eternal bliss and accomplishment.
+            </p>
+          </div>
+        </div>
+        <div class="overview-content" id="o5">
+          <div class="oi">
+            <img src="sowa.png" />
+          </div>
+          <div class="ot">
+            <h3>Sowa Rigpa</h3>
+            <p>
+              The word 'Yoga' comes from the Sanskrit word 'yuj' which means 'to
+              unite or integrate'. Yoga is about the union of a person's own
+              consciousness and the universal consciousness. Naturopathy is a
+              cost effective drugless, non-invasive therapy involving the use of
+              natural materials for health care and healthy living.
+            </p>
+          </div>
+        </div>
+        <div class="overview-content" id="o6">
+          <div class="oi">
+            <img src="unani.png" />
+          </div>
+          <div class="ot">
+            <h3>Homeopathy</h3>
+            <p>
+              'Homoeopathy' was introduced as a scientific system of drug
+              therapeutics by a German Physician, Dr. Christian Frederick Samuel
+              Hahnemann in 1805. The principle of Homoeopathy is Similia
+              Similibus Curentur i.e. let likes be treated by likes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chart">
+      <canvas id="MyChart" height="200px"></canvas>
+    </div>
+  </div>
+  <div class="wrapper" id="wrapper2">
+    <div class="cards" #counterSection>
+      <div class="card">
+        <h2><span id="counter1" data-target="1000">0</span>&nbsp;+</h2>
+        <h3>Herbal Plants Cataloged</h3>
+      </div>
+      <div class="card">
+        <h2><span id="counter2" data-target="500">0</span>&nbsp;+</h2>
+        <h3>Verified Ayurvedic Remedies</h3>
+      </div>
+      <div class="card">
+        <h2><span id="counter3" data-target="100000">0</span>&nbsp;+</h2>
+        <h3>Monthly Website Visits</h3>
+      </div>
+    </div>
+  </div>
+  <!-------------Gallery & Review Section------------->
+  <div class="mixed">
+    <div class="minner">
+      <div class="gallery">
+        <h2 class="heading2">Gallery</h2>
+        <div class="galleryImages">
+          <div class="galleryImage">
+            <img
+              src="https://www.housedigest.com/img/gallery/15-trees-with-medicinal-properties-you-can-grow-in-your-yard/l-intro-1667174157.jpg"
+              alt=""
+            />
+          </div>
+          <div class="galleryImage">
+            <img
+              src="https://th.bing.com/th/id/OIP.RSdTzQ9M4zN3pzV5gDlY_AHaE7?rs=1&pid=ImgDetMain"
+              alt=""
+            />
+          </div>
+          <div class="galleryImage">
+            <img
+              src="https://th.bing.com/th/id/OIP.azMlbf2Vzmhnuuz8S0ecTAHaE7?w=1280&h=853&rs=1&pid=ImgDetMain"
+              alt=""
+            />
+          </div>
+          <div class="galleryImage">
+            <img
+              src="https://th.bing.com/th/id/OIP.yIKV9CvRKwbwNpIb-TDYGQHaEA?w=1024&h=555&rs=1&pid=ImgDetMain"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+      <div class="review">
+        <h2 class="heading2">Reviews</h2>
+        <canvas id="RatingChart"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="community">
+    <div class="community-header">
+      <h2>JOIN YOUR COMMUNITY</h2>
+      <strong>Create authentic relationship </strong>
+      <a href="https://chat.whatsapp.com/EaI6V7q3rnXKd8YlMDbhgo" target="_blank" rel="noopener noreferrer"><button>Get Started</button></a>
+    </div>
+    <img src="https://www.pngall.com/wp-content/uploads/1/Community-Free-Download-PNG.png" alt="">    
+  </div>
+  <!------------------Contact Section-------------->
+  <div class="c5" id="contact">
+    <h2 style="margin-bottom: 18px">Contact Us</h2>
+    <div class="contactSection">
+      <div class="contactDetails">
+        <h2>Get In Touch</h2>
+        <div class="contacts">
+          <div class="contact">
+            <div class="contactIcon">
+              <i class="fa-solid fa-map-marker-alt"></i>
+            </div>
+            <div class="contactText">
+              <span>Address</span>
+              <p>
+                Ministry of Ayush, Ayush Bhawan, B Block, GPO Complex, INA, New
+                Delhi – 110023
+              </p>
+            </div>
+          </div>
+          <div class="contact">
+            <div class="contactIcon">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="contactText">
+              <span>Phone Number</span>
+              <p>1800-11-22-02</p>
+            </div>
+          </div>
+          <div class="contact">
+            <div class="contactIcon">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="contactText">
+              <span>Email</span>
+              <p>support&#64;ayush.gov.in</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="messageForm">
+        <form
+          [formGroup]="contactForm"
+          (ngSubmit)="onSubmit()"
+          class="contactForm"
+        >
+          <h3 style="text-align: center; color: var(--dark)">Write to us</h3>
+          <input type="text" formControlName="name" placeholder="Name" />
+          <div *ngIf="contactForm.get('name')?.invalid && isFormSubmitted">
+            Name is required
+          </div>
+
+          <input type="text" formControlName="email" placeholder="Email" />
+          <div *ngIf="contactForm.get('email')?.invalid && isFormSubmitted">
+            <div *ngIf="contactForm.get('email')?.errors?.['required']">
+              Email is required
+            </div>
+            <div *ngIf="contactForm.get('email')?.errors?.['email']">
+              Invalid email format
+            </div>
+          </div>
+
+          <input
+            type="text"
+            formControlName="profession"
+            placeholder="Profession"
+          />
+          <div
+            *ngIf="contactForm.get('profession')?.invalid && isFormSubmitted"
+          >
+            Profession is required
+          </div>
+
+          <textarea
+            formControlName="message"
+            placeholder="Your message"
+          ></textarea>
+          <div *ngIf="contactForm.get('message')?.invalid && isFormSubmitted">
+            Message is required
+          </div>
+
+          <button [disabled]="contactForm.invalid || isLoading">
+            <span *ngIf="!isLoading">Submit</span>
+            <span *ngIf="isLoading" class="spinner"></span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="highlights">
+    <p class="heading2">A Quick Overview</p>
+    <iframe
+      width="800"
+      height="415"
+      src="https://www.youtube.com/embed/MOLreWl4lnI?si=NpfnxYM2GYoQh-9m"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+  </div>
+  <!------------------FAQ Section-------------->
+  <div class="c6-main">
+    <div class="c6-inner">
+      <div class="shape1" id="sh8"></div>
+      <div class="shape1" id="sh9"></div>
+      <div class="shape1" id="sh10"></div>
+    </div>
+    <div class="c6-outer">
+      <div class="c6">
+        <div class="faq-section">
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq-item" *ngFor="let faq of faqs; let i = index">
+            <div class="faq-question" (click)="toggleFaq(i)">
+              <span>{{ faq.question }}</span>
+              <span class="plus-icon">{{
+                openedFaqIndex === i ? "-" : "+"
+              }}</span>
+            </div>
+            <div class="faq-answer" *ngIf="openedFaqIndex === i">
+              {{ faq.answer }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

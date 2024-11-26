@@ -1,0 +1,22 @@
+.valid {
+    color: green;
+  }
+  
+  .invalid {
+    color: red;
+  }
+.checks li{
+    font-size: small;
+    list-style: none;
+    text-align: left;
+    width: 100%;
+}  
+.checks ul{
+    padding-left: 0;
+}
+.notdisplay{
+    display: none;
+}
+#form1{
+  height: 550px !important;
+}

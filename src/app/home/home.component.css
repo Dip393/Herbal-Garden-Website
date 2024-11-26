@@ -1,0 +1,844 @@
+header{
+    min-height: 100vh;
+    display: flex;
+}
+.inner-header{
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+.outer-header{
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.781);
+    backdrop-filter: blur(8px);
+}
+.helements {
+    width: 90%;
+    max-width: 1800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .nav2 {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(207, 207, 207, 0.074);
+    padding: 12px;
+  }
+  
+  .nav-element {
+    position: relative; /* Ensure plant-section positions relative to its parent */
+    background-color: rgba(222, 222, 222, 0.106);
+    color: var(--light);
+    padding: 8px 12px;
+    border-radius: 16px;
+    text-align: center;
+    font-family: Poppins, 'sans-serif';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    img{
+        margin-right: 12px;
+        width: 32px;
+        height: 32px;
+    }
+  }
+  
+  .nav-link { 
+    list-style: none; 
+    text-decoration: none; 
+    font-size: 20px; 
+    font-weight: 400 !important; 
+    color: var(--light); 
+    white-space: nowrap; 
+  }
+  
+  
+  .plant-section {
+    position: absolute;
+    top: 36px; /* Position below nav-element */
+    left: 0;
+    width: 120px;
+    background-color: #ffffff;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    z-index: 10;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    ul{
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        gap: 12px;
+        li{
+            background-color: #ccc;
+            margin: 8px 4px;
+        }
+        a{
+            color: var(--dark);
+            text-decoration: none;
+            font-size: larger;
+            font-weight: 500;
+        }
+    }
+  }
+  
+  .plants-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .plantcard {
+    width: 100px;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .plantimageType {
+    width: 100%;
+    height: 100px;
+    border-radius: 8px;
+  }
+  
+  .plantimageType img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .view-more-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  
+  .plantcard {
+    width: 100px;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .plantimageType{
+    width: 100%;
+    height: 100px;
+    border-radius: 8px;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+  }
+  
+  .view-more-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  /* Spinning loader */
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .spinner {
+    border: 4px solid var(--light);
+    border-top: 4px solid var(--dark);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+/***Hero Section Contents***/
+.c1{
+    width: 90%;
+    max-width: 1800px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.contents{
+    display: flex;
+    text-align: left;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: var(--light);
+    max-width: 95%;
+}
+.model3D{
+    width: 450px;
+    height: 400px;
+}
+.headline{
+    font-size: 42px;
+    font-weight: bolder;
+    span{
+        color: var(--light-green);
+    }
+}
+.searchBtn{
+    border: none;
+    padding: 12px 16px;
+    border-radius: 9999px;
+    font-size: larger;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--dark);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 20px #00000080;
+    
+}
+.searchBtn::after{
+    content: '';
+    display: flex;
+    height: 100%;
+    width: 20px;
+    top: 0;
+    bottom: 0;
+    background-color: #b8ff7676;
+    z-index: 0;
+    position: absolute;
+    transform: skew(20deg);
+    animation: slide 5s infinite linear;
+}
+@keyframes slide {
+    0% { left: 0; }
+    100% { left: 100%; }
+}
+.search-content-flex{
+    display: flex;
+    border-bottom: 2px solid #ccc;
+    height: 50px;
+    background-color: var(--light-green);
+    border-radius: 6px 6px 0 0  ;
+}  
+#options{
+    border: none;
+    outline: none;
+    padding: 10px;
+    height: 100%;
+    background-color: #ccc;
+    font-size: 16px;
+    font-weight: 500;
+    width: 60px;
+    border-top-left-radius: 6px;
+}
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border-radius: 0px;
+  height: 100%;
+  outline: none;
+  border: none;
+  border-top-right-radius: 6px;
+}
+.wrapper{
+    background-color: var(--light);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+/**Search Plants *********/
+.search-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.944);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: var(--dark);
+  
+  }
+  .popup-content{
+    background: #fff;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 700px; 
+      .search-results {
+          height: 260px;
+          overflow-y: auto;
+          margin-top: 16px;
+      }
+      .search-item {
+          padding: 8px 16px;
+          margin-left: 12px;
+          margin-bottom: 10px;
+          border-left: 2px solid var(--dark);
+          background-color: #e9e9e9;
+          h4 {
+              font-size: 18px;
+              font-weight: bold;
+          }
+          p {
+              margin: 0;
+          }
+      }
+    .searched-item{
+        display: flex;
+        justify-content: space-between;
+        img{
+            width: 80px;
+            height: 80px;
+        }
+    }
+    .close-btn {
+      margin-top: 20px;
+      width: 100%;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      background-color: var(--light);
+      border-top: 2px solid #ccc;
+      color: #ff4400;
+      font-size: larger;
+      font-weight: 600;
+      text-align: right;
+      border-radius: 0 0 6px 6px;
+    }
+  }
+  .notFound{
+    display: flex;
+    flex-direction: column;
+    font-size: larger;
+    font-weight: 600;
+    justify-content: center;
+    align-items: center;
+    img{
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+    }
+  }
+/*******Random 5 plant details****************/
+.plant-container {
+    display: flex;
+    width: 90%;
+    gap: 20px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    overflow-x: auto; /* Allows horizontal scrolling */
+    scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+/* Hide scrollbar in WebKit-based browsers (e.g., Chrome, Edge, Safari) */
+.plant-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.plant-container {
+    scrollbar-width: none; /* For Firefox */
+}
+
+/* Hide scrollbar for older versions of IE/Edge */
+.plant-container {
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+  
+  .plant-card {
+    width: 280px;
+    background-color: var(--dark);
+    color: var(--light);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .plant-image {
+    width: 100%;
+    height: 200px;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+  }
+  
+  .plant-common-name {
+    font-size: 1.2em;
+    margin: 10px 0;
+  }
+  
+  .plant-botanical-name {
+    font-size: 1em;
+    font-style: italic;
+  }
+  
+  .plant-description {
+    font-size: 0.9em;
+    margin: 10px 0;
+  }
+.Viewer{
+    width: 100%;
+    height: 300px;
+}
+.Viewer video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/********Ayush Overview Section ********/
+.overview{
+    padding: 10px;
+    background-color: #fff;
+    text-align: center;
+    font-size: 30px;
+    color: #0c2b00;
+    font-weight: 600;
+}
+.overviews{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.overview p{
+    position: relative;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+}
+.heading1::before{
+    content: "";
+    position: absolute;
+    display: block;
+    width: 120px;
+    height: 3px;
+    background: #94cf5d;
+    bottom: 1px;
+    border-radius: 2px;
+    left: calc(50% - 60px);
+}
+.heading1::after{
+    content: "";
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 6px;
+    background: #205700;
+    border-radius: 2px;
+    bottom: 0;
+    left: calc(50% - 20px);
+}
+.overview-content{
+    background-color: #ffffffc2;
+    backdrop-filter: blur(10px);
+    background-position: center;
+    background-size: cover;
+    width: 360px;
+    background-blend-mode: overlay;
+    border: 1px dotted #183d00;
+    padding: 10px;
+    color: var(--dark);
+    margin: 20px;
+}
+#o1{
+    background-image: url('https://www.pngmart.com/files/5/Ayurveda-PNG-Transparent-Image.png');
+}
+#o2{
+    background-image: url('https://www.pngmart.com/files/5/Naturopathy-Transparent-PNG.png');
+}
+#o3{
+    background-image: url('https://graficsea.com/wp-content/uploads/2022/06/Unani-Medicine-Sharbat-and-syrups-Majoon-Oil-Transparent-Image-PNG-type-Free-Download-.png');
+}
+#o4{
+    background-image: url('https://png.pngtree.com/png-vector/20240309/ourmid/pngtree-homeopathy-medicine-landing-header-vector-png-image_11903954.png');
+}
+#o5{
+    background-image: url('https://www.pngmart.com/files/22/Soybeans-PNG-Pic.png');
+}
+#o6{
+    background-image: url('https://th.bing.com/th/id/OIP.SmQHG6CtdpfhRwf1CSesaAAAAA?rs=1&pid=ImgDetMain');
+}
+.ot p{
+    font-size: medium;
+    text-align: justify;
+}
+/******Chart Js **************/
+.chart{
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto;
+}
+/******Incremental Cards ******/
+.cards{ 
+    display: flex;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: var(--dark);
+}
+.card{
+    width: 200px;
+    /* background: linear-gradient(45deg, #dfe8ff, #cce2ff, #9f8ba1); */
+    background: transparent;
+    margin: 16px 0;
+    border: none;
+    border-right: 3px solid ;
+    border-radius: 0px;
+    padding: 16px;
+    text-align: center;
+    color: var(--light);
+}
+.card h2{
+    font-size: 32px;
+    font-weight: 600;
+}
+.card h3{
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--light-green);
+}
+.card:last-child{
+    border: 0px;
+}
+/****** Overview Video *********/
+.highlights{
+    margin: 0px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/001/990/140/non_2x/seamless-watercolor-fresh-green-background-with-text-space-illustration-environmentally-conscious-image-with-plants-and-sunlight-horizontally-repeatable-free-vector.jpg');
+}
+.highlights iframe{
+    margin: 16px auto;
+    border-radius: 6px;
+}
+.heading2{
+    font-size: xx-large;
+    text-align: center;
+    font-weight:600 ;
+}
+/******Gallery & review section ****/
+.mixed{
+    background-color: var(--light);
+}
+.minner{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 20px 0;
+    width: 90%;
+    max-width: 1800px;
+}
+.gallery{
+    width: 70%;
+    text-align: center;
+    padding-right: 20px;
+}
+.galleryImages{
+    display: flex;
+    overflow: auto;
+    gap: 20px;
+}
+.galleryImages::-webkit-scrollbar{
+    display: none;
+}
+.galleryImage{
+    width: 300px;
+    height: 250px;
+    border-radius: 6px;
+}
+.galleryImage img{
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    object-fit: cover;
+}
+.review{
+    width: 30%;
+    border-left: 2px solid #e9e9e9;
+    border-width: 80%;
+    padding-left: 15px;
+}
+/*************Contact Form******************/
+.c5{
+    text-align: center;
+    padding: 20px;
+    background-color: var(--light);
+    color: var(--light);
+    h2{
+        color: var(--dark);
+        font-weight: 600;
+    }
+}
+.contactSection{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    background: var(--dark);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 900px;
+}
+.contactDetails{
+    height: 100%;
+    margin: 20px;
+    text-align: left;
+}
+.contactDetails h2{
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+.contact{
+    display: flex;
+    width: 350px;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+.contactIcon{
+    background-color: var(--light-green);
+    color: var(--dark);
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+    margin-right: 12px;
+}
+.contactText{
+    width: calc(100% - 52px);
+    font-size: medium;
+}
+.contactText span{
+    font-size: large;
+    font-weight: 600;
+}
+.contactForm{
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    width: 350px;
+    padding: 12px;
+    border-radius: 6px;
+    text-align: left;
+    background-color: var(--light);
+}
+.contactForm input{
+    border: none;
+    padding: 6px;
+    margin-bottom: 12px;
+    outline: none;
+    border-bottom: 2px solid var(--light);
+}
+.contactForm textarea{
+    border: none;
+    height: 100px;
+    max-height: 100px;
+    min-height: 100px;
+    padding: 6px;
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    outline: none;
+    border-bottom: 2px solid var(--light);
+}
+.contactForm input:focus,
+.contactForm textarea:focus{
+    border-bottom: 2px solid var(--dark);
+}
+.contactForm button{
+    border: none;
+    margin: 12px 0;
+    padding: 6px 0;
+    border-radius: 6px;
+    background-color: var(--light-green);
+    font-size: larger;
+    display: flex;
+    justify-content: center;
+}
+/**************************FAQ Section**************************************/
+.c6-main{
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+.c6-inner{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    width: 100%;
+    max-width: 1500px;
+    overflow: hidden;
+}
+#sh8{
+    background-color: #fffb00;
+    top: 10%;
+    left: 50%;
+}
+#sh9{
+    background-color: hsl(0, 100%, 50%);
+    top: 70%;
+    left: 10%;
+}
+#sh10{
+    background-color: hsl(229, 100%, 50%);
+    top: 20%;
+    right: 30%;
+}
+.c6-outer{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width:100%;
+    z-index: 2;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('https://th.bing.com/th/id/OIP.XsvTdn9iNlkjdQ-iVxuGxgHaEK?rs=1&pid=ImgDetMain');
+    background-blend-mode: overlay;
+    background-color: #ffffffd9;
+}
+.c6{
+    width: 90%;
+    max-width: 1500px;
+    padding: 30px 10px;
+}
+.faq-section {
+    margin: 0px auto;
+    font-size: larger;
+}
+  
+  .faq-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .faq-answer {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .plus-icon {
+    font-size: larger;
+    font-weight: bold;
+  }
+  
+  .faq-question.active .plus-icon {
+    transform: rotate(45deg); /* Change plus to minus */
+  }
+  .working{
+    display: none;
+  }
+  /***Online Community*****/
+  .community{
+    background-image: url('https://th.bing.com/th/id/OIP.kGz-B5dV2gmRCrp2s2Zx_gHaFj?rs=1&pid=ImgDetMain') !important;
+    background-blend-mode: overlay ;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #000000e5;
+    height: 500px;
+    display: flex;
+    padding: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--light);
+    position: relative;
+    h2{
+        font-size: 32px;
+        font-weight: 600;
+        font-family: 'Poppins', sans-serif;
+        letter-spacing: 0.5rem;
+    }
+    strong{
+        font-size: 24px;
+        color: var(--light-green);
+    }
+    button{
+        border: none;
+        outline: none;
+        margin: 18px auto;
+        border-radius: 8px;
+        font-size: larger;
+        font-weight: 600;
+        background-color: #205700;
+        color: var(--light);
+        padding: 6px 12px;
+        cursor: pointer;
+    }
+    img{
+        width: 550px;
+        z-index: 2;
+        position: absolute;
+        bottom: 0;
+    }
+  }
+  .community-header{
+    z-index: 6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }

@@ -1,0 +1,20 @@
+<nav>
+    <a><p class="logo">Virtual Herbal Garden</p></a>
+    <div class="menu">
+        <a href="#" class="active"><p>Home</p></a>
+        <a href="#"><p>Virtual Tour</p></a>
+        <a [routerLink]="['/bookmarks']" ><p>Bookmarks</p></a>
+        <a href="#"><p>Contact</p></a>
+        <div class="buttonContainer">
+            <div *ngIf="!loggedIn">
+              <button (click)="router.navigate(['/login'])" id="login" class="AuthButtons">Login/Register</button>
+            </div>
+            <div *ngIf="loggedIn">
+              <button (click)="router.navigate([isAdmin ? '/admin' : '/user'])" class="AuthButtons">
+                <i class="fa-solid fa-user"></i>&nbsp;Dashboard
+              </button>
+              <button (click)="logout()" class="AuthButtons">Logout&nbsp;<i class="fa-solid fa-right-from-bracket"></i></button>
+            </div>
+          </div>
+    </div>
+</nav>

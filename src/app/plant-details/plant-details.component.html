@@ -1,0 +1,157 @@
+<div *ngIf="plantDetails">
+  <div class="item">
+    <div class="item-graphics">
+      <div class="item-media">
+        <div class="media-preview-column">
+          <div  class="preview-item" *ngFor="let image of plantDetails.images">
+            <img
+                [src]= "image"
+                alt="Modal Image"
+                class="preview-image"
+                (click)="showInLargeView(image, 'image')"
+            />
+          </div>
+          <div  class="preview-item" *ngFor="let video of plantDetails.videos">
+            <img
+                src= "https://th.bing.com/th/id/OIP.YzCzRx5jJ5J7rF_t_8g-YAHaHa?rs=1&pid=ImgDetMaino"
+                alt="image"
+                class="preview-image"
+                (click)="showInLargeView(video, 'video')"
+            />
+          </div>
+          <div class="preview-item">
+            <img
+              src="https://th.bing.com/th/id/OIP.tHWICd2JWJswO9YG1EVgdgHaHa?rs=1&pid=ImgDetMain"
+              alt="3D Model"
+              class="preview-image"
+              (click)="showInLargeView(plantDetails.model, '3dmodel')"
+            />
+          </div>
+        </div>
+  
+        <div class="media-large-view-column">
+          <button (click)="sharePage()" class="sharePage"><i class="fa-solid fa-share-from-square"></i></button>
+
+          <div class="large-view-item">
+            <model-viewer
+              *ngIf="largeViewType === '3dmodel'"
+              [src]="largeViewSrc"
+              id="large-view"
+              src=""
+              alt="Large View"
+              auto-rotate
+              camera-controls
+            ></model-viewer>
+            <img
+              *ngIf="largeViewType === 'image'"
+              [src]="largeViewSrc"
+              alt="Large View"
+              class="large-view-image"
+            />
+            <iframe 
+              *ngIf="largeViewType === 'video'"
+              [src]="largeViewSrc"
+              controls autoplay
+              class="large-view-video"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="item-button">
+        <button id="b2" class="bookmarkbtn" *ngIf="!loading" (click)="isPlantBookmarked ? goToBookmarks() : bookmarkPlant(plantDetails._id)">
+          
+          &nbsp;&nbsp;{{ isPlantBookmarked ? 'Go to Bookmark' : 'Bookmark' }}
+          <div *ngIf="loading" class="spinner"></div>
+        </button>
+        
+
+        <button id="download" (click)="downloadPDF()">
+          <i class="fa-regular fa-circle-down"></i>&nbsp;&nbsp;Download Now
+        </button>
+        
+      </div>
+    </div>
+    <div class="item-details">
+      <div class="language-selector">
+        <label for="language">Choose Language:</label>
+        <select id="language" (change)="onLanguageChange($event)">
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="hi">Hindi</option>
+          <!-- Add other languages -->
+        </select>
+      </div>
+        <div class="item-common-names">
+          <h3>{{ plantDetails.commonNames.join(', ') }}</h3>
+        </div>
+        <div class="item-botanical-name">
+          <p><strong>Botanical Name:</strong> {{ plantDetails.botanicalName }}</p>
+        </div>
+        <div class="item-family">
+          <p><strong>Family:</strong> {{ plantDetails.family }}</p>
+        </div>
+        <div class="item-description">
+          <div class="item-header">
+            <strong>Description</strong>
+          </div>
+          <p>{{ plantDetails.description }}</p>
+        </div>
+        <div class="item-medicinal-uses">
+          <div class="item-header">
+            <strong>Medicinal Uses</strong>
+            <i 
+              class="fa-solid" 
+              [ngClass]="{ 'fa-caret-down': !showMedicinalUses, 'fa-caret-up': showMedicinalUses }" 
+              (click)="toggleMedicinalUses()"
+            ></i>
+          </div>
+          <ul *ngIf="showMedicinalUses" class="medicinal-uses">
+            <li *ngFor="let use of plantDetails.medicinalUses">{{ use }}</li>
+          </ul>
+        </div>
+        <div class="item-habitat">
+          <div class="item-header">
+            <strong>Places Where Found:</strong>
+          </div>
+          <p>{{ plantDetails.region }}</p>
+        </div>
+        <div class="item-chemical-composition">
+          <div class="item-header">
+            <strong>Chemical Composition:</strong>
+            <i 
+              class="fa-solid" 
+              [ngClass]="{ 'fa-caret-down': !showComposition, 'fa-caret-up': showComposition }" 
+              (click)="toggleComposition()"
+            ></i>
+          </div>
+          <ul *ngIf="showComposition">
+            <li *ngFor="let composition of plantDetails.composition">{{ composition }}</li>
+          </ul>
+        </div>
+        <div class="item-usage">
+          <div class="item-header">
+            <strong>How to Use:</strong>
+            <i 
+              class="fa-solid" 
+              [ngClass]="{ 'fa-caret-down': !showUses, 'fa-caret-up': showUses }" 
+              (click)="toggleUses()"
+            ></i>
+          </div>
+          <ul *ngIf="showUses">
+            <li *ngFor="let procedure of plantDetails.usageProcedure">{{ procedure }}</li>
+          </ul>
+        </div>
+        <div class="item-safety">
+          <div class="item-header">
+            <strong>Safety and Side Effects:</strong>
+          </div>
+          <p>
+            {{ plantDetails.precautions }}
+          </p>
+        </div>
+        <div class="item-header">
+          <p><strong>Source</strong>&nbsp;{{plantDetails.correspondenceLink }}</p>
+        </div>
+      </div>
+<div *ngIf="!plantDetails">Loading plant details...</div>
+  

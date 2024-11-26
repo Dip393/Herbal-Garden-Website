@@ -1,1 +1,156 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+    --light: #fff;
+    --dark: #091e00;
+    --light-green: #b1f995;
+    --animate-duration: 2s;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: #dddddd;
+    height: 100vh;
+}
+a{
+    cursor: pointer;
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    background: #0000003b;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgb(27, 87, 0); 
+    border-radius: 6px; 
+    border: 3px solid #1b1b1b; 
+}
+html {
+    scrollbar-width:thin;
+    scrollbar-color: rgb(23, 114, 0) #1b1b1b00;
+}
+::-webkit-scrollbar-button {
+    background-color: rgb(46, 102, 0);
+    height: 16px;
+    width: 16px;
+}
+.highlighter{
+    background-color: var(--light-green);
+}
+.authMain{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: url("https://c0.wallpaperflare.com/preview/440/715/681/dark-green-green-elaf-dark-background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  .container{
+    display: flex;
+    flex: 1;
+  }
+  .formContainer{
+      display: flex;
+      background: #ffffff1b;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(15px);
+      border-radius: 12px;
+      color: var(--light);
+      width: 320px;
+      height: auto;
+      margin: 50px auto;
+    }
+    .fcRight{
+      width: 100%;
+      box-sizing: border-box;
+      padding: 18px 12px;
+      font-size: large;
+      font-weight: 500;
+      text-align: center;
+    }
+    .fcRight a{
+      font-size: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    .f1{
+      display: flex;
+      flex-direction: column;
+    }
+    .fcRight input{
+      background: transparent;
+      border: none;
+      outline: none;
+      margin-bottom: 15px;
+      padding: 6px 10px;
+      font-size: 18px;
+      width: 100%;
+      border-bottom: 1px solid #fff;
+      color: var(--light);
+    }
+    .fb1{
+      border: none;
+      margin: 12px 0;
+      border-radius: 9999px;
+      background-color: #0099e0;
+      color: #fff;
+      font-size: large;
+      justify-content: center;
+      display: flex;
+      font-weight: 600;
+      padding: 10px;
+    }
+    .spinner {
+        border: 4px solid rgb(255, 255, 255);
+        border-left-color: #00134b;
+        border-radius: 50%;
+        display: flex;
+        width: 20px;
+        height: 20px;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .disabled-btn {
+        background-color: #d3d3d3; /* Gray color for disabled state */
+        cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+        color: #888; /* Optional: Change text color in disabled state */
+      }
+    @media (max-width: 750px){
+      .container{
+        justify-content: center;
+        align-items: center;
+        padding-top: 30px;
+      }
+    }
+    @media (max-width: 580px){
+      .formContainer{
+        width: 100%;
+        max-width: 300px;
+        background: linear-gradient(45deg, #dee5ff, #ceebff, #fbddff);
+      }
+      .fcLeft{
+        display: none;
+      }
+      .fcRight{
+        width: 100%;
+      }
+      .fcRight input{
+        background-color: #fff;
+      }
+    }

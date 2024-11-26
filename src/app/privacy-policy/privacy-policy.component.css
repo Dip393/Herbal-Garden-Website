@@ -1,0 +1,7 @@
+.navbar{
+    background-color: var(--dark);
+}
+.main{
+    max-width: 90%;
+    margin: 18px auto;
+}

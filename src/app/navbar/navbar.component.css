@@ -1,0 +1,53 @@
+:host {
+    display: block; /* Ensures the component behaves like a block element */
+    width: 100%;
+  }
+  
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    padding-bottom: 0;
+    width: 90%;
+    max-width: 1800px;
+    margin: 0 auto;
+    background-color: #0000003c;
+    border-radius: 16px;
+    margin: 4px auto;
+    .logo{
+        color: var(--light);
+        font-size: 22px;
+        max-width: 200px;
+        font-family: 'Courier New', Courier, monospace;
+        text-align: center;
+    }
+}
+.menu{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    a{
+        list-style: none;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 400 !important;
+        color: var(--light);
+    }
+    p{
+        margin: 0;
+    }
+}
+.active{
+    border-bottom: 2px solid #ffbf00;
+}
+.AuthButtons{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--light);
+    background-color: #ffffff15;
+    padding: 6px 12px;
+    margin: 0 8px;
+    border-radius: 999px;
+}

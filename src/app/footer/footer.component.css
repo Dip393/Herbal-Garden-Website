@@ -1,0 +1,89 @@
+.footer{
+    font-family: "Poppins",sans-serif;
+    background-color: var(--dark);
+}
+.f-outer{
+    color: var(--light);
+    padding: 40px 0;
+}
+.f-inner{
+    display: flex;
+    max-width: 1200px;
+    margin: 0px auto;
+    h6{
+        font-size: larger;
+        color: var(--light-green);
+        font-weight: 600;
+    }
+    justify-content: space-between;
+}
+.fcolumn{
+    max-width: 300px;
+}
+.footer-logo{
+    border-left: 4px solid var(--light-green);
+    padding: 0 12px;
+    span{
+        font-size: 16px;
+        color: var(--light-green);
+    }
+}
+.footer-logo p{
+    font-size: 20px;
+    margin-bottom: 0;
+}
+.footer-nav li{
+    a{
+        color: var(--light) !important;
+    }
+    list-style: none;
+    font-size: 18px;
+}
+.newsletter{
+    margin: 20px 0;
+    input{
+        padding: 18px 12px;
+        font-size: medium;
+        outline: none;
+        border: none;
+    }
+    button{
+        background-color: var(--light-green);
+        color: var(--dark);
+        border: none;
+        outline: none;
+        font-weight: 600;
+    }
+}
+.newsletter form{
+    display: flex;
+    height: 40px;
+}
+.fcolumn h6{
+    margin-bottom: 18px;
+}
+.socials ul{
+    display: flex;
+    padding: 0;
+}
+.socials ul li{
+    list-style: none;
+    font-size: 32px;
+    margin-right: 12px;
+    a{
+        color: var(--light) !important;
+    }
+}
+.footer-contact a{
+    color: var(--light) !important;
+}
+.fc{
+    background-color: rgba(0, 0, 0, 0.178);
+    color: var(--light);
+    margin: 0;
+    padding: 18px 0;
+    text-align: center;
+}
+.fc p{
+    margin: 0;
+}

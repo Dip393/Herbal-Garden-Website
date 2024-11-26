@@ -1,0 +1,9 @@
+.navbar{
+    background-color: var(--dark);
+}
+.main{
+    min-height: 70vh;
+    background-color: var(--light);
+    font-size: larger;
+    padding: 16px;
+}
