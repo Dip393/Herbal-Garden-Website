@@ -6,12 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
+
   private apiUrl = 'http://localhost:3000/api/routes';
-  API_KEY="AIzaSyDUOnrVf3HXEiAC-w0Dg_vxS4jgscpqYG0"
-  private apiKey = this.API_KEY; // Replace with your API key
-  private baseUrl = 'https://translation.googleapis.com/language/translate/v2'; // For Google Translate API
-
-
   constructor(private http: HttpClient) {}
 
   sendContactForm(formValues: any): Observable<any> {
@@ -105,6 +101,10 @@ export class AuthService {
   //Delete bookmark
   deleteBookmark(plantId: string, email: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/remove-bookmark`,{plantId, email});
+  }
+  //Clicked/Viewed Plant
+  clickedPlant(plantId: string, email: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/viewed-plants`,{plantId, email});
   }
   translateText(text: string, toLang: string): Observable<any> {
     return this.http.post('https://translate.argosopentech.com/translate', {

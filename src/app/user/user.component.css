@@ -1,0 +1,138 @@
+.main{
+    min-height: 100vh;
+    background-color: var(--light);
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+}
+.logo{
+    font-size: 25px;
+    font-weight: 600;
+    margin: 20px;
+    margin-bottom: 30px;
+}
+.left-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 220px;
+    background-color: rgba(231, 255, 205, 0.813);
+}
+.menu{
+    display: flex;
+    flex-direction: column;
+    padding: 18px;
+}
+.menu li{
+    display: flex;
+    text-align: left;
+    white-space: nowrap;
+    font-size: larger;
+    font-weight: 500;
+}
+.left-section hr{
+    width: 100%;
+    background-color: rgb(231, 231, 231);
+    height: 2px;
+}
+.contact-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+    margin-top: 50px;
+    padding: 90px 0;
+}
+.contact-section img{
+    width: 120px;
+    position: absolute;
+    left: 0;
+}
+.contact-text{
+    height: max-content;
+    background-color: bisque;
+    padding: 4px;
+    width: 150px;
+    z-index: 2;
+    button{
+        border: none;
+        outline: none;
+        border-radius: 9999px;
+        padding: 5px 10px;
+        background-color: #16331b;
+        color: var(--light);
+        font-weight: 600;
+    }
+}
+.right-section{
+    padding: 16px;
+}
+.weather{
+    display: flex;
+}
+.heading{
+    font-size: x-large;
+    margin-bottom: 18px;
+}
+.weather-card{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    width: 525px;
+    padding-right: 4px;
+    border-right: 1px solid #16331b;
+}
+.weather-info{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(244, 255, 230);
+    box-shadow: 2px 2px 2px rgba(111, 111, 111, 0.1);
+    width: 250px;
+    padding: 12px;
+    border-radius: 6px;
+    strong{
+        font-size: 22px;
+    }
+    i{
+        font-size: 26px;
+    }
+    p{
+        font-size: large;
+        margin-bottom: 0;
+    }
+}
+.weather-title{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+#weatherChart{
+    max-width: 600px;
+    height: 300px !important;
+}
+.quizzes{
+    margin: 20px 0;
+    background-color:#000000ef;
+    background-blend-mode: overlay;
+    backdrop-filter: blur(10px);
+    background-image: url('https://wallpaperaccess.com/full/2681034.jpg');
+    height: 200px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    background-position: center;
+    align-items: center;
+    justify-content: center;
+    font-size: larger;
+    font-weight: 600;
+    color: var(--light);
+    button{
+        border: none;
+        outline: none;
+        background-color: #16331b;
+        color: var(--light);
+        padding: 10px 20px;
+        border-radius: 9999px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+    }
+}

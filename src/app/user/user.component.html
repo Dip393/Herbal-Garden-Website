@@ -1,7 +1,69 @@
-<div class="navbar">
-    <app-navbar></app-navbar>
+
+<div class="main">
+  <div class="left-section">
+    <div class="logo">Herbal</div>
+    <div class="menu">
+      <li><i class="fa-solid fa-sliders"></i>&nbsp;&nbsp;<p>Dashboard</p></li>
+      <li><i class="fa-solid fa-house"></i>&nbsp;&nbsp;<p>Home</p></li>
+      <li><i class="fa-solid fa-power-off"></i>&nbsp;&nbsp;<p>Log Out</p></li>
+    </div>
+    <hr>
+    <div class="contact-section">
+      <img src="https://th.bing.com/th/id/R.a256ed4793f1500bb4376e15e969adc1?rik=M1h%2fBGLQuVWQrQ&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fcartoon-kid-png-cartoon-person-exercising-1425.png&ehk=audsA1%2fWXcKbAN0UQX7K98tXHva%2bZG6DeuhFWrpLM2A%3d&risl=&pid=ImgRaw&r=0" alt="">
+      <div class="contact-text">
+        <p>Need Help? Feel free to ask expert</p>
+        <button>Contact Us</button>
+      </div>
+    </div>
   </div>
-  <div class="main">
-    Logged In User - {{ email }}
+  <div class="right-section">
+    <h2 class="heading">Weather Details</h2>
+    <div class="weather">
+      <div class="weather-card">
+        <div class="weather-info">
+          <div class="weather-title">
+            <strong>Location</strong>
+            <i class="fa-solid fa-location-crosshairs"></i>
+          </div>
+          <p><data>Latitude: </data> {{ latitude }}</p>
+          <p><data>Longitude: </data> {{ longitude }}</p>
+        </div>
+        <div class="weather-info">
+          <div class="weather-title">
+            <strong>Temperature</strong>
+            <i class="fa-solid fa-temperature-three-quarters"></i>
+          </div>
+          <p>{{ weather.temperature }}°C</p>
+        </div>
+        <div class="weather-info">
+          <div class="weather-title">
+            <strong>Condition</strong>
+            <i class="fa-solid fa-cloud-bolt"></i>
+          </div>
+          <p>{{ weather.condition }}</p>
+        </div>
+        <div class="weather-info">
+          <div class="weather-title">
+            <strong>Wind Speed</strong>
+            <i class="fa-solid fa-wind"></i>
+          </div>
+          <p>{{ weather.windSpeed }} m/s</p>
+        </div>
+        <!-- <p><strong>Wind Direction:</strong> {{ weather.windDirection }}°</p> -->
+      </div>
+      <canvas id="weatherChart"></canvas>
+    </div>
+    <div class="searches">
+      <h2 class="heading">Recently Viewed Plants</h2>
+      <div class="searched-plants"></div>
+    </div>
+    <div class="quizzes">
+      <p>Let's do some fun quizzes to gather some more information</p> 
+      <a href=""><button>Get Started</button></a>
+    </div>
+    <div class="notes">
+      <p class="heading">View Your Notes</p>
+    </div>
   </div>
+</div>
 <app-footer></app-footer>

@@ -48,6 +48,7 @@ export class HomeComponent {
   openedFaqIndex: number | null = null;
   isModalOpen: boolean = false;
   modalImage: string = '';
+  email = localStorage.getItem('email');
 
   private router = inject(Router)
 
@@ -62,6 +63,20 @@ export class HomeComponent {
   //For bar charts
   chart: any;
   ratings: any;
+
+  constructor(
+    private fb: FormBuilder,
+    private notification: NotificationService,
+    private http: HttpClient,
+    private authService: AuthService,
+  ){
+    this.contactForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      profession: ['', Validators.required],
+      message: ['', Validators.required],
+    });
+  }
 
   public config:any = {
     type: 'bar',
@@ -146,20 +161,6 @@ export class HomeComponent {
   };
   
 
-  constructor(
-    private fb: FormBuilder,
-    private notification: NotificationService,
-    private http: HttpClient,
-    private authService: AuthService,
-  ){
-    this.contactForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      profession: ['', Validators.required],
-      message: ['', Validators.required],
-    });
-  }
-
   ngOnInit(){
     this.typeEffect(); // Start typing on initialization
     this.getRandomPlants(); // Get random plants details
@@ -227,6 +228,9 @@ export class HomeComponent {
   }
   //Open Plant Details
   openPlantDetails(plantId: string) {
+    if(this.email){
+      this.authService.clickedPlant(plantId, this.email);
+    }
     this.router.navigate([`/plant-details/${plantId}`]);
   }
   // Start typing on initialization
