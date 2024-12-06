@@ -1,23 +1,32 @@
 <div class="authMain">
-    <app-navbar></app-navbar>
-    <div class="container">
-      <div class="formContainer">
-        <div class="fcRight">
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()"  class="f1">
-              <p style="font-weight: 600;">Login Form</p>
-              <input formControlName="email" placeholder="Email" />
-              <input type="password" formControlName="password" placeholder="Password" />
-              <div *ngIf="otpSent">
-                <input formControlName="otp" placeholder="Enter OTP" />
-              </div>
-              <button [disabled]="loginForm.invalid" [ngClass]="{'disabled-btn': loading || loginForm.invalid}" class="fb1">
-                <span *ngIf="!loading">{{ otpSent ? 'Verify OTP' : 'Login' }}</span>
-                <span *ngIf="loading" class="spinner"></span>
-              </button>
-          </form>
-          <a href="/forgot-password">Forgot Your Password? Reset Password</a><br>
-          <a href="/signup">Don't Have An Acount? Sign Up</a>
-        </div>
+  <app-navbar></app-navbar>
+  <div class="container">
+    <div class="formContainer">
+      <div class="fcRight">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="f1">
+          <p style="font-weight: 600">Login Form</p>
+          <input formControlName="email" placeholder="Email" />
+          <input
+            type="password"
+            formControlName="password"
+            placeholder="Password"
+          />
+          <div *ngIf="otpSent">
+            <input formControlName="otp" placeholder="Enter OTP" />
+          </div>
+          <button
+            [disabled]="loginForm.invalid"
+            [ngClass]="{ 'disabled-btn': loading || loginForm.invalid }"
+            class="fb1"
+          >
+            <span *ngIf="!loading">{{ otpSent ? "Verify OTP" : "Login" }}</span>
+            <span *ngIf="loading" class="spinner"></span>
+          </button>
+        </form>
+        <a href="/forgot-password">Forgot Your Password? Reset Password</a
+        ><br />
+        <a href="/signup">Don't Have An Acount? Sign Up</a>
       </div>
     </div>
   </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="navbar">
+  <app-navbar></app-navbar>
+</div>
+<div class="main">
+  <div class="c1">
+    <div class="c1left">
+      <div class="overlay">
+        <h1>Experience the Art of Natural Healing</h1>
+        <h2>Step into the World of</h2>
+        <h3>Homeopathic Wisdom</h3>
+        <div class="line"></div>
+        <p>
+          Uncover the healing potential of plants celebrated in Homeopathy.
+          Explore their medicinal properties through immersive 3D models,
+          detailed insights, and an engaging virtual experience.
+          Reconnect with nature's remedies and embrace the science of gentle,
+          holistic healing for a healthier tomorrow.
+        </p>
+      </div>
+    </div>
+    <div class="c1right">
+      <img src="2.jpg" />
+    </div>
+  </div>
+  <div class="c2">
+    <div class="about">
+      <div class="aleft">
+        <h2>About Homeopathy</h2>
+        <p>Homeopathy is a natural system of medicine founded in the late 18th century by German physician Dr. Samuel Hahnemann. It is based on the principle of "similia similibus curentur" or "like cures like," which means a substance that causes symptoms in a healthy person can be used to treat similar symptoms in an ill person when administered in a highly diluted form.</p>
+      </div>
+      <div class="aright">
+        <div class="aimages">
+          <img src="https://inspiredstockshop.com/wp-content/uploads/2023/05/ISS-Botanical-Blends-4-1.jpg" alt="" class="i1">
+          <img src="https://th.bing.com/th/id/OIP.trXJO792sm3RU4cOJrXxsQAAAA?w=418&h=626&rs=1&pid=ImgDetMain" alt="" class="i2">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="features">
+    <h2 class="heading">Key Features</h2>
+    <div class="underline"></div>
+    <div class="feature-container">
+      <div class="feature" *ngFor="let feature of features">
+        <div class="icon">
+          <i [class]="feature.icon"></i>
+        </div>
+        <h4>{{ feature.name }}</h4>
+        <p>{{ feature.description }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="plants">
+    <div class="plant-container">
+      <h2 class="heading">Some Traditional Plants Used In Homeopathy</h2>
+      <div class="plant-details">
+        <div class="plant-card" *ngFor="let plant of plants"  (click)="openPlantDetails(plant._id)">
+          <div class="plant-image">
+            <img *ngIf="plant.images.length > 0" [src]="plant.images[0]" alt="{{ plant.botanicalName }}" />
+          </div>
+          <h3 class="plant-common-name">{{ plant.commonNames[0] || "Unknown Name" }}</h3>
+          <h4 class="plant-botanical-name"><i>{{ plant.botanicalName }}</i></h4>
+          <p class="plant-description">{{ trimDescription(plant.description, 120) }}</p>
+        </div>
+      </div>
+      <!-- "Load More" Button -->
+      <div class="load-more-container" *ngIf="showLoadMore">
+        <button (click)="loadMorePlants()">Load More</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

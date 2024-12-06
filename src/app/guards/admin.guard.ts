@@ -10,33 +10,39 @@ import { map, catchError } from 'rxjs/operators';
 export class AdminGuard implements CanActivate {
 
   constructor(private authService: AuthService, private router: Router) {}
-  
+
   canActivate(): Observable<boolean> {
     const email = localStorage.getItem('email');
-    
-    if (!email) {
-      this.router.navigate(['']); // Redirect to login if no email is found
-      return of(false); // Return observable with false
+    const isAdmin = localStorage.getItem('isAdmin');
+    if(isAdmin){
+      return of(true); // Allow access if user type is admin
     }
-
-    return this.authService.userType(email).pipe(
-      map(response => {
-        if(response.userType === 'student') {
-          this.router.navigate(['/user']); // Redirect if not admin
-          return false;
-        }
-        if (response.userType === 'admin') {
-          return true; // Allow access if user type is admin
-        }else{
-          this.router.navigate(['']); // Redirect if not admin
-          return false; // Deny access if user type is not admin
-        }
-      }),
-      catchError((error) => {
-        console.error('Error fetching user type:', error);
-        this.router.navigate(['']); // Redirect if there's an error
-        return of(false); // Return observable with false on error
-      })
-    );
+    this.router.navigate(['/']);
+    return of(false); // Allow access if user type is
   }
+  //   if (!email) {
+  //     this.router.navigate(['']); // Redirect to login if no email is found
+  //     return of(false); // Return observable with false
+  //   }
+
+  //   return this.authService.userType(email).pipe(
+  //     map(response => {
+  //       if(response.userType === 'student') {
+  //         this.router.navigate(['/user']); // Redirect if not admin
+  //         return false;
+  //       }
+  //       if (response.userType === 'admin') {
+  //         return true; // Allow access if user type is admin
+  //       }else{
+  //         this.router.navigate(['']); // Redirect if not admin
+  //         return false; // Deny access if user type is not admin
+  //       }
+  //     }),
+  //     catchError((error) => {
+  //       console.error('Error fetching user type:', error);
+  //       this.router.navigate(['']); // Redirect if there's an error
+  //       return of(false); // Return observable with false on error
+  //     })
+  //   );
+  // }
 }

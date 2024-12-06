@@ -27,11 +27,11 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    
+
     if (!this.otpSent) {
       // First step: verify email and password and send OTP
       if (this.loginForm.invalid) return;
-      
+
       this.loading = true;
       this.authService.login(this.loginForm.value).subscribe(
         res => {
@@ -63,19 +63,19 @@ export class LoginComponent {
           }
           else{
             this.loading = false;
-  
+
             // Store email in localStorage
             localStorage.setItem('email', this.loginForm.value.email);
-    
+
             if (res.isAdmin) {
               localStorage.setItem('token', res.token);
               localStorage.setItem('isAdmin', res.isAdmin.toString());
-              this.router.navigate(['/admin']);
+              this.router.navigate(['/']);
             } else {
               localStorage.setItem('token', res.token);
-              this.router.navigate(['/user']);
+              this.router.navigate(['/']);
             }
-    
+
             this.notification.showNotification(`${res.msg}`, 'success');
           }
         },

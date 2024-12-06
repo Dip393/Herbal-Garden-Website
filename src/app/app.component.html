@@ -1,1 +1,43 @@
 <router-outlet></router-outlet>
+<!-- Chatbot Button -->
+<button class="chatbot-button" (click)="toggleChatbotWindow()" *ngIf="isBtnVisible">
+  <!-- <i class="fa-solid fa-headset"></i> -->
+   <img src="https://cdn-icons-png.flaticon.com/512/8649/8649607.png" alt="" width="50px">
+</button>
+
+<!-- Chatbot Window -->
+<div class="chatbot-window" *ngIf="isChatbotVisible">
+  <div class="chatbot-header">
+    <i class="fa-solid fa-arrow-left" (click)="close()" style="cursor: pointer;"></i>
+    <p>Herbal Chatbot&nbsp;</p>
+    <img src="chatbot_logo.png" alt="">
+  </div>
+  <div class="chatbot-messages" #chatbotMessages>
+    <div class="welcome">
+      <img src="https://i.pinimg.com/736x/60/09/77/600977998bb7c509bc55f044cedfe3ef.jpg" alt="">
+      <p>Welcome to Herbal Chatbot!</p>
+    </div>
+    <div *ngFor="let message of messages" [ngClass]="{'user': message.sender === 'user', 'bot': message.sender === 'bot'}" class="message">
+      <div class="text" [innerHTML]="message.text"></div>
+    </div>
+  </div>
+  <div class="chatbot-input">
+    <textarea
+      type="text"
+      [(ngModel)]="userInput"
+      placeholder="Ask your query here..."
+      (keydown.enter)="sendMessage()"
+    ></textarea>
+    <div class="chatsubmit">
+      <button (click)="sendMessage()">
+        <i class="fa-solid fa-arrow-up" *ngIf="!isLoading"></i>
+        <i class="fa-solid fa-square" *ngIf="isLoading"></i>
+      </button>
+    </div>
+  </div>
+  <div class="disclaimer">
+    <p>Chatbots may make errors; please consult a doctor for accurate medical advice</p>
+  </div>
+</div>
+
+<!--Chatbot End-->

@@ -1,7 +1,319 @@
-<div class="navbar">
-  <app-navbar></app-navbar>
-</div>
+
 <div class="main">
-  Logged In User - {{ email }}
+  <div class="left-section">
+    <div class="logo">Herbal</div>
+    <div class="menu">
+      <li class="dashboard-active"><img src="dashboard.png" alt="" width="20px">&nbsp;&nbsp;<p>Dashboard</p></li>
+      <a [routerLink]="['']" ><li><i class="fa-solid fa-house"></i>&nbsp;&nbsp;<p>Home</p></li></a>
+      <li (click)="logout()"><i class="fa-solid fa-power-off"></i>&nbsp;&nbsp;<p>Log Out</p></li>
+    </div>
+    <hr>
+    <div class="contact-section">
+      <img src="https://th.bing.com/th/id/R.a256ed4793f1500bb4376e15e969adc1?rik=M1h%2fBGLQuVWQrQ&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fcartoon-kid-png-cartoon-person-exercising-1425.png&ehk=audsA1%2fWXcKbAN0UQX7K98tXHva%2bZG6DeuhFWrpLM2A%3d&risl=&pid=ImgRaw&r=0" alt="">
+      <div class="contact-text">
+        <p>Need Help? Feel free to ask expert</p>
+        <button (click)="goToSection('contact')">Contact Us</button>
+      </div>
+    </div>
+  </div>
+  <div class="right-section">
+    <div class="weather">
+      <div class="wl">
+        <h3 class="heading">Weather Guide for Optimal Herb Growth</h3>
+        <div class="weather-card">
+          <div class="weather-info">
+            <div class="weather-title">
+              <strong>Location</strong>
+              <i class="fa-solid fa-location-crosshairs"></i>
+            </div>
+            <p><data>Latitude: </data> {{ latitude }}</p>
+            <p><data>Longitude: </data> {{ longitude }}</p>
+          </div>
+          <div class="weather-info">
+            <div class="weather-title">
+              <strong>Temperature</strong>
+              <i class="fa-solid fa-temperature-three-quarters"></i>
+            </div>
+            <p>{{ weather.temperature }}°C</p>
+          </div>
+          <div class="weather-info">
+            <div class="weather-title">
+              <strong>Condition</strong>
+              <i class="fa-solid fa-cloud-bolt"></i>
+            </div>
+            <p>{{ weather.condition }}</p>
+          </div>
+          <div class="weather-info">
+            <div class="weather-title">
+              <strong>Wind Speed</strong>
+              <i class="fa-solid fa-wind"></i>
+            </div>
+            <p>{{ weather.windSpeed }} m/s</p>
+          </div>
+          <!-- <p><strong>Wind Direction:</strong> {{ weather.windDirection }}°</p> -->
+        </div>
+      </div>
+      <div class="wr">
+        <h3 class="heading">Upcoming Week: Temperature Outlook</h3>
+        <canvas id="weatherChart"></canvas>
+      </div>
+    </div>
+    <div class="form-container">
+      <button (click)="toggleForm()" class="addDetails">Add Plant</button>
+
+      <div *ngIf="showAddPlantForm" class="plant-form">
+        <button (click)="closeForm()" class="closeForm"><i class="fa-solid fa-xmark"></i></button>
+        <form (ngSubmit)="addPlant()" #plantForm="ngForm" class="plantAddForm">
+          <h2>Add Plant Details</h2>
+          <!-- Common Names -->
+          <section class="dynamic">
+            <label>Common Names</label>
+            <div *ngFor="let name of commonNames; let i = index trackBy: trackByIndex">
+              <input type="text" [(ngModel)]="commonNames[i]" name="commonName{{i}}" [placeholder]="'Common Name '+(i+1)"/>
+            </div>
+            <button type="button" (click)="addField('commonNames')">Add New Common Name</button>
+          </section>
+
+          <!-- Botanical Name -->
+          <section class="static">
+            <label>Botanical Name</label>
+            <input type="text" [(ngModel)]="plantDetails.botanicalName" name="botanicalName" required />
+          </section>
+
+          <!-- Family -->
+          <section class="static">
+            <label>Plant Family</label>
+            <input type="text" [(ngModel)]="plantDetails.family" name="family" />
+          </section>
+
+          <!-- Medicinal Uses -->
+          <section class="dynamic">
+            <label>Medicinal Uses</label>
+            <div *ngFor="let use of medicinalUses; let i = index">
+              <input type="text" [(ngModel)]="medicinalUses[i]" name="medicinalUse{{i}}" />
+            </div>
+            <button type="button" (click)="addField('medicinalUses')">Add New Medicinal Use</button>
+          </section>
+
+          <!-- Composition -->
+          <section class="dynamic">
+            <label>Chemical Composition</label>
+            <div *ngFor="let comp of composition; let i = index">
+              <input type="text" [(ngModel)]="composition[i]" name="composition{{i}}" />
+            </div>
+            <button type="button" (click)="addField('composition')">Add New Composition</button>
+          </section>
+
+          <!-- Usage Procedure -->
+          <section class="dynamic">
+            <label>Usage Procedure</label>
+            <div *ngFor="let proc of usageProcedure; let i = index">
+              <input type="text" [(ngModel)]="usageProcedure[i]" name="usageProcedure{{i}}" />
+            </div>
+            <button type="button" (click)="addField('usageProcedure')">Add New Usage Procedure</button>
+          </section>
+
+          <!-- Cultivation Methods -->
+          <section class="static">
+            <label>Cultivation Methods</label>
+            <textarea type="text" [(ngModel)]="plantDetails.cultivationMethods" name="cultivationMethods" placeholder="Climatic Conditions, Sunlight, Watering, Temperature, Wind Condition should be mentioned"></textarea>
+          </section>
+
+          <!-- Description -->
+          <section class="static">
+            <label>Description</label>
+            <textarea [(ngModel)]="plantDetails.description" name="description"></textarea>
+          </section>
+
+          <!-- Parts Used -->
+          <section class="dynamic">
+            <label>Parts Used</label>
+            <div *ngFor="let part of partsUsed; let i = index">
+              <input type="text" [(ngModel)]="partsUsed[i]" name="partsUsed{{i}}" />
+            </div>
+            <button type="button" (click)="addField('partsUsed')">Add New Part Used</button>
+          </section>
+
+          <!-- Images -->
+          <section class="dynamic">
+            <label>Images (URLs)</label>
+            <div *ngFor="let image of images; let i = index">
+              <input type="text" [(ngModel)]="images[i]" name="image{{i}}" />
+            </div>
+            <button type="button" (click)="addField('images')">Add New Image URL</button>
+          </section>
+
+          <!-- Videos -->
+          <section class="dynamic">
+            <label>Videos (URLs)</label>
+            <div *ngFor="let video of videos; let i = index">
+              <input type="text" [(ngModel)]="videos[i]" name="video{{i}}" />
+            </div>
+            <button type="button" (click)="addField('videos')">Add New Video URL</button>
+          </section>
+
+          <!-- 3D Model Url -->
+          <section class="static">
+            <label>3D Model URL</label>
+            <input type="text" [(ngModel)]="plantDetails.model" name="model" />
+          </section>
+
+          <!-- Plant Span -->
+          <section class="static">
+            <label>Plant Span</label>
+            <select type="text" [(ngModel)]="plantDetails.span" name="span" >
+              <option value="">--Select an Option--</option>
+              <option value="seasonal">Seasonal</option>
+              <option value="yearly">Yearly</option>
+            </select>
+          </section>
+
+          <!-- Usage Time -->
+          <section class="dynamic">
+            <label>Usage Seasons</label>
+            <div *ngFor="let time of usageTime; let i = index">
+              <input type="text" [(ngModel)]="usageTime[i]" name="usageTime{{i}}" />
+            </div>
+            <button type="button" (click)="addField('usageTime')">Add New Usage Season</button>
+          </section>
+
+          <!-- Medicinal Usage Categories -->
+          <section class="dynamic">
+            <label>Categories</label>
+            <div *ngFor="let category of category; let i = index">
+              <input type="text" [(ngModel)]="category[i]" name="category{{i}}" />
+            </div>
+            <button type="button" (click)="addField('category')">Add New Category</button>
+          </section>
+
+          <!--Region Found-->
+          <section class="dynamic">
+            <label>Region</label>
+            <div *ngFor="let reg of region; let i = index">
+              <input type="text" [(ngModel)]="region[i]" name="region{{i}}" />
+            </div>
+            <button type="button" (click)="addField('region')">Add New Region</button>
+          </section>
+
+          <!-- AYUSH Category where the plant falls -->
+          <section class="dynamic">
+            <label>AYUSH Type</label>
+            <div *ngFor="let ayush of AYUSHType; let i = index">
+              <select [(ngModel)]="AYUSHType[i]" name="AYUSHType{{i}}" >
+                <option value="">--Select an Option--</option>
+                <option value="Ayurveda">Ayurveda</option>
+                <option value="Yoga & Naturopathy">Yoga & Naturopathy</option>
+                <option value="Unani">Unani</option>
+                <option value="Siddha">Siddha</option>
+                <option value="Homeopathy">Homeopathy</option>
+              </select>
+            </div>
+            <button type="button" (click)="addField('AYUSHType')">Add New AYUSH Category</button>
+          </section>
+          <!-----Plant Type-------->
+          <section class="static">
+            <label>Plant Type</label>
+            <input type="text" [(ngModel)]="plantDetails.plantType" name="plantType" />
+          </section>
+          <!---------Citations-------->
+          <section class="dynamic">
+            <label>Citations</label>
+            <div *ngFor="let citation of citations; let i = index">
+              <input type="text" [(ngModel)]="citations[i]" name="citations{{i}}" />
+            </div>
+            <button type="button" (click)="addField('citations')">Add New Citations</button>
+          </section>
+          <!------Precautions --------->
+          <section class="static">
+            <label>Precaution</label>
+            <textarea type="text" [(ngModel)]="plantDetails.precautions" name="precautions" ></textarea>
+          </section>
+          <!---------Source Link------->
+          <section class="static">
+            <label>Source Link</label>
+            <input type="text" [(ngModel)]="plantDetails.correspondenceLink" name="sourceLink" />
+          </section>
+          <section class="dynamic">
+            <button type="submit">Submit</button>
+          </section>
+        </form>
+      </div>
+    </div>
+
+    <div class="searches">
+      <h2 class="heading">Recently Viewed Plants</h2>
+      <div class="slidercontainer">
+        <div class="slider-wrapper">
+          <div *ngFor="let plant of lastViewedPlants">
+            <div class="plant-card" (click)="openPlantDetails(plant._id)">
+              <!-- Display the first image from the images array -->
+              <div class="plant-image">
+                <img *ngIf="plant.images.length > 0" [src]="plant.images[0]" alt="{{ plant.botanicalName }}"/>
+              </div>
+              <!-- Display the first common name -->
+              <h3 class="plant-common-name">{{ plant.commonNames[0] || "Unknown Name" }}</h3>
+              <!-- Display the botanical name -->
+              <h4 class="plant-botanical-name"><i>{{ plant.botanicalName }}</i></h4>
+              <!-- Display the trimmed description -->
+              <p class="plant-description">{{ trimDescription(plant.description, 120) }}</p>
+            </div>
+          </div>
+        </div>
+        <!-- Navigation Buttons -->
+        <button class="slider-btn prev" (click)="scrollSlider('prev')">&#8249;</button>
+        <button class="slider-btn next" (click)="scrollSlider('next')">&#8250;</button>
+      </div>
+    </div>
+    <div class="quizzes">
+      <div class="quiz-image">
+        <img src="https://www.gstsuvidhacenters.com/WebsiteAssets/images/Services/PrivateLimitedCompany1.png" alt="">
+      </div>
+      <div class="quiz-info">
+        <p>Let's do some fun quizzes to gather some more information</p>
+        <a [href]="quizUrl"><button>Get Started</button></a>
+      </div>
+      <div class="quiz-image">
+        <img src="https://static.vecteezy.com/system/resources/previews/019/837/539/original/businessman-cartoon-character-set-handsome-business-man-in-office-style-smart-suit-png.png" alt="">
+      </div>
+    </div>
+    <div class="notes">
+      <h2 class="heading">View Your Notes</h2>
+      <div class="saved-notes">
+        <div *ngFor="let note of notes" class="notes-section">
+          <!-- Editable input when in edit mode -->
+          <div *ngIf="editingNoteId === note._id; else viewMode" class="editMode">
+            <textarea [(ngModel)]="note.content" ></textarea>
+            <div class="buttons">
+              <button (click)="saveEdit(note)"><i class="fa-solid fa-save"></i>&nbsp;Save</button>
+              <button (click)="cancelEdit()"><i class="fa-solid fa-xmark"></i>&nbsp;Discard</button>
+            </div>
+          </div>
+          <!-- Non-editable view mode -->
+          <ng-template #viewMode>
+            <div class="buttons">
+              <button (click)="enableEdit(note._id)">Edit&nbsp;<i class="fa-solid fa-pen"></i></button>
+              <button (click)="deleteNote(note._id)">Delete&nbsp;<i class="fa-solid fa-trash"></i></button>
+            </div>
+            <p style="margin-bottom: 0; font-size: small;color: rgb(132, 132, 132);">For {{note.plantName}}</p>
+            <p>{{ note.content }}</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="most-viewed">
+      <h2 class="heading">Most Viewed Plant Of the Day</h2>
+      <div class="mvp">
+        <div class="mvp-model">
+          <model-viewer [src]="mostViewedPlant.model" camera-controls auto-rotate class="model3D"></model-viewer>
+        </div>
+        <div class="mvp-info" (click)="openPlantDetails(mostViewedPlant._id)">
+          <h3>{{ mostViewedPlant.commonNames[0] || "Unknown Name" }}</h3>
+          <p>{{ mostViewedPlant.botanicalName }}</p>
+          <p>{{ trimDescription(mostViewedPlant.description, 300) }}</p>
+          <p><strong>Medicinal Uses:-</strong><br>{{ mostViewedPlant.medicinalUses[0] }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <app-footer></app-footer>

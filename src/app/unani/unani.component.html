@@ -1,0 +1,78 @@
+<div class="navbar">
+  <app-navbar></app-navbar>
+</div>
+<div class="main">
+  <div class="c1">
+    <div class="c1left">
+      <div class="overlay">
+        <h1>Rediscover Traditional Healing</h1>
+        <h2>Step into the World of</h2>
+        <h3>Unani Medicine</h3>
+        <div class="line"></div>
+        <p>
+            Experience the wisdom of Unani medicine, a holistic system rooted in ancient Greek and Islamic traditions.
+            Explore natural remedies, personalized treatments, and the balance of the four humors for optimal health.
+            Reconnect with this time-honored approach to healing and embrace a balanced, healthier lifestyle.
+        </p>
+      </div>
+    </div>
+    <div class="c1right">
+      <img src="5.jpg" />
+    </div>
+  </div>
+  <div class="c2">
+    <div class="about">
+      <div class="aleft">
+        <h2>About Unani Medicine</h2>
+        <p>
+            Unani medicine is a traditional system of healing that originated in ancient Greece
+            and was further developed by Arab and Persian scholars. Based on the theory of the
+            four humors (blood, phlegm, yellow bile, and black bile), it emphasizes maintaining
+            balance in the body through diet, herbal remedies, detoxification, and lifestyle changes.
+            This holistic approach addresses physical, emotional, and environmental factors
+            to promote well-being and longevity.
+        </p>
+      </div>
+      <div class="aright">
+        <div class="aimages">
+          <img src="https://th.bing.com/th/id/OIP.oHjW6wTg5DvIOymKUqr2awHaE8?w=1200&h=801&rs=1&pid=ImgDetMain" alt="" class="i1">
+          <img src="https://th.bing.com/th/id/OIP.bC9_25YnOT_mg97csKq9aAHaE7?w=1000&h=666&rs=1&pid=ImgDetMain" alt="" class="i2">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="features">
+    <h2 class="heading">Key Features</h2>
+    <div class="underline"></div>
+    <div class="feature-container">
+      <div class="feature" *ngFor="let feature of features">
+        <div class="icon">
+          <i [class]="feature.icon"></i>
+        </div>
+        <h4>{{ feature.name }}</h4>
+        <p>{{ feature.description }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="plants">
+    <div class="plant-container">
+      <h2 class="heading">Some Traditional Plants Used In Unani</h2>
+      <div class="plant-details">
+        <div class="plant-card" *ngFor="let plant of plants"  (click)="openPlantDetails(plant._id)">
+          <div class="plant-image">
+            <img *ngIf="plant.images.length > 0" [src]="plant.images[0]" alt="{{ plant.botanicalName }}" />
+          </div>
+          <h3 class="plant-common-name">{{ plant.commonNames[0] || "Unknown Name" }}</h3>
+          <h4 class="plant-botanical-name"><i>{{ plant.botanicalName }}</i></h4>
+          <p class="plant-description">{{ trimDescription(plant.description, 120) }}</p>
+        </div>
+      </div>
+      <!-- "Load More" Button -->
+      <div class="load-more-container" *ngIf="showLoadMore">
+        <button (click)="loadMorePlants()">Load More</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

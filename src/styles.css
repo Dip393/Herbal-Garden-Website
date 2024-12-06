@@ -10,11 +10,12 @@ body, html {
     padding: 0;
 }
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     padding: 0;
     margin: 0;
     background-color: #dddddd;
     height: 100vh;
+    scroll-behavior: smooth;
 }
 a{
     cursor: pointer;
@@ -30,9 +31,9 @@ li{
     background: #0000003b;
 }
 ::-webkit-scrollbar-thumb {
-    background-color: rgb(27, 87, 0); 
-    border-radius: 6px; 
-    border: 3px solid #1b1b1b; 
+    background-color: rgb(27, 87, 0);
+    border-radius: 6px;
+    border: 3px solid #1b1b1b;
 }
 html {
     scrollbar-width:thin;
@@ -120,7 +121,7 @@ html {
         height: 20px;
         animation: spin 1s linear infinite;
       }
-      
+
       @keyframes spin {
         100% {
           transform: rotate(360deg);

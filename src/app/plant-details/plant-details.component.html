@@ -1,144 +1,202 @@
-<div *ngIf="plantDetails">
-  <div class="item">
-    <div class="item-graphics">
-      <div class="item-media">
-        <div class="media-preview-column">
-          <div  class="preview-item" *ngFor="let image of plantDetails.images">
-            <img
-                [src]= "image"
+<div class="navbar">
+  <app-navbar></app-navbar>
+</div>
+<div class="main">
+  <div *ngIf="plantDetails">
+    <div class="item">
+      <div class="item-graphics">
+        <div class="item-media">
+          <div class="media-preview-column">
+            <div class="preview-item" *ngFor="let image of plantDetails.images">
+              <img
+                [src]="image"
                 alt="Modal Image"
                 class="preview-image"
                 (click)="showInLargeView(image, 'image')"
-            />
-          </div>
-          <div  class="preview-item" *ngFor="let video of plantDetails.videos">
-            <img
-                src= "https://th.bing.com/th/id/OIP.YzCzRx5jJ5J7rF_t_8g-YAHaHa?rs=1&pid=ImgDetMaino"
+              />
+            </div>
+            <div class="preview-item" *ngFor="let video of plantDetails.videos">
+              <img
+                src="https://th.bing.com/th/id/OIP.YzCzRx5jJ5J7rF_t_8g-YAHaHa?rs=1&pid=ImgDetMaino"
                 alt="image"
                 class="preview-image"
                 (click)="showInLargeView(video, 'video')"
-            />
+              />
+            </div>
+            <div class="preview-item">
+              <img
+                src="https://th.bing.com/th/id/OIP.tHWICd2JWJswO9YG1EVgdgHaHa?rs=1&pid=ImgDetMain"
+                alt="3D Model"
+                class="preview-image"
+                (click)="showInLargeView(plantDetails.model, '3dmodel')"
+              />
+            </div>
           </div>
-          <div class="preview-item">
-            <img
-              src="https://th.bing.com/th/id/OIP.tHWICd2JWJswO9YG1EVgdgHaHa?rs=1&pid=ImgDetMain"
-              alt="3D Model"
-              class="preview-image"
-              (click)="showInLargeView(plantDetails.model, '3dmodel')"
-            />
+
+          <div class="media-large-view-column">
+            <button (click)="sharePage()" class="sharePage">
+              <i class="fa-solid fa-share-from-square"></i>
+            </button>
+
+            <div class="large-view-item">
+              <model-viewer
+                *ngIf="largeViewType === '3dmodel'"
+                [src]="largeViewSrc"
+                id="large-view"
+                src=""
+                alt="Large View"
+                auto-rotate
+                camera-controls
+              ></model-viewer>
+              <img
+                *ngIf="largeViewType === 'image'"
+                [src]="largeViewSrc"
+                alt="Large View"
+                class="large-view-image"
+              />
+              <iframe
+                *ngIf="largeViewType === 'video'"
+                [src]="largeViewSrc"
+                controls
+                autoplay
+                class="large-view-video"
+              ></iframe>
+            </div>
           </div>
         </div>
-  
-        <div class="media-large-view-column">
-          <button (click)="sharePage()" class="sharePage"><i class="fa-solid fa-share-from-square"></i></button>
+        <div class="item-button">
+          <button
+            id="b2"
+            class="bookmarkbtn"
+            *ngIf="!loading"
+            (click)="
+              isPlantBookmarked
+                ? goToBookmarks()
+                : bookmarkPlant(plantDetails._id)
+            "
+          >
+            &nbsp;&nbsp;{{ isPlantBookmarked ? "Go to Bookmark" : "Bookmark" }}
+            <div *ngIf="loading" class="spinner"></div>
+            <i class="fa-solid fa-lock" *ngIf="showLock" id="lock"></i>
+          </button>
 
-          <div class="large-view-item">
-            <model-viewer
-              *ngIf="largeViewType === '3dmodel'"
-              [src]="largeViewSrc"
-              id="large-view"
-              src=""
-              alt="Large View"
-              auto-rotate
-              camera-controls
-            ></model-viewer>
-            <img
-              *ngIf="largeViewType === 'image'"
-              [src]="largeViewSrc"
-              alt="Large View"
-              class="large-view-image"
-            />
-            <iframe 
-              *ngIf="largeViewType === 'video'"
-              [src]="largeViewSrc"
-              controls autoplay
-              class="large-view-video"
-            ></iframe>
-          </div>
+          <button id="download" (click)="downloadPDF()">
+            <i class="fa-regular fa-circle-down"></i>&nbsp;&nbsp;Download Now
+            <i class="fa-solid fa-lock" *ngIf="showLock" id="lock"></i>
+          </button>
         </div>
       </div>
-      <div class="item-button">
-        <button id="b2" class="bookmarkbtn" *ngIf="!loading" (click)="isPlantBookmarked ? goToBookmarks() : bookmarkPlant(plantDetails._id)">
-          
-          &nbsp;&nbsp;{{ isPlantBookmarked ? 'Go to Bookmark' : 'Bookmark' }}
-          <div *ngIf="loading" class="spinner"></div>
-        </button>
-        
-
-        <button id="download" (click)="downloadPDF()">
-          <i class="fa-regular fa-circle-down"></i>&nbsp;&nbsp;Download Now
-        </button>
-        
-      </div>
-    </div>
-    <div class="item-details">
-      <div class="language-selector">
-        <label for="language">Choose Language:</label>
-        <select id="language" (change)="onLanguageChange($event)">
-          <option value="en">English</option>
-          <option value="es">Spanish</option>
-          <option value="hi">Hindi</option>
-          <!-- Add other languages -->
-        </select>
-      </div>
+      <div class="item-details">
+        <div class="language-selector">
+          <label for="language">Select Language:</label>
+          <select id="language" [(ngModel)]="selectedLanguage">
+            <option value="en">English</option>
+            <option value="bn">Bengali</option>
+            <option value="hi">Hindi</option>
+          </select>
+          <button (click)="translateContent()" style="height: 33px;">
+            <span *ngIf="!loading">Translate</span>
+            <div class="spinner" *ngIf="loading"></div>
+          </button>
+        </div>
         <div class="item-common-names">
-          <h3>{{ plantDetails.commonNames.join(', ') }}</h3>
+          <h3>{{ plantDetails.commonNames.join(", ") }}</h3>
         </div>
         <div class="item-botanical-name">
           <p><strong>Botanical Name:</strong> {{ plantDetails.botanicalName }}</p>
         </div>
         <div class="item-family">
-          <p><strong>Family:</strong> {{ plantDetails.family }}</p>
+          <p><strong>Family:</strong> {{ translatedDetails.family || plantDetails.family }}</p>
+        </div>
+        <div class="item-type">
+          <p><strong>Plant Type:</strong> {{ translatedDetails.plantType || plantDetails.plantType }}</p>
         </div>
         <div class="item-description">
           <div class="item-header">
             <strong>Description</strong>
           </div>
-          <p>{{ plantDetails.description }}</p>
+          <p>{{ translatedDetails.description || plantDetails.description }}</p>
         </div>
         <div class="item-medicinal-uses">
           <div class="item-header">
             <strong>Medicinal Uses</strong>
-            <i 
-              class="fa-solid" 
-              [ngClass]="{ 'fa-caret-down': !showMedicinalUses, 'fa-caret-up': showMedicinalUses }" 
+            <i
+              class="fa-solid"
+              [ngClass]="{
+                'fa-caret-down': !showMedicinalUses,
+                'fa-caret-up': showMedicinalUses
+              }"
               (click)="toggleMedicinalUses()"
             ></i>
           </div>
           <ul *ngIf="showMedicinalUses" class="medicinal-uses">
-            <li *ngFor="let use of plantDetails.medicinalUses">{{ use }}</li>
+            <li *ngFor="let use of translatedDetails.medicinalUses || plantDetails.medicinalUses">{{ use }}</li>
           </ul>
+        </div>
+        <div class="item-usage">
+          <div class="item-header">
+            <strong>Usage Category:</strong>
+          </div>
+          <p>{{ translatedDetails.category || plantDetails.category}}&nbsp;</p>
+        </div>
+        <div class="item-cultivation">
+          <div class="item-header">
+            <strong>Cultivation:</strong>
+          </div>
+          <p>{{ translatedDetails.cultivationMethods || plantDetails.cultivationMethods }}</p>
         </div>
         <div class="item-habitat">
           <div class="item-header">
             <strong>Places Where Found:</strong>
           </div>
-          <p>{{ plantDetails.region }}</p>
+          <p>{{ translatedDetails.region || plantDetails.region }}</p>
         </div>
         <div class="item-chemical-composition">
           <div class="item-header">
             <strong>Chemical Composition:</strong>
-            <i 
-              class="fa-solid" 
-              [ngClass]="{ 'fa-caret-down': !showComposition, 'fa-caret-up': showComposition }" 
+            <i
+              class="fa-solid"
+              [ngClass]="{
+                'fa-caret-down': !showComposition,
+                'fa-caret-up': showComposition
+              }"
               (click)="toggleComposition()"
             ></i>
           </div>
           <ul *ngIf="showComposition">
-            <li *ngFor="let composition of plantDetails.composition">{{ composition }}</li>
+            <li *ngFor="let composition of translatedDetails.composition || plantDetails.composition">
+              {{ composition }}
+            </li>
           </ul>
         </div>
         <div class="item-usage">
           <div class="item-header">
             <strong>How to Use:</strong>
-            <i 
-              class="fa-solid" 
-              [ngClass]="{ 'fa-caret-down': !showUses, 'fa-caret-up': showUses }" 
+            <i
+              class="fa-solid"
+              [ngClass]="{ 'fa-caret-down': !showUses, 'fa-caret-up': showUses }"
               (click)="toggleUses()"
             ></i>
           </div>
           <ul *ngIf="showUses">
-            <li *ngFor="let procedure of plantDetails.usageProcedure">{{ procedure }}</li>
+            <li *ngFor="let procedure of translatedDetails.usageProcedure || plantDetails.usageProcedure">
+              {{ procedure }}
+            </li>
+          </ul>
+        </div>
+        <div class="item-cite">
+          <div class="item-header">
+            <strong>Citations:</strong>
+            <i
+              class="fa-solid"
+              [ngClass]="{ 'fa-caret-down': !showCitations, 'fa-caret-up': showCitations }"
+              (click)="toggleCitations()"
+            ></i>
+          </div>
+          <ul *ngIf="showCitations">
+            <li *ngFor="let citations of translatedDetails.citations || plantDetails.citations">
+              {{ citations }}
+            </li>
           </ul>
         </div>
         <div class="item-safety">
@@ -146,12 +204,39 @@
             <strong>Safety and Side Effects:</strong>
           </div>
           <p>
-            {{ plantDetails.precautions }}
+            {{ translatedDetails.precautions || plantDetails.precautions }}
           </p>
         </div>
         <div class="item-header">
-          <p><strong>Source</strong>&nbsp;{{plantDetails.correspondenceLink }}</p>
+          <p>
+            <strong>Source:</strong>&nbsp;<a href="{{ plantDetails.correspondenceLink }}">{{ plantDetails.correspondenceLink }}</a>
+          </p>
         </div>
       </div>
-<div *ngIf="!plantDetails">Loading plant details...</div>
-  
+      <div *ngIf="!plantDetails">Loading plant details...</div>
+    </div>
+  </div>
+  <!------Notes Section------->
+  <button id="note-button" (click)="showPopupNote()" *ngIf="showNotesBtn">
+    Notes&nbsp;<i class="fa-solid fa-note-sticky"></i>
+  </button>
+  <div id="note-modal" class="modal" *ngIf="showPopup">
+    <div class="modal-content">
+      <h5>
+        Take your important Notes&nbsp;<i
+          class="fa-regular fa-note-sticky"
+        ></i>
+      </h5>
+      <textarea id="note-textarea" #noteInput></textarea>
+      <br />
+      <div class="note-button">
+        <button id="save-btn" [disabled]="loading" (click)="addNote(noteInput.value)">
+          <div><i class="fa-solid fa-check" *ngIf="!loading"></i>&nbsp;<span *ngIf="!loading">Save</span></div>
+          <div class="spinner" *ngIf="loading"></div>
+        </button>
+        <button id="discard-btn" (click)="closeNotesPopup()"><i class="fa-solid fa-xmark"></i>&nbsp;Discard</button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

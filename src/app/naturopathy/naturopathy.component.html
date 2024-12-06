@@ -1,0 +1,77 @@
+<div class="navbar">
+  <app-navbar></app-navbar>
+</div>
+<div class="main">
+  <div class="c1">
+    <div class="c1left">
+      <div class="overlay">
+        <h1>Rejuvenate Your Body and Mind</h1>
+        <h2>Step into the World of</h2>
+        <h3>Yoga & Naturopathy</h3>
+        <div class="line"></div>
+        <p>
+            Experience the synergy of Yoga and Naturopathy—natural approaches to holistic well-being.
+            Discover practices that harmonize body, mind, and soul through yoga postures, breathing exercises,
+            and lifestyle changes. Reconnect with nature to restore balance and vitality, embracing a healthier way of living.
+        </p>
+    </div>
+    </div>
+    <div class="c1right">
+      <img src="4.jpg" />
+    </div>
+  </div>
+  <div class="c2">
+    <div class="about">
+      <div class="aleft">
+        <h2>About Yoga & Naturopathy</h2>
+        <p>
+            Yoga and Naturopathy are interconnected approaches that focus on self-healing through natural means.
+            Yoga, a practice originating in ancient India, combines physical postures, breathing techniques,
+            and meditation for mental and physical wellness. Naturopathy emphasizes natural therapies,
+            including diet, hydrotherapy, and fasting, to detoxify and rejuvenate the body. Together, they promote
+            a balanced, drug-free lifestyle for overall health and harmony.
+        </p>
+      </div>
+      <div class="aright">
+        <div class="aimages">
+          <img src="https://th.bing.com/th/id/OIP.Be1KL0vWUS8siLCgZ_Wa9AHaEi?rs=1&pid=ImgDetMain" alt="" class="i1">
+          <img src="https://th.bing.com/th/id/OIP.hNqrrb04hudl7wEQfI-yTAHaEK?w=1100&h=619&rs=1&pid=ImgDetMain" alt="" class="i2">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="features">
+    <h2 class="heading">Key Features</h2>
+    <div class="underline"></div>
+    <div class="feature-container">
+      <div class="feature" *ngFor="let feature of features">
+        <div class="icon">
+          <i [class]="feature.icon"></i>
+        </div>
+        <h4>{{ feature.name }}</h4>
+        <p>{{ feature.description }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="plants">
+    <div class="plant-container">
+      <h2 class="heading">Some Traditional Plants Used In Naturopathy</h2>
+      <div class="plant-details">
+        <div class="plant-card" *ngFor="let plant of plants"  (click)="openPlantDetails(plant._id)">
+          <div class="plant-image">
+            <img *ngIf="plant.images.length > 0" [src]="plant.images[0]" alt="{{ plant.botanicalName }}" />
+          </div>
+          <h3 class="plant-common-name">{{ plant.commonNames[0] || "Unknown Name" }}</h3>
+          <h4 class="plant-botanical-name"><i>{{ plant.botanicalName }}</i></h4>
+          <p class="plant-description">{{ trimDescription(plant.description, 120) }}</p>
+        </div>
+      </div>
+      <!-- "Load More" Button -->
+      <div class="load-more-container" *ngIf="showLoadMore">
+        <button (click)="loadMorePlants()">Load More</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

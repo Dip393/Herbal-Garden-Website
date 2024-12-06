@@ -54,14 +54,17 @@ export class BookmarksComponent {
     );
   }
   removeBookmark(plantId: string): void {
+    this.loading = true;
     const email = localStorage.getItem('email'); // Retrieve the logged-in user's email
     if(email){
       this.authService.deleteBookmark(plantId,email).subscribe(
         (res) => {
           this.fetchBookmarkedPlants(); // Refresh the bookmarks list
+          this.loading = false;
         },
         (err) => {
           console.error('Error removing bookmark:', err);
+          this.loading = false;
         }
       )
     }

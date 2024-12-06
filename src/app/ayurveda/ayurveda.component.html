@@ -1,0 +1,80 @@
+<div class="navbar">
+  <app-navbar></app-navbar>
+</div>
+<div class="main">
+  <div class="c1">
+    <div class="c1left">
+      <div class="overlay">
+        <h1>Embrace the Essence of Natural Healing</h1>
+        <h2>Step into the World of</h2>
+        <h3>Ayurvedic Wisdom</h3>
+        <div class="line"></div>
+        <p>
+            Discover the timeless healing power of plants celebrated in Ayurveda.
+            Explore their therapeutic properties through immersive 3D models,
+            in-depth insights, and an engaging virtual journey.
+            Reconnect with nature's ancient remedies and embrace the holistic
+            science of balance and well-being for a healthier, harmonious life.
+        </p>
+      </div>
+    </div>
+    <div class="c1right">
+      <img src="3.jpg" />
+    </div>
+  </div>
+  <div class="c2">
+    <div class="about">
+      <div class="aleft">
+        <h2>About Ayurveda</h2>
+        <p>
+            Ayurveda, one of the world's oldest holistic healing systems, originated in India over 5,000 years ago.
+            Rooted in the principle of balance, it emphasizes harmony between mind, body, and spirit.
+            Ayurveda focuses on individualized treatment and prevention through natural remedies,
+            including medicinal plants, diet, lifestyle practices, and therapies.
+            This ancient science promotes overall well-being by aligning with the rhythms of nature.
+        </p>
+    </div>
+
+      <div class="aright">
+        <div class="aimages">
+          <img src="https://th.bing.com/th/id/OIP.bpsrnHsn6U3CV3Kyf2GbrQAAAA?rs=1&pid=ImgDetMain" alt="" class="i1">
+          <img src="https://th.bing.com/th/id/OIP._vzCG6TwEgWSUuiwYmyK1wHaF1?w=1250&h=985&rs=1&pid=ImgDetMain" alt="" class="i2">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="features">
+    <h2 class="heading">Key Features</h2>
+    <div class="underline"></div>
+    <div class="feature-container">
+      <div class="feature" *ngFor="let feature of features">
+        <div class="icon">
+          <i [class]="feature.icon"></i>
+        </div>
+        <h4>{{ feature.name }}</h4>
+        <p>{{ feature.description }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="plants">
+    <div class="plant-container">
+      <h2 class="heading">Some Traditional Plants Used In Ayurveda</h2>
+      <div class="plant-details">
+        <div class="plant-card" *ngFor="let plant of plants"  (click)="openPlantDetails(plant._id)">
+          <div class="plant-image">
+            <img *ngIf="plant.images.length > 0" [src]="plant.images[0]" alt="{{ plant.botanicalName }}" />
+          </div>
+          <h3 class="plant-common-name">{{ plant.commonNames[0] || "Unknown Name" }}</h3>
+          <h4 class="plant-botanical-name"><i>{{ plant.botanicalName }}</i></h4>
+          <p class="plant-description">{{ trimDescription(plant.description, 120) }}</p>
+        </div>
+      </div>
+      <!-- "Load More" Button -->
+      <div class="load-more-container" *ngIf="showLoadMore">
+        <button (click)="loadMorePlants()">Load More</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

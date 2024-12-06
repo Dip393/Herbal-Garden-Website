@@ -3,66 +3,134 @@
   <div class="left-section">
     <div class="logo">Herbal</div>
     <div class="menu">
-      <li><i class="fa-solid fa-sliders"></i>&nbsp;&nbsp;<p>Dashboard</p></li>
-      <li><i class="fa-solid fa-house"></i>&nbsp;&nbsp;<p>Home</p></li>
-      <li><i class="fa-solid fa-power-off"></i>&nbsp;&nbsp;<p>Log Out</p></li>
+      <li><img src="dashboard.png" alt="" width="20px">&nbsp;&nbsp;<p>Dashboard</p></li>
+      <a [routerLink]="['']" ><li><i class="fa-solid fa-house"></i>&nbsp;&nbsp;<p>Home</p></li></a>
+      <li (click)="logout()"><i class="fa-solid fa-power-off"></i>&nbsp;&nbsp;<p>Log Out</p></li>
     </div>
     <hr>
     <div class="contact-section">
       <img src="https://th.bing.com/th/id/R.a256ed4793f1500bb4376e15e969adc1?rik=M1h%2fBGLQuVWQrQ&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fcartoon-kid-png-cartoon-person-exercising-1425.png&ehk=audsA1%2fWXcKbAN0UQX7K98tXHva%2bZG6DeuhFWrpLM2A%3d&risl=&pid=ImgRaw&r=0" alt="">
       <div class="contact-text">
         <p>Need Help? Feel free to ask expert</p>
-        <button>Contact Us</button>
+        <button (click)="goToSection('contact')">Contact Us</button>
       </div>
     </div>
   </div>
   <div class="right-section">
-    <h2 class="heading">Weather Details</h2>
     <div class="weather">
-      <div class="weather-card">
-        <div class="weather-info">
-          <div class="weather-title">
-            <strong>Location</strong>
-            <i class="fa-solid fa-location-crosshairs"></i>
+      <div class="wl">
+        <h3 class="heading">Weather Guide for Optimal Herb Growth</h3>
+        <div class="weather-card">
+          <div class="weather-info">
+            <div class="weather-title">
+              <strong>Location</strong>
+              <i class="fa-solid fa-location-crosshairs"></i>
+            </div>
+            <p><data>Latitude: </data> {{ latitude }}</p>
+            <p><data>Longitude: </data> {{ longitude }}</p>
           </div>
-          <p><data>Latitude: </data> {{ latitude }}</p>
-          <p><data>Longitude: </data> {{ longitude }}</p>
-        </div>
-        <div class="weather-info">
-          <div class="weather-title">
-            <strong>Temperature</strong>
-            <i class="fa-solid fa-temperature-three-quarters"></i>
+          <div class="weather-info">
+            <div class="weather-title">
+              <strong>Temperature</strong>
+              <i class="fa-solid fa-temperature-three-quarters"></i>
+            </div>
+            <p>{{ weather.temperature }}°C</p>
           </div>
-          <p>{{ weather.temperature }}°C</p>
-        </div>
-        <div class="weather-info">
-          <div class="weather-title">
-            <strong>Condition</strong>
-            <i class="fa-solid fa-cloud-bolt"></i>
+          <div class="weather-info">
+            <div class="weather-title">
+              <strong>Condition</strong>
+              <i class="fa-solid fa-cloud-bolt"></i>
+            </div>
+            <p>{{ weather.condition }}</p>
           </div>
-          <p>{{ weather.condition }}</p>
-        </div>
-        <div class="weather-info">
-          <div class="weather-title">
-            <strong>Wind Speed</strong>
-            <i class="fa-solid fa-wind"></i>
+          <div class="weather-info">
+            <div class="weather-title">
+              <strong>Wind Speed</strong>
+              <i class="fa-solid fa-wind"></i>
+            </div>
+            <p>{{ weather.windSpeed }} m/s</p>
           </div>
-          <p>{{ weather.windSpeed }} m/s</p>
+          <!-- <p><strong>Wind Direction:</strong> {{ weather.windDirection }}°</p> -->
         </div>
-        <!-- <p><strong>Wind Direction:</strong> {{ weather.windDirection }}°</p> -->
       </div>
-      <canvas id="weatherChart"></canvas>
+      <div class="wr">
+        <h3 class="heading">Upcoming Week: Temperature Outlook</h3>
+        <canvas id="weatherChart"></canvas>
+      </div>
     </div>
     <div class="searches">
       <h2 class="heading">Recently Viewed Plants</h2>
-      <div class="searched-plants"></div>
+      <div class="slidercontainer">
+        <div class="slider-wrapper">
+          <div *ngFor="let plant of lastViewedPlants">
+            <div class="plant-card" (click)="openPlantDetails(plant._id)">
+              <!-- Display the first image from the images array -->
+              <div class="plant-image">
+                <img *ngIf="plant.images.length > 0" [src]="plant.images[0]" alt="{{ plant.botanicalName }}"/>
+              </div>
+              <!-- Display the first common name -->
+              <h3 class="plant-common-name">{{ plant.commonNames[0] || "Unknown Name" }}</h3>
+              <!-- Display the botanical name -->
+              <h4 class="plant-botanical-name"><i>{{ plant.botanicalName }}</i></h4>
+              <!-- Display the trimmed description -->
+              <p class="plant-description">{{ trimDescription(plant.description, 120) }}</p>
+            </div>
+          </div>
+        </div>
+        <!-- Navigation Buttons -->
+        <button class="slider-btn prev" (click)="scrollSlider('prev')">&#8249;</button>
+        <button class="slider-btn next" (click)="scrollSlider('next')">&#8250;</button>
+      </div>
     </div>
     <div class="quizzes">
-      <p>Let's do some fun quizzes to gather some more information</p> 
-      <a href=""><button>Get Started</button></a>
+      <div class="quiz-image">
+        <img src="https://www.gstsuvidhacenters.com/WebsiteAssets/images/Services/PrivateLimitedCompany1.png" alt="">
+      </div>
+      <div class="quiz-info">
+        <p>Let's do some fun quizzes to gather some more information</p>
+        <a [href]="quizUrl"><button>Get Started</button></a>
+      </div>
+      <div class="quiz-image">
+        <img src="https://static.vecteezy.com/system/resources/previews/019/837/539/original/businessman-cartoon-character-set-handsome-business-man-in-office-style-smart-suit-png.png" alt="">
+      </div>
     </div>
     <div class="notes">
-      <p class="heading">View Your Notes</p>
+      <h2 class="heading">View Your Notes</h2>
+      <div class="saved-notes">
+        <div *ngFor="let note of notes" class="notes-section">
+          <!-- Editable input when in edit mode -->
+          <div *ngIf="editingNoteId === note._id; else viewMode" class="editMode">
+            <textarea [(ngModel)]="note.content" ></textarea>
+            <div class="buttons">
+              <button (click)="saveEdit(note)"><i class="fa-solid fa-save"></i>&nbsp;Save</button>
+              <button (click)="cancelEdit()"><i class="fa-solid fa-xmark"></i>&nbsp;Discard</button>
+            </div>
+          </div>
+          <!-- Non-editable view mode -->
+          <ng-template #viewMode>
+            <div class="buttons">
+              <button (click)="enableEdit(note._id)">Edit&nbsp;<i class="fa-solid fa-pen"></i></button>
+              <button (click)="deleteNote(note._id)">Delete&nbsp;<i class="fa-solid fa-trash"></i></button>
+            </div>
+            <p style="margin-bottom: 0; font-size: small;color: rgb(132, 132, 132);">For {{note.plantName}}</p>
+            <p>{{ note.content }}</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="most-viewed">
+      <h2 class="heading">Most Viewed Plant Of the Day</h2>
+      <div class="mvp">
+        <div class="mvp-model">
+          <model-viewer [src]="mostViewedPlant.model" camera-controls auto-rotate class="model3D"></model-viewer>
+        </div>
+        <div class="mvp-info" (click)="openPlantDetails(mostViewedPlant._id)">
+          <h3>{{ mostViewedPlant.commonNames[0] || "Unknown Name" }}</h3>
+          <p>{{ mostViewedPlant.botanicalName }}</p>
+          <p>{{ trimDescription(mostViewedPlant.description, 300) }}</p>
+          <p><strong>Medicinal Uses:-</strong><br>{{ mostViewedPlant.medicinalUses[0] }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

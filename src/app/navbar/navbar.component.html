@@ -1,20 +1,24 @@
 <nav>
-    <a><p class="logo">Virtual Herbal Garden</p></a>
+    <a href="">
+      <img src="logo.png" alt="" class="logo">
+    </a>
     <div class="menu">
-        <a href="#" class="active"><p>Home</p></a>
-        <a href="#"><p>Virtual Tour</p></a>
-        <a [routerLink]="['/bookmarks']" ><p>Bookmarks</p></a>
-        <a href="#"><p>Contact</p></a>
-        <div class="buttonContainer">
-            <div *ngIf="!loggedIn">
-              <button (click)="router.navigate(['/login'])" id="login" class="AuthButtons">Login/Register</button>
-            </div>
-            <div *ngIf="loggedIn">
-              <button (click)="router.navigate([isAdmin ? '/admin' : '/user'])" class="AuthButtons">
-                <i class="fa-solid fa-user"></i>&nbsp;Dashboard
-              </button>
-              <button (click)="logout()" class="AuthButtons">Logout&nbsp;<i class="fa-solid fa-right-from-bracket"></i></button>
-            </div>
-          </div>
+      <a (click)="setActive('home','')" [ngClass]="{'active': activeMenu === 'home'}" [routerLink]="['']"><p>Home</p></a>
+      <a ><p>Virtual Tour</p></a>
+      <a (click)="goToSection('gallery')"><p>Gallery</p></a>
+      <a (click)="setActive('bookmarks','bookmarks');" *ngIf="showBookmarkBtn" [ngClass]="{'active': activeMenu === 'bookmarks'}"><p>Bookmarks</p></a>
+      <a (click)="goToSection('contact')"><p>Contact</p></a>
+
+      <div class="buttonContainer">
+        <div *ngIf="!loggedIn">
+          <button (click)="router.navigate(['/login'])" id="login" class="AuthButtons">Login/Register</button>
+        </div>
+        <div *ngIf="loggedIn">
+          <button (click)="router.navigate([isAdmin ? '/admin' : '/user'])" class="AuthButtons">
+            <i class="fa-solid fa-user"></i>&nbsp;Dashboard
+          </button>
+          <button (click)="logout()" class="AuthButtons">Logout&nbsp;<i class="fa-solid fa-right-from-bracket"></i></button>
+        </div>
+      </div>
     </div>
 </nav>

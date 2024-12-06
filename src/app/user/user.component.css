@@ -3,6 +3,9 @@
     background-color: var(--light);
     display: flex;
     font-family: 'Poppins', sans-serif;
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
 }
 .logo{
     font-size: 25px;
@@ -14,7 +17,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 220px;
+    width: 240px;
     background-color: rgba(231, 255, 205, 0.813);
 }
 .menu{
@@ -28,6 +31,8 @@
     white-space: nowrap;
     font-size: larger;
     font-weight: 500;
+    color: var(--dark);
+    cursor: pointer;
 }
 .left-section hr{
     width: 100%;
@@ -64,11 +69,23 @@
     }
 }
 .right-section{
+  width: calc(100% - 240px);
     padding: 16px;
 }
 .weather{
     display: flex;
 }
+.wl{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding-right: 4px;
+  border-right: 1px solid #16331b;
+}
+.wr{
+    padding-left: 20px;
+    width: 50%;
+  }
 .heading{
     font-size: x-large;
     margin-bottom: 18px;
@@ -77,9 +94,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 18px;
-    width: 525px;
-    padding-right: 4px;
-    border-right: 1px solid #16331b;
+    width: 100%;
 }
 .weather-info{
     display: flex;
@@ -115,10 +130,9 @@
     background-blend-mode: overlay;
     backdrop-filter: blur(10px);
     background-image: url('https://wallpaperaccess.com/full/2681034.jpg');
-    height: 200px;
+    height: 220px;
     border-radius: 8px;
     display: flex;
-    flex-direction: column;
     background-position: center;
     align-items: center;
     justify-content: center;
@@ -135,4 +149,172 @@
         cursor: pointer;
         transition: background-color 0.3s ease-in-out;
     }
+    img{
+      max-height: 100%;
+    }
+}
+.quiz-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.quiz-image{
+  height: 200px;
+}
+/*******To view plant cards *******/
+.searches{
+  margin: 20px 0;
+}
+.slidercontainer {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  scroll-behavior: smooth; /* Smooth scrolling */
+  margin-bottom: 40px;
+}
+
+.slider-wrapper {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+}
+
+/* Hide scrollbar in WebKit-based browsers (e.g., Chrome, Edge, Safari) */
+.slider-wrapper::-webkit-scrollbar {
+    display: none !important;
+}
+
+/* Hide scrollbar for Firefox */
+.slider-wrapper {
+    scrollbar-width: none; /* For Firefox */
+}
+
+/* Hide scrollbar for older versions of IE/Edge */
+.slider-wrapper {
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(226, 226, 226, 0.838);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.slider-btn.prev {
+  left: 10px;
+}
+
+.slider-btn.next {
+  right: 10px;
+}
+.searched-plants::-webkit-scrollbar {
+  display: none;
+}
+.plant-card {
+  width: 280px;
+  background-color: var(--dark);
+  color: var(--light);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.plant-image {
+  width: 100%;
+  height: 200px;
+  img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+}
+
+.plant-common-name {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.plant-botanical-name {
+  font-size: 1em;
+  font-style: italic;
+}
+
+.plant-description {
+  font-size: 0.9em;
+  margin: 10px 0;
+  height: 100px;
+}
+/**********Notes Section Stylings****************/
+.saved-notes{
+  max-height: 300px;
+  overflow: auto;
+}
+.notes-section{
+  background-color: rgb(237, 253, 238);
+  border-radius: 4px;
+  padding: 12px;
+  font-size: larger;
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+.buttons{
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.buttons button{
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  background-color: var(--dark);
+  color: var(--light);
+}
+.editMode{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  textarea{
+    padding: 12px;
+    height: 180px;
+    width: 100%;
+    resize: none;
+  }
+}
+/********Most Viewed Plant Of the Day**********/
+.most-viewed{
+  margin-top: 18px;
+}
+.mvp{
+  display: flex;
+  background-color: #f3ffdcef;
+  border-radius: 6px;
+  align-items: center;
+  padding: 12px;
+}
+.mvp-model{
+  background-color: var(--light);
+}
+.mvp-model model-viewer{
+  height: 300px;
+  width: 300px;
+}
+.mvp-info{
+  padding: 0 12px;
 }

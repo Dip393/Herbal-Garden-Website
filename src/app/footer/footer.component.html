@@ -18,9 +18,9 @@
           <div class="footer-nav">
             <ul>
               <h6>USEFUL LINKS</h6>
-              <li><a href="#home">Home</a></li>
-              <li><a href="#gallery">Gallery</a></li>
-              <li><a href="#contact">Contact Us</a></li>
+              <li><a (click)="goToSection('')">Home</a></li>
+              <li><a (click)="goToSection('gallery')">Gallery</a></li>
+              <li><a (click)="goToSection('contact')">Contact Us</a></li>
               <li><a [routerLink]="['/privacy']" routerLinkActive="router-link-active" >Privacy Policy</a></li>
             </ul>
           </div>

@@ -1,0 +1,214 @@
+.navbar{
+  background-color: var(--dark);
+}
+.main{
+  min-height: 100vh;
+  background-color: #f9ffee;
+  font-family: 'Poppins', sans-serif;
+}
+/********************************Hero Section********************************/
+.c1{
+  display: flex;
+  max-width: 100%;
+  overflow: hidden;
+  height: 400px;
+}
+.c1left{
+  width: 50%;
+  background-color: rgba(16, 44, 0, 0.89);
+  background-blend-mode: overlay;
+  background-image: url('https://th.bing.com/th/id/OIP.V4L1MIYC81CqjM0nXQjXrQHaE8?rs=1&pid=ImgDetMain');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.overlay{
+  backdrop-filter: blur(15px);
+  padding: 20px;
+  font-size: larger;
+  font-weight: 600;
+  color: var(--light);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.overlay h1,
+.overlay h2,
+.overlay h3 {
+    font-size: 3rem;
+    font-weight: 600;
+}
+.overlay h2{
+    color: #d6ffba;
+}
+.line {
+  content: '';
+  width: 200px;
+  height: 8px !important;
+  background-color: #ffffff;
+  margin: 16px 0;
+  padding-left: 10px;
+  transform: skew(20deg);
+}
+.c1right{
+  width: 50%;
+}
+.c1right img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.c1left {
+  position: relative;
+  width: fit-content;
+}
+.image-container {
+  position: relative;
+}
+/***********About Section****************/
+.c2{
+  background-color: #ffff;
+}
+.about{
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin: 0 auto;
+}
+.aleft{
+  width: 50%;
+  font-size: larger;
+  font-family: 'Poppins', 'sans-serif';
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.aright{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+.images{
+  display: flex;
+  gap: 16px;
+}
+.i1{
+  height: 400px;
+  width: 300px;
+  object-fit: cover;
+  margin-right: 16px;
+  border-radius: 6px;
+}
+.i2{
+  height: 350px;
+  border-radius: 6px;
+}
+/***************Key Features************/
+.feature-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  max-width: 1200px;
+  padding: 20px;
+  margin: 0 auto;
+}
+.underline{
+  content: '';
+  width: 50%;
+  height: 4px;
+  background-color: #071300;
+  margin-bottom: 16px;
+}
+.feature{
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #caf974;
+  padding: 16px;
+  font-size: larger;
+  font-weight: 500;
+  border-radius: 6px;
+}
+.feature i{
+  font-size: 3rem;
+  margin-bottom: 12px;
+  color: #1d4f00;
+}
+/**********Plant Cards*********/
+.plants{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('https://i.pinimg.com/originals/9e/21/46/9e2146174f3af0e56af8e7414ec150c3.jpg');
+}
+.plant-container{
+  background-color: #0d1000b4;
+  backdrop-filter: blur(5px);
+  width: 100%;
+  color: var(--light);
+}
+.plant-details{
+  gap: 18px;
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.plant-card {
+  width: 280px;
+  background-color: var(--dark);
+  color: var(--light);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.plant-image {
+  width: 100%;
+  height: 200px;
+  img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+}
+
+.plant-common-name {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.plant-botanical-name {
+  font-size: 1em;
+  font-style: italic;
+}
+
+.plant-description {
+  font-size: 0.9em;
+  margin: 10px 0;
+  height: 100px;
+}
+.heading{
+  margin: 18px auto;
+  font-size: 2.6rem;
+  font-weight: 600;
+  text-align: center;
+}
+.load-more-container button{
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--light);
+  margin: 20px auto;
+  font-size: larger;
+  display: flex;
+  justify-content: center;
+}

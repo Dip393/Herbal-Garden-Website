@@ -1,0 +1,76 @@
+<div class="navbar">
+  <app-navbar></app-navbar>
+</div>
+<div class="main">
+  <div class="c1">
+    <div class="c1left">
+      <div class="overlay">
+        <h1>Discover the Ancient Art of Healing</h1>
+        <h2>Step into the World of</h2>
+        <h3>Siddha Medicine</h3>
+        <div class="line"></div>
+        <p>
+            Explore Siddha, one of the oldest medical systems rooted in Tamil tradition.
+            Harness the healing power of herbs, minerals, and spiritual practices to achieve balance and longevity.
+            Reconnect with this time-honored science, where nature and spirituality blend for holistic well-being.
+        </p>
+    </div>
+    </div>
+    <div class="c1right">
+      <img src="1.jpg" />
+    </div>
+  </div>
+  <div class="c2">
+    <div class="about">
+      <div class="aleft">
+        <h2>About Siddha Medicine</h2>
+        <p>
+            Siddha medicine, one of the oldest systems of traditional medicine, originated in Tamil Nadu, India.
+            Developed by the Siddhars (ancient spiritual scientists), it is based on the principles of the five elements (Earth, Water, Fire, Air, Ether)
+            and the three humors (Vatham, Pitham, and Kapham). Siddha emphasizes the use of herbs, minerals, and lifestyle practices
+            for curing diseases and promoting longevity. This holistic system integrates physical, mental, and spiritual well-being.
+        </p>
+      </div>
+      <div class="aright">
+        <div class="aimages">
+          <img src="https://th.bing.com/th/id/OIP.LFSyaB2TWpq5HW0_62M8SAAAAA?w=474&h=314&rs=1&pid=ImgDetMain" alt="" class="i1">
+          <img src="https://th.bing.com/th/id/OIP.u6Zd-n6suVyUYa8mxJgvNgHaHa?rs=1&pid=ImgDetMain" alt="" class="i2">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="features">
+    <h2 class="heading">Key Features</h2>
+    <div class="underline"></div>
+    <div class="feature-container">
+      <div class="feature" *ngFor="let feature of features">
+        <div class="icon">
+          <i [class]="feature.icon"></i>
+        </div>
+        <h4>{{ feature.name }}</h4>
+        <p>{{ feature.description }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="plants">
+    <div class="plant-container">
+      <h2 class="heading">Some Traditional Plants Used In Unani</h2>
+      <div class="plant-details">
+        <div class="plant-card" *ngFor="let plant of plants"  (click)="openPlantDetails(plant._id)">
+          <div class="plant-image">
+            <img *ngIf="plant.images.length > 0" [src]="plant.images[0]" alt="{{ plant.botanicalName }}" />
+          </div>
+          <h3 class="plant-common-name">{{ plant.commonNames[0] || "Unknown Name" }}</h3>
+          <h4 class="plant-botanical-name"><i>{{ plant.botanicalName }}</i></h4>
+          <p class="plant-description">{{ trimDescription(plant.description, 120) }}</p>
+        </div>
+      </div>
+      <!-- "Load More" Button -->
+      <div class="load-more-container" *ngIf="showLoadMore">
+        <button (click)="loadMorePlants()">Load More</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

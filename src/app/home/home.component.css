@@ -1,3 +1,6 @@
+.main{
+  font-family: 'Poppins', sans-serif;
+}
 header{
     min-height: 100vh;
     display: flex;
@@ -32,7 +35,7 @@ header{
     margin: 0 auto;
     position: relative;
   }
-  
+
   .nav2 {
     width: 100%;
     display: flex;
@@ -42,7 +45,7 @@ header{
     background-color: rgba(207, 207, 207, 0.074);
     padding: 12px;
   }
-  
+
   .nav-element {
     position: relative; /* Ensure plant-section positions relative to its parent */
     background-color: rgba(222, 222, 222, 0.106);
@@ -55,23 +58,26 @@ header{
     justify-content: center;
     align-items: center;
     flex: 1;
+    transition: transform 0.3s ease-in-out;
     img{
         margin-right: 12px;
         width: 32px;
         height: 32px;
     }
   }
-  
-  .nav-link { 
-    list-style: none; 
-    text-decoration: none; 
-    font-size: 20px; 
-    font-weight: 400 !important; 
-    color: var(--light); 
-    white-space: nowrap; 
+  .nav-element:hover{
+    background-color: rgba(174, 255, 0, 0.317);
   }
-  
-  
+  .nav-link {
+    list-style: none;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 400 !important;
+    color: var(--light);
+    white-space: nowrap;
+  }
+
+
   .plant-section {
     position: absolute;
     top: 36px; /* Position below nav-element */
@@ -100,13 +106,13 @@ header{
         }
     }
   }
-  
+
   .plants-grid {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
   }
-  
+
   .plantcard {
     width: 100px;
     text-align: center;
@@ -114,19 +120,19 @@ header{
     padding: 10px;
     border-radius: 5px;
   }
-  
+
   .plantimageType {
     width: 100%;
     height: 100px;
     border-radius: 8px;
   }
-  
+
   .plantimageType img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  
+
   .view-more-btn {
     margin-top: 20px;
     padding: 10px 20px;
@@ -136,8 +142,8 @@ header{
     border-radius: 5px;
     cursor: pointer;
   }
-  
-  
+
+
   .plantcard {
     width: 100px;
     text-align: center;
@@ -145,7 +151,7 @@ header{
     padding: 10px;
     border-radius: 5px;
   }
-  
+
   .plantimageType{
     width: 100%;
     height: 100px;
@@ -156,7 +162,7 @@ header{
         object-fit: cover;
     }
   }
-  
+
   .view-more-btn {
     margin-top: 20px;
     padding: 10px 20px;
@@ -172,7 +178,7 @@ header{
     justify-content: center;
     align-items: center;
   }
-  
+
   .spinner {
     border: 4px solid var(--light);
     border-top: 4px solid var(--dark);
@@ -181,7 +187,7 @@ header{
     height: 50px;
     animation: spin 2s linear infinite;
   }
-  
+
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -190,15 +196,18 @@ header{
 .c1{
     width: 90%;
     max-width: 1800px;
-    margin: 0 auto;
+    margin: auto auto;
     margin-top: 20px;
+    height: calc(100% - 170px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .contents{
     display: flex;
     text-align: left;
     justify-content: center;
     align-items: center;
-    height: 100%;
     color: var(--light);
     max-width: 95%;
 }
@@ -217,14 +226,15 @@ header{
     border: none;
     padding: 12px 16px;
     border-radius: 9999px;
-    font-size: larger;
+    font-size: x-large;
     cursor: pointer;
     font-weight: 600;
-    color: var(--dark);
+    background-color: #205700;
+    color: var(--light);
     position: relative;
     overflow: hidden;
     box-shadow: 0 10px 20px #00000080;
-    
+    width: 320px;
 }
 .searchBtn::after{
     content: '';
@@ -243,13 +253,30 @@ header{
     0% { left: 0; }
     100% { left: 100%; }
 }
+.search-btn{
+  border: none;
+  font-size: 20px;
+  color: #205700;
+  padding: 0 18px;
+}
+.listening{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: larger;
+  font-weight: 600;
+}
+.listening img{
+  height: 250px;
+}
 .search-content-flex{
     display: flex;
     border-bottom: 2px solid #ccc;
     height: 50px;
     background-color: var(--light-green);
     border-radius: 6px 6px 0 0  ;
-}  
+}
 #options{
     border: none;
     outline: none;
@@ -273,7 +300,7 @@ header{
   border-top-right-radius: 6px;
 }
 .wrapper{
-    background-color: var(--light);
+    background-color: #f9ffee;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -294,13 +321,13 @@ header{
     align-items: center;
     z-index: 1000;
     color: var(--dark);
-  
+
   }
   .popup-content{
     background: #fff;
     border-radius: 6px;
     width: 100%;
-    max-width: 700px; 
+    max-width: 700px;
       .search-results {
           height: 260px;
           overflow-y: auto;
@@ -358,32 +385,67 @@ header{
     }
   }
 /*******Random 5 plant details****************/
-.plant-container {
-    display: flex;
-    width: 90%;
-    gap: 20px;
+  .slidercontainer {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
-    margin-bottom: 40px;
-    overflow-x: auto; /* Allows horizontal scrolling */
     scroll-behavior: smooth; /* Smooth scrolling */
-}
+    margin-bottom: 40px;
+  }
 
-/* Hide scrollbar in WebKit-based browsers (e.g., Chrome, Edge, Safari) */
-.plant-container::-webkit-scrollbar {
-    display: none;
-}
+  .slider-wrapper {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 0;
+  }
 
-/* Hide scrollbar for Firefox */
-.plant-container {
-    scrollbar-width: none; /* For Firefox */
-}
+  /* Hide scrollbar in WebKit-based browsers (e.g., Chrome, Edge, Safari) */
+  .slider-wrapper::-webkit-scrollbar {
+      display: none !important;
+  }
 
-/* Hide scrollbar for older versions of IE/Edge */
-.plant-container {
-    -ms-overflow-style: none; /* For Internet Explorer and Edge */
-}
+  /* Hide scrollbar for Firefox */
+  .slider-wrapper {
+      scrollbar-width: none; /* For Firefox */
+  }
 
-  
+  /* Hide scrollbar for older versions of IE/Edge */
+  .slider-wrapper {
+      -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  }
+
+  .slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(226, 226, 226, 0.838);
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .slider-btn.prev {
+    left: 10px;
+  }
+
+  .slider-btn.next {
+    right: 10px;
+  }
+  #MyChart {
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+  }
+
   .plant-card {
     width: 280px;
     background-color: var(--dark);
@@ -395,7 +457,7 @@ header{
     padding: 10px;
     cursor: pointer;
   }
-  
+
   .plant-image {
     width: 100%;
     height: 200px;
@@ -405,17 +467,17 @@ header{
         object-fit: cover;
     }
   }
-  
+
   .plant-common-name {
     font-size: 1.2em;
     margin: 10px 0;
   }
-  
+
   .plant-botanical-name {
     font-size: 1em;
     font-style: italic;
   }
-  
+
   .plant-description {
     font-size: 0.9em;
     margin: 10px 0;
@@ -423,16 +485,177 @@ header{
 .Viewer{
     width: 100%;
     height: 300px;
+    position: relative;
+    display: flex;
 }
 .Viewer video{
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+.Viewer video{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.viewer-text {
+  background-color: #000000d6;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+  font-weight: 600;
+  color: var(--light);
+  letter-spacing: 0.7rem;
+  text-align: center;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5),
+               -3px -3px 5px rgba(69, 69, 69, 0.3);
+}
+
+.viewer-text p {
+  font-family: "Nunito", sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  text-transform: uppercase;
+  position: relative;
+  /* animation: colorShift 4s infinite alternate; */
+}
+
+.viewer-text a button {
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  background-color: var(--light);
+  color: var(--dark);
+  cursor: pointer;
+  font-family: "Nunito", sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.viewer-text a button:hover {
+  background-color: #fff;
+  transform: scale(1.1);
+}
+
+/* Keyframes for color-shifting text */
+@keyframes colorShift {
+  0% {
+    color: #ff0000;
+    text-shadow: 2px 2px 4px #ff8080, -2px -2px 4px rgba(255, 255, 255, 0.3);
+  }
+  25% {
+    color: #00ff00;
+    text-shadow: 2px 2px 4px #80ff80, -2px -2px 4px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    color: #0000ff;
+    text-shadow: 2px 2px 4px #8080ff, -2px -2px 4px rgba(255, 255, 255, 0.3);
+  }
+  75% {
+    color: #ffff00;
+    text-shadow: 2px 2px 4px #ffff80, -2px -2px 4px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    color: #ff00ff;
+    text-shadow: 2px 2px 4px #ff80ff, -2px -2px 4px rgba(255, 255, 255, 0.3);
+  }
+}
+/***************Advanced Search Functionality****************/
+.selection-options{
+  background-image: url('https://th.bing.com/th/id/OIP.surj3s_Yfe2CdcgHgmxvUwHaEK?rs=1&pid=ImgDetMain');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  h2{
+    color: var(--light-green);
+  }
+}
+.select-container{
+  display: flex;
+}
+.as{
+  background-color: #071300e4;
+  color: var(--light);
+  backdrop-filter: blur(10px);
+  height: 100%;
+  width: 100%;
+  padding: 18px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.underline{
+  content: '';
+  width: 100%;
+  height: 4px;
+  background-color: #fefefe;
+  margin: 16px 0;
+  margin-right: auto;
+}
+.advanced-search{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.advanced-search button{
+  border: none;
+  outline: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  background-color: var(--light);
+  color: var(--dark);
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  margin-right: 10px;
+  margin: 0;
+  width: 350px;
+  margin: 0 auto;
+}
+.o{
+  display: flex;
+  flex-direction: column;
+  margin: 16px;
+  justify-content: center;
+  align-items: center;
+  font-size: larger;
+  font-weight: 500;
+  color: var(--light);
+}
+.o select{
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  outline: none;
+  margin-top: 12px;
+}
+.advanced-search-results{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-height: 500px;
+  gap: 18px;
+  padding: 16px;
+  overflow: auto;
+}
 /********Ayush Overview Section ********/
 .overview{
     padding: 10px;
-    background-color: #fff;
+    background-color: #f9ffee;
     text-align: center;
     font-size: 30px;
     color: #0c2b00;
@@ -471,7 +694,7 @@ header{
     left: calc(50% - 20px);
 }
 .overview-content{
-    background-color: #ffffffc2;
+    background-color: #ffffffe7;
     backdrop-filter: blur(10px);
     background-position: center;
     background-size: cover;
@@ -504,6 +727,14 @@ header{
     font-size: medium;
     text-align: justify;
 }
+.ot h3{
+  font-weight: 600;
+}
+.ot a{
+  color: #005800;
+  font-size: 1.3rem !important;
+  margin-top: 30px;
+}
 /******Chart Js **************/
 .chart{
     width: 100%;
@@ -511,7 +742,7 @@ header{
     margin: 30px auto;
 }
 /******Incremental Cards ******/
-.cards{ 
+.cards{
     display: flex;
     margin: 0 auto;
     width: 100%;
@@ -563,35 +794,25 @@ header{
     font-weight:600 ;
 }
 /******Gallery & review section ****/
-.mixed{
-    background-color: var(--light);
-}
-.minner{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0 auto;
-    padding: 20px 0;
-    width: 90%;
-    max-width: 1800px;
-}
 .gallery{
-    width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 20px 0;
+  background-color: #f9ffee;
+    width: 100%;
     text-align: center;
     padding-right: 20px;
 }
-.galleryImages{
-    display: flex;
-    overflow: auto;
-    gap: 20px;
-}
-.galleryImages::-webkit-scrollbar{
-    display: none;
+.gallery-slider{
+  gap: 18px;
 }
 .galleryImage{
     width: 300px;
     height: 250px;
     border-radius: 6px;
+    flex-shrink: 0;
 }
 .galleryImage img{
     width: 100%;
@@ -599,18 +820,52 @@ header{
     border-radius: 6px;
     object-fit: cover;
 }
-.review{
-    width: 30%;
-    border-left: 2px solid #e9e9e9;
-    border-width: 80%;
-    padding-left: 15px;
+.slider-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1250px;
+  margin: auto;
 }
-/*************Contact Form******************/
+
+.gallery-slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.gallery button {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.gallery button:first-of-type {
+  left: 0;
+}
+
+.gallery button:last-of-type {
+  right: 0;
+}
+/*************Contact & Review Form******************/
 .c5{
-    text-align: center;
-    padding: 20px;
-    background-color: var(--light);
+  display: flex;
+  text-align: center;
+  padding: 20px;
+  background-color: #f9ffee;
+
+}
+.contact-left{
     color: var(--light);
+    width: 70%;
     h2{
         color: var(--dark);
         font-weight: 600;
@@ -671,7 +926,7 @@ header{
     padding: 12px;
     border-radius: 6px;
     text-align: left;
-    background-color: var(--light);
+    background-color: #f9ffee;
 }
 .contactForm input{
     border: none;
@@ -679,18 +934,16 @@ header{
     margin-bottom: 12px;
     outline: none;
     border-bottom: 2px solid var(--light);
+    background-color: #f9ffee;
 }
 .contactForm textarea{
     border: none;
     height: 100px;
-    max-height: 100px;
-    min-height: 100px;
+    resize: none;
     padding: 6px;
-    min-width: 100%;
-    width: 100%;
-    max-width: 100%;
     outline: none;
     border-bottom: 2px solid var(--light);
+    background-color: #f9ffee;
 }
 .contactForm input:focus,
 .contactForm textarea:focus{
@@ -705,6 +958,66 @@ header{
     font-size: larger;
     display: flex;
     justify-content: center;
+}
+.contact-right{
+  display: flex;
+  align-items: center;
+  width: 30%;
+}
+.review{
+    border-left: 2px solid #e9e9e9;
+    border-width: 80%;
+    padding-left: 15px;
+}
+.review-form{
+  background-color: #000000d6;
+  backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+#reviewForm{
+  max-width: 350px;
+  width: 90%;
+  padding: 20px;
+  border-radius: 6px;
+  background-color: var(--light) !important;
+}
+#RatingChart{
+  width: 390px;
+}
+.form-group{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+  font-size: larger;
+  font-weight: 500;
+  color: var(--dark);
+  input,textarea{
+    padding: 4px 8px;
+  }
+  textarea{
+    resize: none;
+  }
+}
+.buttons{
+  display: flex;
+  gap: 16px;
+}
+.buttons button{
+  border: none;
+  outline: none;
+  padding: 8px 16px;
+  background-color: var(--dark);
+  color: var(--light);
+  border-radius: 4px;
 }
 /**************************FAQ Section**************************************/
 .c6-main{
@@ -743,7 +1056,6 @@ header{
     justify-content: center;
     position: relative;
     width:100%;
-    z-index: 2;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -760,30 +1072,30 @@ header{
     margin: 0px auto;
     font-size: larger;
 }
-  
+
   .faq-item {
     border-bottom: 1px solid #ddd;
     padding: 10px 0;
   }
-  
+
   .faq-question {
     display: flex;
     justify-content: space-between;
     cursor: pointer;
     font-weight: bold;
   }
-  
+
   .faq-answer {
     margin-top: 10px;
     font-size: 18px;
     color: #555;
   }
-  
+
   .plus-icon {
     font-size: larger;
     font-weight: bold;
   }
-  
+
   .faq-question.active .plus-icon {
     transform: rotate(45deg); /* Change plus to minus */
   }

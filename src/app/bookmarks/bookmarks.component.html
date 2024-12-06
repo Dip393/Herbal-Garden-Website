@@ -3,17 +3,17 @@
     <app-navbar></app-navbar>
 </div>
 <div class="bookmarks-container">
-  
+
     <!-- Loading Spinner -->
     <div *ngIf="loading" class="spinner">
-      
+
     </div>
-  
+
     <!-- Error Message -->
     <div *ngIf="error" class="error">
       <p>{{ error }}</p>
     </div>
-  
+
     <!-- Bookmarked Plants List -->
     <div *ngIf="!loading && bookmarkedPlants.length > 0" class="plant-list">
       <div class="plant-card" *ngFor="let plant of bookmarkedPlants">
@@ -27,13 +27,16 @@
           <p><strong>Botanical Name:</strong> {{ plant.botanicalName }}</p>
           <p><strong>Description:</strong> {{ plant.description }}</p>
           <div class="bblock">
-            <button (click)="removeBookmark(plant._id)" class="remove-btn">Remove Bookmark</button>
+            <button (click)="removeBookmark(plant._id)" class="remove-btn">
+              <span *ngIf="!loading">Remove Bookmark</span>
+              <div *ngIf="loading" class="spinner"></div>
+            </button>
             <button (click)="openPlantDetails(plant._id)" class="view-btn">View Details</button>
           </div>
         </div>
       </div>
     </div>
-  
+
     <!-- No Bookmarks Message -->
     <div *ngIf="!loading && bookmarkedPlants.length === 0" class="no-bookmarks">
       <p>You haven't bookmarked any plants yet!</p>
@@ -41,4 +44,3 @@
   </div>
   <!-- Footer -->
 <app-footer></app-footer>
-  
