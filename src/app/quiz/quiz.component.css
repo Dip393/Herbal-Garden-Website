@@ -1,0 +1,39 @@
+.quiz-container {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+.question-section {
+  margin-bottom: 20px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.option {
+  margin: 5px 0;
+}
+
+.submit-btn,
+.certificate-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.submit-btn:hover,
+.certificate-btn:hover {
+  background-color: #45a049;
+}
+
+.result-section {
+  margin-top: 20px;
+}

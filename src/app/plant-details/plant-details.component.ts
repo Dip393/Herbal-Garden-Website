@@ -23,8 +23,14 @@ export class PlantDetailsComponent {
   plantDetails: any = null;
   plantName: string | null = null;
   data: any = null;
+
   email = localStorage.getItem('email');
+  isAdmin = localStorage.getItem('isAdmin');
+
   showLock: boolean = true;
+
+  showEditPopup: boolean = false;
+  editablePlantDetails: any = {};
 
   private sanitizer = inject(DomSanitizer);
   private authService = inject(AuthService);
@@ -69,6 +75,45 @@ export class PlantDetailsComponent {
     this.showNotesButton();
     if(this.email){
       this.showLock = false;
+    }
+    this.editablePlantDetails = { ...this.plantDetails };
+  }
+  openEditForm(): void {
+    // Open the popup form and copy the current plant details to an editable object
+    this.showEditPopup = true;
+    this.editablePlantDetails = { ...this.plantDetails };
+  }
+  saveChanges(): void {
+    const updatedDetails = this.editablePlantDetails;
+    this.loading = true;
+    if(this.plantId){
+      this.authService.updatePlantDetails(this.plantId, updatedDetails).subscribe({
+        next: () => {
+          this.plantDetails = { ...this.editablePlantDetails }; // Update local data
+          this.showEditPopup = false;
+          this.loading = false;
+        },
+        error: () => {
+          this.loading = false;
+          alert('Failed to update plant details.');
+        }
+      });
+    }
+  }
+
+  discardChanges(): void {
+    // Close the popup without saving changes
+    this.showEditPopup = false;
+  }
+  addItem(array: any[]) {
+    if (Array.isArray(array)) {
+      array.push(''); // Adds a new empty item
+    }
+  }
+
+  removeItem(array: any[], index: number) {
+    if (Array.isArray(array) && index >= 0 && index < array.length) {
+      array.splice(index, 1); // Removes the specific item
     }
   }
 

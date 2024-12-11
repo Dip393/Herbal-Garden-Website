@@ -11,6 +11,10 @@
             formControlName="password"
             placeholder="Password"
           />
+          <select name="role">
+            <option value="">Select User Role</option>
+            <option *ngFor="let role of roles" [value]="role.value">{{role.name}}</option>
+          </select>
           <div *ngIf="otpSent">
             <input formControlName="otp" placeholder="Enter OTP" />
           </div>

@@ -18,6 +18,7 @@ export class NavbarComponent {
   token = localStorage.getItem('token');
   showBookmarkBtn:boolean = false;
 
+
   constructor(
     private authService: AuthService,
     public router: Router,

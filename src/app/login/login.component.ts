@@ -4,12 +4,12 @@ import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angula
 import { Router } from '@angular/router';
 import { NotificationService } from '../services/notification.service';
 import { AuthService } from '../services/auth.service';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [NavbarComponent, ReactiveFormsModule, NgIf, NgClass],
+  imports: [NavbarComponent, ReactiveFormsModule, NgIf, NgClass, NgFor],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -17,6 +17,12 @@ export class LoginComponent {
   loading = false;
   otpSent = false;
   loginForm !: FormGroup;
+  userName: string = '';
+
+  roles=[
+    { value: 'student', name: 'User' },
+    { value: 'admin', name: 'Admin' }
+  ]
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private notification: NotificationService) {
     this.loginForm = this.fb.group({
@@ -27,19 +33,16 @@ export class LoginComponent {
   }
 
   onSubmit() {
-
     if (!this.otpSent) {
-      // First step: verify email and password and send OTP
       if (this.loginForm.invalid) return;
 
       this.loading = true;
       this.authService.login(this.loginForm.value).subscribe(
         res => {
-          if(res.error){
+          if (res.error) {
             this.notification.showNotification(`${res.msg}`, 'error');
             this.loading = false;
-          }
-          else{
+          } else {
             this.loading = false;
             this.otpSent = true;
             this.notification.showNotification(`${res.msg}`, 'success');
@@ -52,20 +55,26 @@ export class LoginComponent {
         }
       );
     } else {
-      // Second step: verify OTP
       this.loading = true;
       this.authService.verifyLoginOtp(this.loginForm.value).subscribe(
         res => {
-          if(res.error){
+          if (res.error) {
             this.notification.showNotification(`${res.msg}`, 'error');
             this.loading = false;
             return;
-          }
-          else{
+          } else {
             this.loading = false;
 
-            // Store email in localStorage
             localStorage.setItem('email', this.loginForm.value.email);
+
+            if (this.loginForm.value.email) {
+              this.authService.getUserName(this.loginForm.value.email).subscribe(
+                (res) => {
+                  this.userName = res.name;
+                  localStorage.setItem('userName', this.userName);
+                }
+              )
+            }
 
             if (res.isAdmin) {
               localStorage.setItem('token', res.token);
@@ -86,4 +95,5 @@ export class LoginComponent {
       );
     }
   }
+
 }

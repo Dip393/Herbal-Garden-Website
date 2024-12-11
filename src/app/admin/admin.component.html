@@ -17,6 +17,11 @@
     </div>
   </div>
   <div class="right-section">
+    <div class="welcome">
+      <h3>Hi, {{ userName }}</h3>
+      <p>Welcome to your admin dashboard!</p>
+    </div>
+    <div class="line"></div>
     <div class="weather">
       <div class="wl">
         <h3 class="heading">Weather Guide for Optimal Herb Growth</h3>
@@ -59,8 +64,17 @@
       </div>
     </div>
     <div class="form-container">
-      <button (click)="toggleForm()" class="addDetails">Add Plant</button>
-
+      <div class="quizzes">
+        <div class="quiz-image">
+          <img src="https://th.bing.com/th/id/R.f6c85e72807a33d5c62c80fbd098b606?rik=XnS1YCPeX0enVw&riu=http%3a%2f%2fwww.textures4photoshop.com%2ftex%2fthumbs%2fplant-top-view-PNG-image-thumb24.png&ehk=CukjZjsmfABc6CHHv3G3wZcXgc6dAipT4GA%2f1w1yIww%3d&risl=&pid=ImgRaw&r=0" alt="">
+        </div>
+        <div class="quiz-info">
+          <button (click)="toggleForm()" class="addDetails">Add New Plant</button>
+        </div>
+        <div class="quiz-image">
+          <img src="https://th.bing.com/th/id/R.6f02bff3c224b08d3fc42b311d195bd4?rik=T4D4riUwAD1XLA&riu=http%3a%2f%2fwww.pngall.com%2fwp-content%2fuploads%2f2016%2f07%2fPlants-PNG-File.png&ehk=YNRcReCTtvblF%2fk3fJj01hJCfjUnvjcZAcVJXI5K%2bvk%3d&risl=&pid=ImgRaw&r=0" alt="">
+        </div>
+      </div>
       <div *ngIf="showAddPlantForm" class="plant-form">
         <button (click)="closeForm()" class="closeForm"><i class="fa-solid fa-xmark"></i></button>
         <form (ngSubmit)="addPlant()" #plantForm="ngForm" class="plantAddForm">
@@ -262,18 +276,6 @@
         <!-- Navigation Buttons -->
         <button class="slider-btn prev" (click)="scrollSlider('prev')">&#8249;</button>
         <button class="slider-btn next" (click)="scrollSlider('next')">&#8250;</button>
-      </div>
-    </div>
-    <div class="quizzes">
-      <div class="quiz-image">
-        <img src="https://www.gstsuvidhacenters.com/WebsiteAssets/images/Services/PrivateLimitedCompany1.png" alt="">
-      </div>
-      <div class="quiz-info">
-        <p>Let's do some fun quizzes to gather some more information</p>
-        <a [href]="quizUrl"><button>Get Started</button></a>
-      </div>
-      <div class="quiz-image">
-        <img src="https://static.vecteezy.com/system/resources/previews/019/837/539/original/businessman-cartoon-character-set-handsome-business-man-in-office-style-smart-suit-png.png" alt="">
       </div>
     </div>
     <div class="notes">

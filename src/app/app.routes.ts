@@ -15,6 +15,7 @@ import { UnaniComponent } from './unani/unani.component';
 import { SiddhaComponent } from './siddha/siddha.component';
 import { HomeopathyComponent } from './homeopathy/homeopathy.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
@@ -35,5 +36,6 @@ export const routes: Routes = [
     { path: 'siddha', component: SiddhaComponent },
     { path: 'homeopathy', component: HomeopathyComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent, canActivate:[AuthGuard]},
+    { path: 'quiz', component: QuizComponent},
     { path: '**', redirectTo: '' }
 ];

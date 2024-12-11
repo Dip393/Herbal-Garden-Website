@@ -148,5 +148,9 @@ export class AuthService {
   advancedSearch(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/advanced-search`, data);
   }
+  //To edit plant details
+  updatePlantDetails(plantId: string, updatedDetails: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/plants/${plantId}`, { ...updatedDetails });
+  }
 }
 

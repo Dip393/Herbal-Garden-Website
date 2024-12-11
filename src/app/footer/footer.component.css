@@ -87,3 +87,8 @@
 .fc p{
     margin: 0;
 }
+@media (max-width: 650px){
+  .footer{
+    display: none;
+  }
+}

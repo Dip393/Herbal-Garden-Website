@@ -1154,3 +1154,38 @@ header{
     justify-content: center;
     text-align: center;
   }
+@media (max-width: 650px){
+  .helements{
+    display: none;
+  }
+  .main-left{
+    padding-top: 40px;
+  }
+  .main-right{
+    display: none;
+  }
+  .select-container{
+    flex-direction: column;
+  }
+  .chart{
+    display: none;
+  }
+  #wrapper2{
+    display: none;
+  }
+  .community img{
+    display: none;
+  }
+  .review{
+    display: none;
+  }
+  .contactSection{
+    flex-direction: column;
+  }
+  .contact-left{
+    width: 100%;
+  }
+  .highlights{
+    display: none;
+  }
+}

@@ -2,7 +2,7 @@
     display: block; /* Ensures the component behaves like a block element */
     width: 100%;
   }
-  
+
 nav{
     display: flex;
     justify-content: space-between;
@@ -50,4 +50,94 @@ nav{
     padding: 6px 12px;
     margin: 0 8px;
     border-radius: 999px;
+}
+.nav-mobile{
+  display: none;
+}
+@media (max-width: 767px) {
+    .logo{
+        left: 10px;
+    }
+    .navbar{
+        gap: 10px;
+    }
+}
+@media (max-width: 750px){
+    .navbar{
+        gap: 8px;
+    }
+    .buttonContainer button{
+        padding: 0;
+        margin: 0;
+    }
+    .buttonContainer button:first-child{
+        margin-right: 8px;
+    }
+}
+@media (max-width: 650px){
+    nav{
+        display: none;
+    }
+    .nav-mobile{
+      background-color: #0000003c;
+        display: flex;
+        justify-content: center;
+        height: 40px;
+        align-items: center;
+        padding: 25px 10px;
+        width: 100%;
+        position: fixed;
+        z-index: 4;
+    }
+    .nav-mobile .logo{
+      height: 40px;
+    }
+    #navMobile{
+        display: none;
+        flex-direction: column;
+        background-color: #000000e8;
+        height: 100vh;
+        z-index: 3;
+        font-size: large;
+        font-weight: 600;
+        padding: 10px;
+        position: fixed;
+        right: 0;
+        width: 200px;
+        text-decoration: none;
+        top: 0;
+        bottom: 0;
+        padding-left: 18px;
+    }
+    .logoMobile{
+        font-size: large;
+        font-weight: 600;
+        text-decoration: none;
+    }
+    .toggleNav{
+        border: none;
+        color: #ffffff;
+        background-color: transparent;
+        font-size: 30px;
+        position: absolute;
+        right: 10px;
+    }
+    .buttonContainer{
+        position: relative;
+    }
+    .userBtn{
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column !important;
+    }
+    .buttonContainer button{
+        color: #fff;
+        text-decoration: none;
+        padding: 8px 6px;
+    }
+    #navMobile a{
+        color: #fff;
+        text-decoration: none;
+        margin: 6px 0;
+    }
 }

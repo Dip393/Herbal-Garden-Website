@@ -32,6 +32,7 @@ export class AdminComponent {
 
   //Get user email from localstorage
   email = localStorage.getItem('email');
+  userName = localStorage.getItem('userName');
 
   showAddPlantForm: boolean = false;
 
@@ -94,6 +95,9 @@ export class AdminComponent {
     } else {
       console.warn('Geolocation not supported by the browser.');
       this.fetchWeather(22.5726, 88.3639); // Fallback to Kolkata
+    }
+    if(this.userName){
+      console.log(this.userName);
     }
     this.fetchWeatherData();
     this.getViewedPlants();

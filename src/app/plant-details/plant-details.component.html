@@ -87,6 +87,158 @@
         </div>
       </div>
       <div class="item-details">
+        <button id="edit" (click)="openEditForm()" *ngIf="isAdmin">
+          <i class="fa-regular fa-pen-to-square"></i>&nbsp;&nbsp;Edit
+        </button>
+        <!-- Popup Form for Editing -->
+        <div class="modal" *ngIf="showEditPopup">
+          <div class="modal-content">
+            <h5>Edit Plant Details</h5>
+            <form #editForm="ngForm" (ngSubmit)="saveChanges()" class="editForm">
+              <div class="editInputs" *ngFor="let name of editablePlantDetails.commonNames; let i = index">
+                <label for="commonNames-{{ i }}">Common Name {{ i + 1 }}:</label>
+                <input
+                  type="text"
+                  id="commonNames-{{ i }}"
+                  name="commonNames-{{ i }}"
+                  [(ngModel)]="editablePlantDetails.commonNames[i]"
+                />
+                <button type="button" (click)="removeItem(editablePlantDetails.commonNames, i)">Delete</button>
+              </div>
+              <button type="button" (click)="addItem(editablePlantDetails.commonNames)">Add Common Name</button>
+
+              <div class="editInputs">
+                <label for="botanicalName">Botanical Name:</label>
+                <input
+                  type="text"
+                  id="botanicalName"
+                  name="botanicalName"
+                  [(ngModel)]="editablePlantDetails.botanicalName"
+                  required
+                />
+              </div>
+              <div class="editInputs">
+                <label for="family">Family:</label>
+                <input
+                  type="text"
+                  id="family"
+                  name="family"
+                  [(ngModel)]="editablePlantDetails.family"
+                  required
+                />
+              </div>
+              <div class="editInputs">
+                <label for="plantType">Plant Type:</label>
+                <input
+                  type="text"
+                  id="plantType"
+                  name="plantType"
+                  [(ngModel)]="editablePlantDetails.plantType"
+                  required
+                />
+              </div>
+              <div class="editInputs">
+                <label for="description">Description:</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  [(ngModel)]="editablePlantDetails.description"
+                  required
+                ></textarea>
+              </div>
+              <div class="editInputs">
+                <div class="editInputs" *ngFor="let uses of editablePlantDetails.medicinalUses; let i = index">
+                  <label for="medicinalUses-{{ i }}">Medicinal Use {{ i + 1 }}:</label>
+                  <div class="deleteInput">
+                    <input
+                    type="text"
+                    id="medicinalUses-{{ i }}"
+                    name="medicinalUses-{{ i }}"
+                    [(ngModel)]="editablePlantDetails.medicinalUses[i]"
+                    />
+                    <button type="button" (click)="removeItem(editablePlantDetails.medicinalUses, i)">Delete</button>
+                  </div>
+                </div>
+                <button type="button" (click)="addItem(editablePlantDetails.medicinalUses)">Add Medicinal Use</button>
+              </div>
+              <label for="cultivationMethods">Cultivation Methods:</label>
+              <textarea
+                id="cultivationMethods"
+                name="cultivationMethods"
+                [(ngModel)]="editablePlantDetails.cultivationMethods"
+              ></textarea>
+              <div class="editInputs" *ngFor="let name of editablePlantDetails.region; let i = index">
+                <label for="commonNames-{{ i }}">Region {{ i + 1 }}:</label>
+                <div class="deleteInput">
+                  <input
+                  type="text"
+                  id="region-{{ i }}"
+                  name="region-{{ i }}"
+                  [(ngModel)]="editablePlantDetails.region[i]"
+                  />
+                  <button type="button" (click)="removeItem(editablePlantDetails.region, i)">Delete</button>
+                </div>
+              </div>
+              <button type="button" (click)="addItem(editablePlantDetails.region)">Add Region</button>
+
+              <div class="editInputs" *ngFor="let name of editablePlantDetails.usageProcedure; let i = index">
+                <label for="usageProcedure-{{ i }}">How To Use {{ i + 1 }}:</label>
+                <div class="deleteInput">
+                  <input
+                  type="text"
+                  id="usageProcedure-{{ i }}"
+                  name="usageProcedure-{{ i }}"
+                  [(ngModel)]="editablePlantDetails.usageProcedure[i]"
+                  />
+                  <button type="button" (click)="removeItem(editablePlantDetails.usageProcedure, i)">Delete</button>
+                </div>
+              </div>
+              <button type="button" (click)="addItem(editablePlantDetails.usageProcedure)">Add usage procedure</button>
+
+              <label for="precautions">Safety and Side Effects:</label>
+              <textarea
+                id="precautions"
+                name="precautions"
+                [(ngModel)]="editablePlantDetails.precautions"
+              ></textarea>
+              <div class="editInputs" *ngFor="let name of editablePlantDetails.citations; let i = index">
+                <label for="citations-{{ i }}">Citation {{ i + 1 }}:</label>
+                <div class="deleteInput">
+                  <input
+                    type="text"
+                    id="citations-{{ i }}"
+                    name="citations-{{ i }}"
+                    [(ngModel)]="editablePlantDetails.citations[i]"
+                  />
+                  <button type="button" (click)="removeItem(editablePlantDetails.citations, i)">Delete</button>
+                </div>
+              </div>
+              <button type="button" (click)="addItem(editablePlantDetails.citations)">Add Citation</button>
+              <div class="editInputs" *ngFor="let name of editablePlantDetails.composition; let i = index">
+                <label for="composition{{ i }}">Composition{{ i + 1 }}:</label>
+                <div class="deleteInput">
+                  <input
+                  type="text"
+                  id="composition{{ i }}"
+                  name="composition{{ i }}"
+                  [(ngModel)]="editablePlantDetails.composition[i]"
+                  />
+                  <button type="button" (click)="removeItem(editablePlantDetails.composition, i)">Delete</button>
+                </div>
+              </div>
+              <button type="button" (click)="addItem(editablePlantDetails.composition)">Add Composition</button>
+
+              <div class="form-buttons">
+                <button type="submit" [disabled]="loading">
+                  Save
+                </button>
+                <button type="button" (click)="discardChanges()">
+                  Discard
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
         <div class="language-selector">
           <label for="language">Select Language:</label>
           <select id="language" [(ngModel)]="selectedLanguage">

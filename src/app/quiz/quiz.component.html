@@ -1,0 +1,25 @@
+<div class="quiz-container">
+  <h2>Herbal Quiz</h2>
+  <form *ngIf="!showResult">
+    <div *ngFor="let question of questions; let i = index" class="question-section">
+      <p><strong>Question {{ i + 1 }}:</strong> {{ question.question }}</p>
+      <div class="options">
+        <label *ngFor="let option of question.options" class="option">
+          <input
+            type="radio"
+            name="question-{{ i }}"
+            [value]="option"
+            [(ngModel)]="question.selectedAnswer"
+          />
+          {{ option }}
+        </label>
+      </div>
+    </div>
+    <button type="button" class="submit-btn" (click)="calculateScore()">Submit</button>
+  </form>
+
+  <div *ngIf="showResult" class="result-section">
+    <h3>Your Score: {{ score }}/10</h3>
+    <button class="certificate-btn" (click)="generateCertificate()">Download Certificate</button>
+  </div>
+</div>

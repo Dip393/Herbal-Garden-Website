@@ -88,6 +88,12 @@
 width: calc(100% - 240px);
   padding: 16px;
 }
+.line{
+  height: 2px;
+  border-radius: 6px;
+  margin: 18px auto;
+  background-color: #16331b;
+}
 .weather{
   display: flex;
 }
@@ -237,7 +243,7 @@ border-right: 1px solid #16331b;
   display: flex;
   background-position: center;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: larger;
   font-weight: 600;
   color: var(--light);

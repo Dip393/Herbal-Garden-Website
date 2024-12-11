@@ -250,3 +250,24 @@
   border-radius: 4px;
 
 }
+.modal{
+  padding: 18px;
+}
+.modal-content{
+  height: 100%;
+  width: 100%;
+  max-width: 1600px;
+  overflow: auto;
+  padding: 12px;
+}
+.editForm{
+  height: 90%;
+}
+.editInputs{
+  display: flex;
+  flex-direction: column;
+}
+.deleteInput{
+  display: flex;
+  width: 100%;
+}

@@ -22,3 +22,26 @@
       </div>
     </div>
 </nav>
+<div class="nav-mobile">
+  <a href="">
+    <img src="logo.png" alt="" class="logo">
+  </a>
+  <button class="toggleNav" (click)="displayNavMobile()"><i class="fa-solid fa-bars-staggered"></i></button>
+  <div class="nav-elements" id="navMobile">
+    <span class="closeNav" (click)="closeNav()" style="text-align: right; color: #ffacac;"><i class="fa-solid fa-xmark"></i></span>
+    <a (click)="goToSection('')">Home</a>
+    <a (click)="goToSection('about')">About</a>
+    <a (click)="goToSection('contact')">Contact</a>
+    <div class="buttonContainer">
+      <div *ngIf="!loggedIn">
+        <button (click)="router.navigate(['/login'])">Login&nbsp;<i class="fa-solid fa-right-to-bracket"></i></button>
+      </div>
+      <div *ngIf="loggedIn" class="userBtn">
+        <button (click)="router.navigate([isAdmin ? '/admin-dashboard' : '/user-dashboard'])">
+          Dashboard
+        </button>
+        <button (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</div>
