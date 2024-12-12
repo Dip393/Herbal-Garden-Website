@@ -1,7 +1,12 @@
+.navbar{
+  background-color: var(--dark);
+}
 .quiz-container {
   width: 80%;
-  margin: auto;
-  text-align: center;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 16px;
+  font-size: larger;
 }
 
 .question-section {

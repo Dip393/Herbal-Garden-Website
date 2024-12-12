@@ -59,7 +59,14 @@ export class SiddhaComponent {
     }
   ];
 
-
+  goToSection(section: string) {
+    this.router.navigate(['/siddha']).then(() => {
+      const gallerySection = document.getElementById(section);
+      if (gallerySection) {
+        gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
 
   // Fetch plants by AYUSHType with pagination
   getPlants() {

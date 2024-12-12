@@ -37,9 +37,9 @@
         <button (click)="router.navigate(['/login'])">Login&nbsp;<i class="fa-solid fa-right-to-bracket"></i></button>
       </div>
       <div *ngIf="loggedIn" class="userBtn">
-        <button (click)="router.navigate([isAdmin ? '/admin-dashboard' : '/user-dashboard'])">
+        <!-- <button (click)="router.navigate([isAdmin ? '/admin-dashboard' : '/user-dashboard'])">
           Dashboard
-        </button>
+        </button> -->
         <button (click)="logout()">Logout</button>
       </div>
     </div>

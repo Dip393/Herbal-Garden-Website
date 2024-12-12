@@ -78,6 +78,23 @@ export class AyurvedaComponent {
       }
     );
   }
+  goToSection(section: string) {
+    // Navigate to the home component and scroll to the #about section
+    this.router.navigate(['ayurveda'], { fragment: `${section}` });
+    if (this.router.url === '/ayurveda') {
+      const gallerySection = document.getElementById(section);
+      if (gallerySection) {
+        gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      this.router.navigate(['/ayurveda']).then(() => {
+        const gallerySection = document.getElementById(section);
+        if (gallerySection) {
+          gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+  }
 
   // Load the next set of plants
   loadMorePlants() {

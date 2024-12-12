@@ -11,7 +11,7 @@
   display: flex;
   max-width: 100%;
   overflow: hidden;
-  height: 450px;
+  height: 500px;
 }
 .c1left{
   width: 50%;
@@ -213,4 +213,37 @@
   font-size: larger;
   display: flex;
   justify-content: center;
+}
+
+.searchBtn{
+  border: none;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: x-large;
+  cursor: pointer;
+  font-weight: 600;
+  background-color: #205700;
+  color: var(--light);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 20px #00000080;
+  width: 320px;
+  margin: 20px 0;
+}
+.searchBtn::after{
+  content: '';
+  display: flex;
+  height: 100%;
+  width: 20px;
+  top: 0;
+  bottom: 0;
+  background-color: #b8ff7676;
+  z-index: 0;
+  position: absolute;
+  transform: skew(20deg);
+  animation: slide 5s infinite linear;
+}
+@keyframes slide {
+  0% { left: 0; }
+  100% { left: 100%; }
 }

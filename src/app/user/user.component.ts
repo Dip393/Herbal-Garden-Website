@@ -32,6 +32,7 @@ export class UserComponent {
 
   //Get user email from localstorage
   email = localStorage.getItem('email');
+  userName = localStorage.getItem('userName');
 
   private http = inject(HttpClient);
   private authService = inject(AuthService);

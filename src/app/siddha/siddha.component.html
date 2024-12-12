@@ -8,7 +8,9 @@
         <h1>Discover the Ancient Art of Healing</h1>
         <h2>Step into the World of</h2>
         <h3>Siddha Medicine</h3>
-        <div class="line"></div>
+        <div class="search">
+          <button class="searchBtn" (click)="goToSection('plants')">View Plants&nbsp;<i class="fa-brands fa-pagelines"></i></button>
+        </div>
         <p>
             Explore Siddha, one of the oldest medical systems rooted in Tamil tradition.
             Harness the healing power of herbs, minerals, and spiritual practices to achieve balance and longevity.
@@ -52,7 +54,7 @@
       </div>
     </div>
   </div>
-  <div class="plants">
+  <div class="plants" id="plants">
     <div class="plant-container">
       <h2 class="heading">Some Traditional Plants Used In Unani</h2>
       <div class="plant-details">

@@ -79,4 +79,12 @@ export class HomeopathyComponent {
     }
     this.router.navigate([`/plant-details/${plantId}`]);
   }
+  goToSection(section: string) {
+    this.router.navigate(['/homeopathy']).then(() => {
+      const gallerySection = document.getElementById(section);
+      if (gallerySection) {
+        gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
 }

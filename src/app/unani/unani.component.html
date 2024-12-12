@@ -8,6 +8,9 @@
         <h1>Rediscover Traditional Healing</h1>
         <h2>Step into the World of</h2>
         <h3>Unani Medicine</h3>
+        <div class="search">
+          <button class="searchBtn" (click)="goToSection('plants')">View Plants&nbsp;<i class="fa-brands fa-pagelines"></i></button>
+        </div>
         <div class="line"></div>
         <p>
             Experience the wisdom of Unani medicine, a holistic system rooted in ancient Greek and Islamic traditions.
@@ -54,7 +57,7 @@
       </div>
     </div>
   </div>
-  <div class="plants">
+  <div class="plants" id="plants">
     <div class="plant-container">
       <h2 class="heading">Some Traditional Plants Used In Unani</h2>
       <div class="plant-details">

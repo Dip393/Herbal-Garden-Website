@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgIf, NgFor } from '@angular/common';
 import { Chart, registerables } from 'chart.js';
+import * as AOS from 'aos';
+
 Chart.register(...registerables);
 declare var webkitSpeechRecognition: any; // Declare the SpeechRecognition API
 
@@ -72,7 +74,7 @@ export class HomeComponent {
   models=[
     {model: 'tulsi.glb', id:'1'},
     {model: 'Turmeric.glb', id:'2'},
-    {model: 'Shatavari.glb', id:'3'},
+    {model: 'Senna.glb', id:'3'},
     {model: 'pepperMint.glb', id:'4'},
   ]
   currentModelIndex: number = 0; // Index of the currently displayed model
@@ -258,6 +260,10 @@ export class HomeComponent {
     this.getRandomPlants(); // Get random plants details
     this.loopedPlants = [...this.plants, ...this.plants];
     this.startModelRotation();
+    AOS.init({
+      duration: 1300, // Animation duration in milliseconds
+      delay: 350, // Delay before animation starts in milliseconds
+    });
   }
   ngAfterViewInit(): void {
     this.typeEffect(); // Start typing on initialization
@@ -269,6 +275,14 @@ export class HomeComponent {
     }, 3000); // Change image every 3 seconds
     // Initialize the chart
     this.ratings = new Chart('RatingChart', this.ratingconfig);
+  }
+  goToSection(section: string) {
+    this.router.navigate(['/']).then(() => {
+      const gallerySection = document.getElementById(section);
+      if (gallerySection) {
+        gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   }
   ngOnDestroy() {
     // Clear interval when the component is destroyed

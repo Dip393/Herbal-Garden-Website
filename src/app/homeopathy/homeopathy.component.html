@@ -8,7 +8,9 @@
         <h1>Experience the Art of Natural Healing</h1>
         <h2>Step into the World of</h2>
         <h3>Homeopathic Wisdom</h3>
-        <div class="line"></div>
+        <div class="search">
+          <button class="searchBtn" (click)="goToSection('plants')">View Plants&nbsp;<i class="fa-brands fa-pagelines"></i></button>
+        </div>
         <p>
           Uncover the healing potential of plants celebrated in Homeopathy.
           Explore their medicinal properties through immersive 3D models,
@@ -49,7 +51,7 @@
       </div>
     </div>
   </div>
-  <div class="plants">
+  <div class="plants" id="plants">
     <div class="plant-container">
       <h2 class="heading">Some Traditional Plants Used In Homeopathy</h2>
       <div class="plant-details">

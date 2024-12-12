@@ -27,8 +27,13 @@
               the ancient traditions of herbal medicine through 3D models,
               detailed information, and intuitive features.
             </p>
-            <div class="search">
-              <button class="searchBtn" (click)="openSearchPopup()">Search Plants&nbsp;<i class="fa-solid fa-leaf"></i></button>
+            <div class="btnC">
+              <div class="search">
+                <button class="searchBtn" (click)="openSearchPopup()">Search Plants&nbsp;<i class="fa-solid fa-leaf"></i></button>
+              </div>
+              <div class="search">
+                <button class="searchBtn" (click)="goToSection('filter')">Filter Plants&nbsp;<i class="fa-solid fa-caret-down"></i></button>
+              </div>
             </div>
           </div>
           <div class="main-right">
@@ -148,19 +153,19 @@
       </div>
 
       <!-- Navigation Buttons -->
-      <button class="slider-btn prev" (click)="scrollSlider('prev')">&#8249;</button>
-      <button class="slider-btn next" (click)="scrollSlider('next')">&#8250;</button>
+      <button class="slider-btn prev" (click)="scrollSlider('prev')"><i class="fa-solid fa-angle-left"></i></button>
+      <button class="slider-btn next" (click)="scrollSlider('next')"><i class="fa-solid fa-angle-right"></i></button>
     </div>
 
   </div>
   <!---------------Advanced Search Functionality------------>
-  <div class="selection-options">
+  <div class="selection-options" id="filter">
     <div class="as">
-      <h2 class="heading2">Advanced Filter Option</h2>
+      <h2 class="heading2" data-aos="fade-down">Advanced Filter Option</h2>
       <div class="underline"></div>
       <form [formGroup]="searchForm" (ngSubmit)="performSearch()" class="advanced-search">
         <div class="select-container">
-          <div class="o">
+          <div class="o" data-aos="fade-right">
             <label for="medicinal-uses">Select by Medicinal Uses:</label>
             <select formControlName="category">
               <option value="">--Select an Option--</option>
@@ -176,19 +181,20 @@
             </select>
           </div>
 
-          <div class="o">
+          <div class="o" data-aos="fade-up">
             <label for="region">Select by Region:</label>
             <select formControlName="region">
               <option value="">--Select an Option--</option>
-              <option value="north-america">North America</option>
-              <option value="south-america">South America</option>
-              <option value="asia">Asia</option>
-              <option value="europe">Europe</option>
-              <option value="africa">Africa</option>
+              <option value="Hilly Region">Hilly Region</option>
+              <option value="Plain Land">Plain Land</option>
+              <option value="plateau">Plateau</option>
+              <option value="Coastal Regions">Coastal Region</option>
+              <option value="Desert">Desert</option>
             </select>
           </div>
 
-          <div class="o">
+
+          <div class="o" data-aos="fade-left">
             <label for="type">Select by Type:</label>
             <select formControlName="plantType">
               <option value="">--Select an Option--</option>
@@ -229,7 +235,7 @@
     <div class="overview">
       <p class="heading1" style="font-size: 28px;">Ayush Overview</p>
       <div class="overviews">
-        <div class="overview-content" id="o1">
+        <div class="overview-content" id="o1" data-aos="fade-up-right">
           <div class="oi">
             <img src="ayurveda.png" />
           </div>
@@ -243,7 +249,7 @@
             </p>
           </div>
         </div>
-        <div class="overview-content" id="o2">
+        <div class="overview-content" id="o2" data-aos="fade-up">
           <div class="oi">
             <img src="yoga.png" />
           </div>
@@ -258,7 +264,7 @@
             </p>
           </div>
         </div>
-        <div class="overview-content" id="o3">
+        <div class="overview-content" id="o3" data-aos="fade-up-left">
           <div class="oi">
             <img src="unani.png" />
           </div>
@@ -273,7 +279,7 @@
             </p>
           </div>
         </div>
-        <div class="overview-content" id="o4">
+        <div class="overview-content" id="o4" data-aos="fade-up-right">
           <div class="oi">
             <img src="siddha.png" />
           </div>
@@ -286,7 +292,7 @@
             </p>
           </div>
         </div>
-        <div class="overview-content" id="o6">
+        <div class="overview-content" id="o6" data-aos="fade-up-right">
           <div class="oi">
             <img src="unani.png" />
           </div>
@@ -302,22 +308,22 @@
         </div>
       </div>
     </div>
-    <div class="chart">
+    <!-- <div class="chart">
       <canvas id="MyChart" height="200px"></canvas>
-    </div>
+    </div> -->
   </div>
   <!-------------Counter Section------------->
   <div class="wrapper" id="wrapper2">
     <div class="cards" #counterSection>
-      <div class="card">
+      <div class="card" data-aos="fade-down">
         <h2><span id="counter1" data-target="1000">0</span>&nbsp;+</h2>
         <h3>Herbal Plants Cataloged</h3>
       </div>
-      <div class="card">
+      <div class="card" data-aos="fade-up">
         <h2><span id="counter2" data-target="500">0</span>&nbsp;+</h2>
         <h3>Verified Ayurvedic Remedies</h3>
       </div>
-      <div class="card">
+      <div class="card" data-aos="fade-down">
         <h2><span id="counter3" data-target="100000">0</span>&nbsp;+</h2>
         <h3>Monthly Website Visits</h3>
       </div>
@@ -336,6 +342,7 @@
       <button (click)="nextImage()">❯</button>
     </div>
   </div>
+  <!-- <div class="line" style="height: 5px; background-color: #0b1200;"></div> -->
   <!------------------Community Section-------------->
   <div class="community">
     <div class="community-header">
@@ -347,7 +354,7 @@
   </div>
   <!------------------Contact Section-------------->
   <div class="c5" id="contact">
-    <div class="contact-left">
+    <div class="contact-left" data-aos="fade-left">
       <h2 style="margin-bottom: 18px">Contact Us</h2>
       <div class="contactSection">
         <div class="contactDetails">
@@ -435,8 +442,8 @@
         </div>
       </div>
     </div>
-    <div class="contact-right">
-      <!----Review Section----->
+    <!----Review Section----->
+    <div class="contact-right" data-aos="fade-right">
       <div class="review">
         <h2 class="heading2">Reviews</h2>
         <canvas id="RatingChart"></canvas>

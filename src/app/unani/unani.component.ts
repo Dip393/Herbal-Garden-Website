@@ -58,7 +58,14 @@ export class UnaniComponent {
       description: 'Incorporates techniques like cupping (Hijama), leech therapy, and purging.'
     }
   ];
-
+  goToSection(section: string) {
+    this.router.navigate(['/unani']).then(() => {
+      const gallerySection = document.getElementById(section);
+      if (gallerySection) {
+        gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
 
   // Fetch plants by AYUSHType with pagination
   getPlants() {

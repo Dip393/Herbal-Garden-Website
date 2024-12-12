@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:3000/api/routes';
+  // private apiUrl = 'http://localhost:3000/api/routes';
+  private apiUrl = 'https://herbalbackend.onrender.com/api/routes';
   constructor(private http: HttpClient) {}
   //Add Plant Details
   addPlantDetails(data: any): Observable<any> {

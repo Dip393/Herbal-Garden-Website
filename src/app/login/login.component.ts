@@ -28,6 +28,7 @@ export class LoginComponent {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
+      userType: ['', [Validators.required]],
       otp: ['']  // OTP field to be filled after the email and password are submitted
     });
   }

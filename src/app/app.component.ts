@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, ElementRef, inject, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { NotificationService } from './services/notification.service';
 import { AuthService } from './services/auth.service';
 import { NgClass, NgFor, NgForOf, NgIf } from '@angular/common';
@@ -23,7 +23,7 @@ export class AppComponent {
   isBtnVisible:boolean = true; // Toggle Button visibility
   messages: { sender: 'user' | 'bot'; text: string }[] = []; // Chat messages
   @ViewChild('chatbotMessages') chatbotMessages!: ElementRef;
-
+  private router = inject(Router);
   constructor(private authService: AuthService) {}
 
   toggleChatbotWindow(): void {

@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';
 import { FormsModule } from '@angular/forms';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-plant-details',
@@ -23,11 +24,13 @@ export class PlantDetailsComponent {
   plantDetails: any = null;
   plantName: string | null = null;
   data: any = null;
+  showModelInLargeView: boolean = false;
 
   email = localStorage.getItem('email');
   isAdmin = localStorage.getItem('isAdmin');
 
   showLock: boolean = true;
+  is3DModelVisible: boolean = false;
 
   showEditPopup: boolean = false;
   editablePlantDetails: any = {};
@@ -60,9 +63,20 @@ export class PlantDetailsComponent {
   showPopup: boolean = false;
 
   translatedDetails: any = {};
+  isTranslateLoading: boolean = false;
   currentLanguage: string = 'en'; // Default language
   selectedLanguage: string = 'en'; // Selected language for translation
   excludeFields: string[] = ['commonNames', 'botanicalName', 'correspondenceLink'];
+
+  //Map Showing Information
+  private map : L.Map | undefined;
+  locations = [
+    { name: 'Punjab', lat: 30.7333, lng: 76.7794 },
+    { name: 'West Bengal', lat: 22.5726, lng: 88.3639 },
+    { name: 'Gujarat', lat: 22.2587, lng: 71.1924 },
+  ];
+
+  isModel: boolean = true;
 
   constructor(private route: ActivatedRoute) {
     this.currentPageUrl = `${window.location.origin}${this.router.url}`;
@@ -77,11 +91,44 @@ export class PlantDetailsComponent {
       this.showLock = false;
     }
     this.editablePlantDetails = { ...this.plantDetails };
+    this.initMap();
   }
   openEditForm(): void {
     // Open the popup form and copy the current plant details to an editable object
     this.showEditPopup = true;
     this.editablePlantDetails = { ...this.plantDetails };
+  }
+  showModelPopup(){
+    this.is3DModelVisible = true;
+    this.proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+  }
+  close3DPopup(){
+    this.is3DModelVisible = false;
+  }
+  private initMap(): void {
+    // Initialize the map after the view is loaded
+    this.map = L.map('map').setView([22.9868, 87.855], 5); // Center on India
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors',
+    }).addTo(this.map);
+
+    // Add markers
+    this.locations.forEach((location) => {
+      L.marker([location.lat, location.lng])
+        .addTo(this.map!)
+        .bindPopup(`<b>${location.name}</b>`);
+    });
+  }
+  openFullMap(): void {
+    const query = this.locations
+      .map((loc) => `${loc.lat},${loc.lng}`)
+      .join('/');
+    window.open(
+      `https://www.openstreetmap.org/?mlat=${this.locations[0].lat}&mlon=${this.locations[0].lng}&zoom=5#map=5/${query}`,
+      '_blank'
+    );
   }
   saveChanges(): void {
     const updatedDetails = this.editablePlantDetails;
@@ -154,7 +201,7 @@ export class PlantDetailsComponent {
       return;
     }
 
-    this.loading = true;
+    this.isTranslateLoading = true;
 
     const payload = {
       plantDetails: this.plantDetails, // Send the entire object
@@ -167,16 +214,16 @@ export class PlantDetailsComponent {
         if (response.translatedDetails) {
           this.translatedDetails = response.translatedDetails; // Use translated content
           this.currentLanguage = this.selectedLanguage;
-          this.loading = false;
+          this.isTranslateLoading = false;
         } else {
           alert('Translation service returned no content.');
-          this.loading = false;
+          this.isTranslateLoading = false;
         }
       },
       error: (err) => {
         console.error('Error during translation:', err);
         alert('Translation failed. Please try again.');
-        this.loading = false;
+        this.isTranslateLoading = false;
       }
     });
   }
@@ -197,12 +244,20 @@ export class PlantDetailsComponent {
     this.showCitations = !this.showCitations;
   }
   sanitizeUrl(url: string): SafeResourceUrl {
+    // Return sanitized URL for non-YouTube videos
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
   showInLargeView(src: string, type: string) {
+    if(type === 'video' || type === 'image'){
+      this.isModel = false;
+    }
+    else{
+      this.isModel = true;
+    }
     if(type === 'video'){
       this.largeViewSrc = this.sanitizeUrl(src);
+      console.log(this.largeViewSrc);
       this.largeViewType = type;
       return;
     }

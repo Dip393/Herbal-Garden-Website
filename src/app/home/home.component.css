@@ -222,6 +222,10 @@ header{
         color: var(--light-green);
     }
 }
+.btnC{
+  display: flex;
+  gap: 12px;
+}
 .searchBtn{
     border: none;
     padding: 12px 16px;
@@ -1158,6 +1162,18 @@ header{
   .helements{
     display: none;
   }
+  .headline{
+    font-size: 28px;
+  }
+  .slidercontainer{
+    padding: 12px;
+  }
+  .plant-card{
+    height: 455px;
+  }
+  .btnC{
+    flex-direction: column;
+  }
   .main-left{
     padding-top: 40px;
   }
@@ -1187,5 +1203,11 @@ header{
   }
   .highlights{
     display: none;
+  }
+  .gallery{
+    padding: 12px;
+  }
+  .slider-container{
+    margin: 10px auto;
   }
 }

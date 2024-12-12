@@ -3,7 +3,7 @@
   <div class="left-section">
     <div class="logo">Herbal</div>
     <div class="menu">
-      <li><img src="dashboard.png" alt="" width="20px">&nbsp;&nbsp;<p>Dashboard</p></li>
+      <li class="dashboard-active"><img src="dashboard.png" alt="" width="20px" height="20px">&nbsp;&nbsp;<p>Dashboard</p></li>
       <a [routerLink]="['']" ><li><i class="fa-solid fa-house"></i>&nbsp;&nbsp;<p>Home</p></li></a>
       <li (click)="logout()"><i class="fa-solid fa-power-off"></i>&nbsp;&nbsp;<p>Log Out</p></li>
     </div>
@@ -17,6 +17,11 @@
     </div>
   </div>
   <div class="right-section">
+    <div class="welcome">
+      <h3>Hi, {{ userName }}</h3>
+      <p>Welcome to your dashboard!</p>
+    </div>
+    <div class="line"></div>
     <div class="weather">
       <div class="wl">
         <h3 class="heading">Weather Guide for Optimal Herb Growth</h3>
@@ -78,20 +83,8 @@
           </div>
         </div>
         <!-- Navigation Buttons -->
-        <button class="slider-btn prev" (click)="scrollSlider('prev')">&#8249;</button>
-        <button class="slider-btn next" (click)="scrollSlider('next')">&#8250;</button>
-      </div>
-    </div>
-    <div class="quizzes">
-      <div class="quiz-image">
-        <img src="https://www.gstsuvidhacenters.com/WebsiteAssets/images/Services/PrivateLimitedCompany1.png" alt="">
-      </div>
-      <div class="quiz-info">
-        <p>Let's do some fun quizzes to gather some more information</p>
-        <a [href]="quizUrl"><button>Get Started</button></a>
-      </div>
-      <div class="quiz-image">
-        <img src="https://static.vecteezy.com/system/resources/previews/019/837/539/original/businessman-cartoon-character-set-handsome-business-man-in-office-style-smart-suit-png.png" alt="">
+        <button class="slider-btn prev" (click)="scrollSlider('prev')"><i class="fa-solid fa-angle-left"></i></button>
+        <button class="slider-btn next" (click)="scrollSlider('next')"><i class="fa-solid fa-angle-right"></i></button>
       </div>
     </div>
     <div class="notes">
@@ -130,6 +123,19 @@
           <p>{{ trimDescription(mostViewedPlant.description, 300) }}</p>
           <p><strong>Medicinal Uses:-</strong><br>{{ mostViewedPlant.medicinalUses[0] }}</p>
         </div>
+      </div>
+    </div>
+    <h2 style="color: #265f00; text-align: center; margin: 18px auto;">Let's do some fun quizzes !</h2>
+    <div class="quizzes">
+      <div class="quiz-image">
+        <img src="https://png.pngtree.com/png-vector/20220530/ourmid/pngtree-quiz-banner-in-pop-art-style-png-image_4763335.png" alt="">
+      </div>
+      <div class="quiz-info">
+        <p>Let's do some fun quizzes to gather some more information</p>
+        <a href="quiz"><button>Get Started</button></a>
+      </div>
+      <div class="quiz-image">
+        <img src="https://static.vecteezy.com/system/resources/previews/019/837/539/original/businessman-cartoon-character-set-handsome-business-man-in-office-style-smart-suit-png.png" alt="">
       </div>
     </div>
   </div>

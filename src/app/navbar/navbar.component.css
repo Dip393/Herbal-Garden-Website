@@ -82,15 +82,12 @@ nav{
       background-color: #0000003c;
         display: flex;
         justify-content: center;
-        height: 40px;
         align-items: center;
-        padding: 25px 10px;
+        padding: 0px 10px;
         width: 100%;
-        position: fixed;
-        z-index: 4;
     }
     .nav-mobile .logo{
-      height: 40px;
+      height: 60px;
     }
     #navMobile{
         display: none;

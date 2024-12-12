@@ -8,7 +8,9 @@
         <h1>Embrace the Essence of Natural Healing</h1>
         <h2>Step into the World of</h2>
         <h3>Ayurvedic Wisdom</h3>
-        <div class="line"></div>
+        <div class="search">
+          <button class="searchBtn" (click)="goToSection('plants')">View Plants&nbsp;<i class="fa-brands fa-pagelines"></i></button>
+        </div>
         <p>
             Discover the timeless healing power of plants celebrated in Ayurveda.
             Explore their therapeutic properties through immersive 3D models,
@@ -56,7 +58,7 @@
       </div>
     </div>
   </div>
-  <div class="plants">
+  <div class="plants" id="plants">
     <div class="plant-container">
       <h2 class="heading">Some Traditional Plants Used In Ayurveda</h2>
       <div class="plant-details">

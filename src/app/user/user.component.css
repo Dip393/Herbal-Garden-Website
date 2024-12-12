@@ -13,6 +13,25 @@
     margin: 20px;
     margin-bottom: 30px;
 }
+.dashboard-active{
+  background-color: #00000018;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 8px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  p{
+    margin-bottom: 0;
+  }
+}
+.line{
+  height: 2px;
+  border-radius: 6px;
+  margin: 18px auto;
+  background-color: #16331b;
+}
 .left-section{
     display: flex;
     flex-direction: column;
@@ -208,7 +227,8 @@
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  font-size: 18px;
+  font-size: 28px;
+  font-weight: bolder;
   cursor: pointer;
   z-index: 10;
 }
