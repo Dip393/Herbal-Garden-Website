@@ -218,8 +218,8 @@ export class PlantDetailsComponent {
       to_code: this.selectedLanguage
     };
 
-    this.http.post('https://herbal-garden-python-backend.onrender.com/translate', payload).subscribe({
-    // this.http.post('http://127.0.0.1:9000/translate', payload).subscribe({
+    // this.http.post('https://herbal-garden-python-backend.onrender.com/translate', payload).subscribe({
+     this.http.post('http://127.0.0.1:9000/translate', payload).subscribe({
       next: (response: any) => {
         if (response.translatedDetails) {
           this.translatedDetails = response.translatedDetails; // Use translated content
