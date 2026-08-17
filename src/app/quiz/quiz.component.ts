@@ -349,7 +349,7 @@ export class QuizComponent {
     );
 
     doc.text(
-      'Ministry of AYUSH',
+      'AyurAI',
       105,
       247,
       {
