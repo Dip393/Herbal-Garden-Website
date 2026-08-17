@@ -648,10 +648,15 @@
           class="fa-regular fa-note-sticky"
         ></i>
       </h5>
-      <textarea id="note-textarea" #noteInput></textarea>
+      <textarea
+        id="note-textarea"
+        name="currentNote"
+        [(ngModel)]="currentNote"
+        placeholder="Write your important notes here..."
+      ></textarea>
       <br />
       <div class="note-button">
-        <button id="save-btn" [disabled]="loading" (click)="addNote(noteInput.value)">
+        <button id="save-btn" [disabled]="loading" (click)="addNote(currentNote)">
           <div><i class="fa-solid fa-check" *ngIf="!loading"></i>&nbsp;<span *ngIf="!loading">Save</span></div>
           <div class="spinner" *ngIf="loading"></div>
         </button>

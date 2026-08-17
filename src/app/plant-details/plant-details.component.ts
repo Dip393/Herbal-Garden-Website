@@ -61,6 +61,10 @@ export class PlantDetailsComponent {
   //To take notes
   showNotesBtn: boolean = false;
   showPopup: boolean = false;
+  notes: any[] = [];
+  isNotesLoading: boolean = false;
+  currentNote: string = '';
+  currentNoteId: string | null = null;
 
   translatedDetails: any = {};
   isTranslateLoading: boolean = false;
@@ -87,7 +91,7 @@ export class PlantDetailsComponent {
       this.fetchPlantDetails(this.plantId);
     }
     this.showNotesButton();
-    if(this.email){
+    if (this.email) {
       this.showLock = false;
     }
     this.editablePlantDetails = { ...this.plantDetails };
@@ -176,6 +180,11 @@ export class PlantDetailsComponent {
           }
         )
         this.plantName = this.plantDetails.commonNames[0];
+
+        if (this.email) {
+          this.loadNotes();
+        }
+
         const email = localStorage.getItem('email');
         if (email) {
           this.authService.isBookmarked(this.plantDetails._id, email).subscribe(
@@ -411,13 +420,54 @@ export class PlantDetailsComponent {
         .catch((error) => console.error('Error copying link:', error));
     }
   }
+
+  loadNotes(): void {
+    if (!this.email || !this.plantName) {
+      console.log('Cannot load notes:', { email: this.email, plantName: this.plantName });
+      return;
+    }
+
+    this.isNotesLoading = true;
+
+    this.authService.getNotes(this.email).subscribe({
+      next: (res) => {
+        console.log('ALL NOTES FROM BACKEND:', res);
+        this.notes = Array.isArray(res) ? res : [];
+
+        const plantNote = this.notes.find((note: any) => note.plantName === this.plantName);
+
+        if (plantNote) {
+          this.currentNote = plantNote.content || '';
+          this.currentNoteId = plantNote._id || null;
+          console.log('CURRENT PLANT NOTE:', plantNote);
+        } else {
+          this.currentNote = '';
+          this.currentNoteId = null;
+          console.log('No note found for:', this.plantName);
+        }
+        this.isNotesLoading = false;
+      },
+      error: (err) => {
+        console.error('Error loading notes:', err);
+        this.notes = [];
+        this.currentNote = '';
+        this.currentNoteId = null;
+        this.isNotesLoading = false;
+      }
+    });
+  }
+
+
   showNotesButton(){
     if(this.email){
       this.showNotesBtn = true;
     }
   }
   //To show notes popup
-  showPopupNote() {
+  showPopupNote(): void {
+    console.log('Opening notes popup');
+    console.log('Current plant:', this.plantName);
+    console.log('Current note:', this.currentNote);
     this.showPopup = true;
   }
   //To close notes popup
@@ -425,21 +475,45 @@ export class PlantDetailsComponent {
     this.showPopup = false;
   }
   //To add notes
-  addNote(note: string){
-    this.loading = true;
-    if(note.trim() && this.email && this.plantName){
-      this.authService.addNote(this.email, note, this.plantName).subscribe(
-        (res) => {
-          this.loading = false;
-          this.closeNotesPopup();
-        },
-        (err) => {
-          this.loading = false;
-          alert('Error adding note:'+ err);
-        }
-      );
-    } else {
+  addNote(note: string): void {
+    if (!note.trim()) {
       alert('Please enter a note');
+      return;
     }
+
+    if (!this.email || !this.plantName) {
+      alert('Please login first.');
+      return;
+    }
+
+    this.loading = true;
+
+    this.authService.addNote(
+      this.email,
+      note.trim(),
+      this.plantName
+    ).subscribe({
+      next: (res) => {
+        this.loading = false;
+
+        console.log('Note added:', res);
+        this.currentNote = note.trim();
+        this.closeNotesPopup();
+
+        // ⭐ Refresh notes from MongoDB
+        this.loadNotes();
+      },
+
+      error: (err) => {
+        this.loading = false;
+
+        console.error('Error adding note:', err);
+
+        alert(
+          'Error adding note: ' +
+          (err?.error?.error || err?.message || 'Unknown error')
+        );
+      }
+    });
   }
 }
