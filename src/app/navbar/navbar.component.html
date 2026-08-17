@@ -5,7 +5,7 @@
     <div class="menu">
       <a (click)="setActive('home','')" [ngClass]="{'active': activeMenu === 'home'}" [routerLink]="['']"><p>Home</p></a>
       <!-- <a href="http://127.0.0.1:5500/"><p>Virtual Tour</p></a> -->
-      <a href=""><p>Virtual Tour</p></a>
+      <a href="https://play.unity.com/api/v1/games/game/666e9721-9031-48ac-b350-fda2096286d9/build/latest/frame"><p>Virtual Tour</p></a>
       <a (click)="goToSection('gallery')"><p>Gallery</p></a>
       <a (click)="setActive('bookmarks','bookmarks');" *ngIf="showBookmarkBtn" [ngClass]="{'active': activeMenu === 'bookmarks'}"><p>Bookmarks</p></a>
       <a (click)="goToSection('contact')"><p>Contact</p></a>
