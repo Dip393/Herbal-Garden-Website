@@ -27,12 +27,6 @@ export class AuthService {
   login(data: any) {
     return this.http.post<any>(`${this.apiUrl}/login`, data);
   }
-  verifyLoginOtp(data: any) {
-    return this.http.post<any>(`${this.apiUrl}/verify-login-otp`, data);
-  }
-  verifyOtp(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/verify-otp`, data);
-  }
   logout(email: string) {
     return this.http.post<any>(`${this.apiUrl}/logout`, { email });
   }
