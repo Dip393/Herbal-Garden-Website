@@ -284,9 +284,42 @@
           </div>
         </div>
         <div class="language-selector">
-          <div class="audio-container">
-            <audio id="audio-player" [src]="plantDetails.audio" controls></audio>
-
+          <div class="tts-container">
+            <button
+              type="button"
+              class="tts-button"
+              (click)="readPlantDetails()"
+              *ngIf="!isSpeaking"
+            >
+              🔊 Read Aloud
+            </button>
+          
+            <button
+              type="button"
+              class="tts-button"
+              (click)="pauseSpeech()"
+              *ngIf="isSpeaking && !isSpeechPaused"
+            >
+              ⏸ Pause
+            </button>
+          
+            <button
+              type="button"
+              class="tts-button"
+              (click)="resumeSpeech()"
+              *ngIf="isSpeaking && isSpeechPaused"
+            >
+              ▶ Resume
+            </button>
+          
+            <button
+              type="button"
+              class="tts-stop-button"
+              (click)="stopSpeech()"
+              *ngIf="isSpeaking"
+            >
+              ⏹ Stop
+            </button>
           </div>
           <label for="language">Select Language:</label>
           <select id="language" [(ngModel)]="selectedLanguage">
@@ -501,8 +534,42 @@
               <i class="fa-solid fa-lock" *ngIf="showLock" id="lock"></i>
             </button>
           </div>
-          <div class="audio-container">
-            <audio id="audio-player" controls>{{ plantDetails.audio }}</audio>
+          <div class="tts-container">
+            <button
+              type="button"
+              class="tts-button"
+              (click)="readPlantDetails()"
+              *ngIf="!isSpeaking"
+            >
+              🔊 Read Aloud
+            </button>
+          
+            <button
+              type="button"
+              class="tts-button"
+              (click)="pauseSpeech()"
+              *ngIf="isSpeaking && !isSpeechPaused"
+            >
+              ⏸ Pause
+            </button>
+          
+            <button
+              type="button"
+              class="tts-button"
+              (click)="resumeSpeech()"
+              *ngIf="isSpeaking && isSpeechPaused"
+            >
+              ▶ Resume
+            </button>
+          
+            <button
+              type="button"
+              class="tts-stop-button"
+              (click)="stopSpeech()"
+              *ngIf="isSpeaking"
+            >
+              ⏹ Stop
+            </button>
           </div>
           <div class="language-selector">
             <label for="language">Select Language:</label>
