@@ -3,21 +3,16 @@
     <div class="inner-header">
       <img src="https://c0.wallpaperflare.com/preview/440/715/681/dark-green-green-elaf-dark-background.jpg" alt="" />
     </div>
-
     <div class="outer-header">
       <app-navbar></app-navbar>
-
       <div class="helements">
         <div class="nav2">
           <div class="nav-element" *ngFor="let category of plantcategory">
-            <img [src]="category.image" alt="" />
-            <a class="nav-link" [routerLink]="[category.component]">
-              {{ category.name }}
-            </a>
+            <img [src]="category.image" alt="">
+            <a class="nav-link" [routerLink]="[category.component]">{{ category.name }}</a>
           </div>
         </div>
       </div>
-
       <div class="c1">
         <div class="contents">
           <div class="main-left">
@@ -26,45 +21,33 @@
               With Our<br />
               <span>Virtual Herbal Garden</span>
             </p>
-
             <p>
               Discover the diverse world of medicinal plants used in AYUSH with
               our immersive Virtual Herbal Garden. Learn, interact, and experience
               the ancient traditions of herbal medicine through 3D models,
               detailed information, and intuitive features.
             </p>
-
             <div class="btnC">
               <div class="search">
-                <button class="searchBtn" (click)="openSearchPopup()">
-                  Search Plants&nbsp;<i class="fa-solid fa-leaf"></i>
-                </button>
+                <button class="searchBtn" (click)="openSearchPopup()">Search Plants&nbsp;<i class="fa-solid fa-leaf"></i></button>
               </div>
-
               <div class="search">
-                <button class="searchBtn" (click)="goToSection('filter')">
-                  Filter Plants&nbsp;<i class="fa-solid fa-caret-down"></i>
-                </button>
+                <button class="searchBtn" (click)="goToSection('filter')">Filter Plants&nbsp;<i class="fa-solid fa-caret-down"></i></button>
               </div>
             </div>
           </div>
-
           <div class="main-right">
-            <model-viewer
-              [src]="currentModel"
-              camera-controls
-              auto-rotate
-              class="model3D">
-            </model-viewer>
+            <!-- Display the currently selected 3D model -->
+            <model-viewer [src]="currentModel" camera-controls auto-rotate class="model3D"></model-viewer>
           </div>
         </div>
       </div>
     </div>
   </header>
-
-  <!-- ==================== SEARCH FUNCTIONALITY ==================== -->
+  <!------------Search Functionality------------->
   <div class="search-popup" *ngIf="showPopup">
     <div class="popup-content">
+      <!-- Dropdown for selecting search fields -->
       <div class="search-content-flex">
         <select [(ngModel)]="selectedField" id="options">
           <option value="all">All</option>
@@ -79,71 +62,44 @@
           <option value="type">Ayush Category</option>
         </select>
 
-        <input
-          type="text"
-          [placeholder]="placeholderText"
-          [(ngModel)]="searchQuery"
-          (input)="searchPlants()"
-          class="search-input"
-        />
-
-        <button
-          *ngIf="searchQuery"
-          class="search-btn"
-          (click)="clearSearch()">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-
-        <button class="search-btn" (click)="startVoiceSearch()">
-          <i class="fa-solid fa-microphone"></i>
-        </button>
-
-        <button class="search-btn" (click)="openImageUploader()">
-          <i class="fa-regular fa-image"></i>
-        </button>
+        <!-- Input field for search query -->
+        <input type="text" [placeholder]="placeholderText" [(ngModel)]="searchQuery" (input)="searchPlants()" class="search-input"/>
+        <button *ngIf="searchQuery" class="search-btn" (click)="clearSearch()"><i class="fa-solid fa-xmark"></i></button>
+        <button class="search-btn" (click)="startVoiceSearch()"><i class="fa-solid fa-microphone"></i></button>
+        <button class="search-btn" (click)="openImageUploader()"><i class="fa-regular fa-image"></i></button>
       </div>
-
+      <!-- Search results -->
       <div class="search-results">
-        <input
-          style="display: none;"
-          type="file"
-          (change)="onImageUpload($event)"
-          id="fileInput"
-        />
-
+        <input style="display: none;" type="file" (change)="onImageUpload($event)" id="fileInput"/>
+        <!-- Listening Indicator -->
         <div *ngIf="isListening" class="listening-indicator">
           <div class="listening">
             <span>Listening...</span>
-            <img
-              src="https://cdn.dribbble.com/users/2790075/screenshots/5571604/media/02df16d0aca0257ccb028f3cf4c266a7.gif"
-              alt=""
-            />
-          </div>
+            <img src="https://cdn.dribbble.com/users/2790075/screenshots/5571604/media/02df16d0aca0257ccb028f3cf4c266a7.gif" alt="">
+          </div> <!-- Optional spinner animation -->
         </div>
-
-        <div *ngIf="isLoading" class="loader">
-          Loading...
-        </div>
-
+        <!-- Loader while fetching results -->
+        <div *ngIf="isLoading" class="loader">Loading...</div>
+        <!-- No results found -->
         <div
           *ngIf="!isLoading && searchResults.length === 0 && searchQuery"
-          class="notFound">
-          Search not found&nbsp;
-          <img
+          class="notFound"
+        >
+          Search not found&nbsp;<img
             src="https://cdn3.iconfinder.com/data/icons/elastic-search-line/128/Elastic_Search_-_Line-10-512.png"
             alt=""
           />
         </div>
-
+        <!-- Display results -->
         <div
           *ngFor="let plant of searchResults"
           class="search-item"
-          (click)="openPlantDetails(plant.plantId)">
+          (click)="openPlantDetails(plant.plantId)"
+        >
           <div class="searched-item">
             <h4 [innerHTML]="plant.highlightedCommonNames"></h4>
-            <img [src]="plant.images[0]" alt="" />
+            <img [src]="plant.images[0]" />
           </div>
-
           <div *ngFor="let match of getMatchingFields(plant)">
             <strong>{{ match.key }}:</strong>
             <span [innerHTML]="match.value"></span>
@@ -151,25 +107,25 @@
         </div>
       </div>
 
-      <button class="close-btn" (click)="closeSearchPopup()">
-        Close
-      </button>
+      <!-- Close button -->
+      <button class="close-btn" (click)="closeSearchPopup()">Close</button>
     </div>
   </div>
-
-  <!-- ==================== RANDOM PLANTS ==================== -->
+  <!------------5 Random Seasonal Plants-->
   <div class="wrapper">
     <h2 class="heading2" style="margin: 20px auto">
       Take A Look on Some Plants
     </h2>
-
     <div class="slidercontainer">
+      <!-- Slider Wrapper -->
       <div class="slider-wrapper">
         <div
           class="plant"
           *ngFor="let plant of plants"
-          (click)="openPlantDetails(plant._id)">
+          (click)="openPlantDetails(plant._id)"
+        >
           <div class="plant-card">
+            <!-- Plant Image -->
             <div class="plant-image">
               <img
                 *ngIf="plant.images.length > 0"
@@ -178,14 +134,17 @@
               />
             </div>
 
+            <!-- Common Name -->
             <h3 class="plant-common-name">
               {{ plant.commonNames[0] || "Unknown Name" }}
             </h3>
 
+            <!-- Botanical Name -->
             <h4 class="plant-botanical-name">
               <i>{{ plant.botanicalName }}</i>
             </h4>
 
+            <!-- Description -->
             <p class="plant-description">
               {{ trimDescription(plant.description, 180) }}
             </p>
@@ -193,190 +152,93 @@
         </div>
       </div>
 
-      <button class="slider-btn prev" (click)="scrollSlider('prev')">
-        <i class="fa-solid fa-angle-left"></i>
-      </button>
-
-      <button class="slider-btn next" (click)="scrollSlider('next')">
-        <i class="fa-solid fa-angle-right"></i>
-      </button>
+      <!-- Navigation Buttons -->
+      <button class="slider-btn prev" (click)="scrollSlider('prev')"><i class="fa-solid fa-angle-left"></i></button>
+      <button class="slider-btn next" (click)="scrollSlider('next')"><i class="fa-solid fa-angle-right"></i></button>
     </div>
-  </div>
 
-  <!-- ==================== ADVANCED FILTER ==================== -->
+  </div>
+  <!---------------Advanced Search Functionality------------>
   <div class="selection-options" id="filter">
     <div class="as">
-      <h2 class="heading2" data-aos="fade-down">
-        Advanced Filter Option
-      </h2>
-
+      <h2 class="heading2" data-aos="fade-down">Advanced Filter Option</h2>
       <div class="underline"></div>
-
-      <form
-        [formGroup]="searchForm"
-        (ngSubmit)="performSearch()"
-        class="advanced-search">
-
+      <form [formGroup]="searchForm" (ngSubmit)="performSearch()" class="advanced-search">
         <div class="select-container">
-
-          <!-- MEDICINAL USE -->
           <div class="o" data-aos="fade-right">
-            <label for="medicinal-uses">
-              Select by Medicinal Uses:
-            </label>
-
-            <select formControlName="category" id="medicinal-uses">
+            <label for="medicinal-uses">Select by Medicinal Uses:</label>
+            <select formControlName="category">
               <option value="">--Select an Option--</option>
-              <option value="Anti-inflammatory">
-                Anti-inflammatory
-              </option>
-              <option value="Antioxidant">
-                Antioxidant
-              </option>
-              <option value="Digestive">
-                Digestive
-              </option>
-              <option value="Immune Support">
-                Immune Support
-              </option>
-              <option value="Stress and Anxiety Relief">
-                Stress and Anxiety Relief
-              </option>
-              <option value="Pain Relief">
-                Pain Relief
-              </option>
-              <option value="Hormonal Balance">
-                Hormonal Balance
-              </option>
-              <option value="Blood Sugar Regulation">
-                Blood Sugar Regulation
-              </option>
-              <option value="Bone and Joint Health">
-                Bone and Joint Health
-              </option>
+              <option value="anti-inflammatory">Anti-inflammatory</option>
+              <option value="antioxidant">Antioxidant</option>
+              <option value="digestive">Digestive</option>
+              <option value="immune-support">Immune Support</option>
+              <option value="Stress relief">Stress and Anxiety Relief</option>
+              <option value="pain-relief">Pain Relief</option>
+              <option value="hormonal-balance">Hormonal Balance</option>
+              <option value="blood-sugar-regulation">Blood Sugar Regulation</option>
+              <option value="bone-joint-health">Bone and Joint Health</option>
             </select>
           </div>
 
-          <!-- REGION -->
           <div class="o" data-aos="fade-up">
-            <label for="region">
-              Select by Region:
-            </label>
-
-            <select formControlName="region" id="region">
+            <label for="region">Select by Region:</label>
+            <select formControlName="region">
               <option value="">--Select an Option--</option>
-              <option value="Hilly Region">
-                Hilly Region
-              </option>
-              <option value="Plain Land">
-                Plain Land
-              </option>
-              <option value="Plateau">
-                Plateau
-              </option>
-              <option value="Coastal Region">
-                Coastal Region
-              </option>
-              <option value="Desert">
-                Desert
-              </option>
+              <option value="Hilly Region">Hilly Region</option>
+              <option value="Plain Land">Plain Land</option>
+              <option value="plateau">Plateau</option>
+              <option value="Coastal Regions">Coastal Region</option>
+              <option value="Desert">Desert</option>
             </select>
           </div>
 
-          <!-- PLANT TYPE -->
+
           <div class="o" data-aos="fade-left">
-            <label for="type">
-              Select by Type:
-            </label>
-
-            <select formControlName="plantType" id="type">
+            <label for="type">Select by Type:</label>
+            <select formControlName="plantType">
               <option value="">--Select an Option--</option>
-              <option value="Herb">
-                Herb
-              </option>
-              <option value="Shrub">
-                Shrub
-              </option>
-              <option value="Tree">
-                Tree
-              </option>
-              <option value="Vine">
-                Vine
-              </option>
-              <option value="Succulent">
-                Succulent
-              </option>
+              <option value="Herb">Herb</option>
+              <option value="shrub">Shrub</option>
+              <option value="Tree">Tree</option>
+              <option value="vine">Vine</option>
+              <option value="Succulent">Succulent</option>
             </select>
           </div>
-
         </div>
-
         <button type="submit">
-          <span *ngIf="!isLoading">
-            <i class="fa-solid fa-filter"></i>&nbsp;Filter
-          </span>
-
+          <span *ngIf="!isLoading"><i class="fa-solid fa-filter"></i>&nbsp;Filter</span>
           <div class="spinner" *ngIf="isLoading"></div>
         </button>
       </form>
-
-      <!-- ADVANCED SEARCH RESULTS -->
-      <div
-        class="advanced-search-results"
-        *ngIf="showAdvancedResults">
-
-        <div *ngIf="advancedSearchResults.length === 0">
-          No results found.
-        </div>
-
-        <div
-          class="plant"
-          *ngFor="let plant of advancedSearchResults"
-          (click)="openPlantDetails(plant._id)">
-
+      <div class="advanced-search-results" *ngIf="showAdvancedResults">
+        <div *ngIf="advancedSearchResults.length === 0">No results found.</div>
+        <div class="plant" *ngFor="let plant of advancedSearchResults" (click)="openPlantDetails(plant._id)">
           <div class="plant-card">
+            <!-- Plant Image -->
             <div class="plant-image">
-              <img
-                *ngIf="plant.images.length > 0"
-                [src]="plant.images[0]"
-                alt="{{ plant.botanicalName }}"
-              />
+              <img *ngIf="plant.images.length > 0" [src]="plant.images[0]" alt="{{ plant.botanicalName }}"/>
             </div>
-
-            <h3 class="plant-common-name">
-              {{ plant.commonNames[0] || "Unknown Name" }}
-            </h3>
-
-            <h4 class="plant-botanical-name">
-              <i>{{ plant.botanicalName }}</i>
-            </h4>
-
-            <p class="plant-description">
-              {{ trimDescription(plant.description, 180) }}
-            </p>
+            <!-- Common Name -->
+            <h3 class="plant-common-name">{{ plant.commonNames[0] || "Unknown Name" }}</h3>
+            <!-- Botanical Name -->
+            <h4 class="plant-botanical-name"><i>{{ plant.botanicalName }}</i></h4>
+            <!-- Description -->
+            <p class="plant-description">{{ trimDescription(plant.description, 180) }}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- ==================== ABOUT AYUSH ==================== -->
+  <!----------------About Ayush--------------->
   <div class="wrapper" id="wrapper">
     <div class="overview">
-      <p class="heading1" style="font-size: 28px;">
-        Ayush Overview
-      </p>
-
+      <p class="heading1" style="font-size: 28px;">Ayush Overview</p>
       <div class="overviews">
-
-        <div
-          class="overview-content"
-          id="o1"
-          data-aos="fade-up-right">
+        <div class="overview-content" id="o1" data-aos="fade-up-right">
           <div class="oi">
-            <img src="ayurveda.png" alt="Ayurveda" />
+            <img src="ayurveda.png" />
           </div>
-
           <div class="ot">
             <h3>Ayurveda</h3>
             <p>
@@ -387,251 +249,170 @@
             </p>
           </div>
         </div>
-
-        <div
-          class="overview-content"
-          id="o2"
-          data-aos="fade-up">
+        <div class="overview-content" id="o2" data-aos="fade-up">
           <div class="oi">
-            <img src="yoga.png" alt="Yoga and Naturopathy" />
+            <img src="yoga.png" />
           </div>
-
           <div class="ot">
             <h3>Yoga & Naturopathy</h3>
             <p>
-              The word 'Yoga' comes from the Sanskrit word 'yuj' which means
-              'to unite or integrate'. Yoga is about the union of a person's
-              own consciousness and the universal consciousness. Naturopathy
-              is a cost effective drugless, non-invasive therapy involving
-              the use of natural materials for health care and healthy living.
+              The word 'Yoga' comes from the Sanskrit word 'yuj' which means 'to
+              unite or integrate'. Yoga is about the union of a person's own
+              consciousness and the universal consciousness. Naturopathy is a
+              cost effective drugless, non-invasive therapy involving the use of
+              natural materials for health care and healthy living.
             </p>
           </div>
         </div>
-
-        <div
-          class="overview-content"
-          id="o3"
-          data-aos="fade-up-left">
+        <div class="overview-content" id="o3" data-aos="fade-up-left">
           <div class="oi">
-            <img src="unani.png" alt="Unani" />
+            <img src="unani.png" />
           </div>
-
           <div class="ot">
             <h3>Unani</h3>
             <p>
-              Unani System of medicine is a comprehensive medical system,
-              which provides preventive, promotive, curative and rehabilitative
-              health care. The system is holistic in nature and takes into
-              account the whole personality of an individual rather than
-              taking a reductionist approach towards disease.
+              Unani System of medicine is a comprehensive medical system, which
+              provides preventive, promotive, curative and rehabilitative health
+              care. The system is holistic in nature and takes into account the
+              whole personality of an individual rather than taking a
+              reductionist approach towards disease.
             </p>
           </div>
         </div>
-
-        <div
-          class="overview-content"
-          id="o4"
-          data-aos="fade-up-right">
+        <div class="overview-content" id="o4" data-aos="fade-up-right">
           <div class="oi">
-            <img src="siddha.png" alt="Siddha" />
+            <img src="siddha.png" />
           </div>
-
           <div class="ot">
             <h3>Siddha</h3>
             <p>
-              The Siddha system is an ancient system of medicine in India.
-              The word 'Siddha' is derived from the root word "Citti"
-              meaning attainment of perfection, eternal bliss and accomplishment.
+              The Siddha system is an ancient system of medicine in India. The
+              word 'Siddha' is derived from the root word "Citti" meaning
+              attainment of perfection, eternal bliss and accomplishment.
             </p>
           </div>
         </div>
-
-        <div
-          class="overview-content"
-          id="o6"
-          data-aos="fade-up-right">
+        <div class="overview-content" id="o6" data-aos="fade-up-right">
           <div class="oi">
-            <img src="unani.png" alt="Homeopathy" />
+            <img src="unani.png" />
           </div>
-
           <div class="ot">
             <h3>Homeopathy</h3>
             <p>
               'Homoeopathy' was introduced as a scientific system of drug
-              therapeutics by a German Physician, Dr. Christian Frederick
-              Samuel Hahnemann in 1805. The principle of Homoeopathy is
-              Similia Similibus Curentur i.e. let likes be treated by likes.
+              therapeutics by a German Physician, Dr. Christian Frederick Samuel
+              Hahnemann in 1805. The principle of Homoeopathy is Similia
+              Similibus Curentur i.e. let likes be treated by likes.
             </p>
           </div>
         </div>
-
       </div>
     </div>
+    <!-- <div class="chart">
+      <canvas id="MyChart" height="200px"></canvas>
+    </div> -->
   </div>
-
-  <!-- ==================== COUNTER SECTION ==================== -->
+  <!-------------Counter Section------------->
   <div class="wrapper" id="wrapper2">
     <div class="cards" #counterSection>
-
       <div class="card" data-aos="fade-down">
-        <h2>
-          <span id="counter1" data-target="1000">0</span>&nbsp;+
-        </h2>
+        <h2><span id="counter1" data-target="1000">0</span>&nbsp;+</h2>
         <h3>Herbal Plants Cataloged</h3>
       </div>
-
       <div class="card" data-aos="fade-up">
-        <h2>
-          <span id="counter2" data-target="500">0</span>&nbsp;+
-        </h2>
+        <h2><span id="counter2" data-target="500">0</span>&nbsp;+</h2>
         <h3>Verified Ayurvedic Remedies</h3>
       </div>
-
       <div class="card" data-aos="fade-down">
-        <h2>
-          <span id="counter3" data-target="100000">0</span>&nbsp;+
-        </h2>
+        <h2><span id="counter3" data-target="100000">0</span>&nbsp;+</h2>
         <h3>Monthly Website Visits</h3>
       </div>
-
     </div>
   </div>
-
-  <!-- ==================== GALLERY ==================== -->
+  <!-------------Gallery & Review Section------------->
   <div class="gallery" id="gallery">
     <h2 class="heading2">Gallery</h2>
-
     <div class="slider-container">
       <button (click)="prevImage()">❮</button>
-
       <div class="gallery-slider">
-        <div
-          class="galleryImage"
-          *ngFor="let image of galleryImages">
-          <img [src]="image.link" alt="Gallery Image" />
+        <div class="galleryImage" *ngFor="let image of galleryImages">
+          <img [src]="image.link" alt="Gallery Image">
         </div>
       </div>
-
       <button (click)="nextImage()">❯</button>
     </div>
   </div>
-
-  <!-- ==================== COMMUNITY ==================== -->
+  <!-- <div class="line" style="height: 5px; background-color: #0b1200;"></div> -->
+  <!------------------Community Section-------------->
   <div class="community">
     <div class="community-header">
       <h2>JOIN OUR HERBAL COMMUNITY</h2>
-
-      <strong>Create authentic relationship</strong>
-
-      <a
-        href="https://chat.whatsapp.com/EaI6V7q3rnXKd8YlMDbhgo"
-        target="_blank"
-        rel="noopener noreferrer">
-        <button>Get Started</button>
-      </a>
+      <strong>Create authentic relationship </strong>
+      <a href="https://chat.whatsapp.com/EaI6V7q3rnXKd8YlMDbhgo" target="_blank" rel="noopener noreferrer"><button>Get Started</button></a>
     </div>
-
-    <img
-      src="https://www.pngall.com/wp-content/uploads/1/Community-Free-Download-PNG.png"
-      alt="Herbal Community"
-    />
+    <img src="https://www.pngall.com/wp-content/uploads/1/Community-Free-Download-PNG.png" alt="">
   </div>
-
-  <!-- ==================== CONTACT ==================== -->
+  <!------------------Contact Section-------------->
   <div class="c5" id="contact">
-
     <div class="contact-left" data-aos="fade-left">
-      <h2 style="margin-bottom: 18px">
-        Contact Us
-      </h2>
-
+      <h2 style="margin-bottom: 18px">Contact Us</h2>
       <div class="contactSection">
-
         <div class="contactDetails">
           <h2>Get In Touch</h2>
-
           <div class="contacts">
-
             <div class="contact">
               <div class="contactIcon">
                 <i class="fa-solid fa-map-marker-alt"></i>
               </div>
-
               <div class="contactText">
                 <span>Address</span>
                 <p>
-                  Ministry of Ayush, Ayush Bhawan, B Block, GPO Complex,
-                  INA, New Delhi – 110023
+                  Ministry of Ayush, Ayush Bhawan, B Block, GPO Complex, INA, New
+                  Delhi – 110023
                 </p>
               </div>
             </div>
-
             <div class="contact">
               <div class="contactIcon">
                 <i class="fa-solid fa-phone"></i>
               </div>
-
               <div class="contactText">
                 <span>Phone Number</span>
                 <p>1800-11-22-02</p>
               </div>
             </div>
-
             <div class="contact">
               <div class="contactIcon">
                 <i class="fa-solid fa-envelope"></i>
               </div>
-
               <div class="contactText">
                 <span>Email</span>
                 <p>support&#64;ayush.gov.in</p>
               </div>
             </div>
-
           </div>
         </div>
-
-        <!-- CONTACT FORM -->
+        <!-----------Contact Form------------>
         <div class="messageForm">
           <form
             [formGroup]="contactForm"
             (ngSubmit)="onSubmit()"
-            class="contactForm">
-
-            <h3 style="text-align: center; color: var(--dark)">
-              Write to us
-            </h3>
-
-            <input
-              type="text"
-              formControlName="name"
-              placeholder="Name"
-            />
-
-            <div
-              *ngIf="contactForm.get('name')?.invalid && isFormSubmitted">
+            class="contactForm"
+          >
+            <h3 style="text-align: center; color: var(--dark)">Write to us</h3>
+            <input type="text" formControlName="name" placeholder="Name" />
+            <div *ngIf="contactForm.get('name')?.invalid && isFormSubmitted">
               Name is required
             </div>
 
-            <input
-              type="text"
-              formControlName="email"
-              placeholder="Email"
-            />
-
-            <div
-              *ngIf="contactForm.get('email')?.invalid && isFormSubmitted">
-
-              <div
-                *ngIf="contactForm.get('email')?.errors?.['required']">
+            <input type="text" formControlName="email" placeholder="Email" />
+            <div *ngIf="contactForm.get('email')?.invalid && isFormSubmitted">
+              <div *ngIf="contactForm.get('email')?.errors?.['required']">
                 Email is required
               </div>
-
-              <div
-                *ngIf="contactForm.get('email')?.errors?.['email']">
+              <div *ngIf="contactForm.get('email')?.errors?.['email']">
                 Invalid email format
               </div>
-
             </div>
 
             <input
@@ -639,135 +420,60 @@
               formControlName="profession"
               placeholder="Profession"
             />
-
             <div
-              *ngIf="contactForm.get('profession')?.invalid && isFormSubmitted">
+              *ngIf="contactForm.get('profession')?.invalid && isFormSubmitted"
+            >
               Profession is required
             </div>
 
             <textarea
               formControlName="message"
-              placeholder="Your query">
-            </textarea>
-
-            <div
-              *ngIf="contactForm.get('message')?.invalid && isFormSubmitted">
+              placeholder="Your query"
+            ></textarea>
+            <div *ngIf="contactForm.get('message')?.invalid && isFormSubmitted">
               Query is required
             </div>
 
-            <button
-              [disabled]="contactForm.invalid || isLoading">
-
-              <span *ngIf="!isLoading">
-                Submit
-              </span>
-
-              <span
-                *ngIf="isLoading"
-                class="spinner">
-              </span>
+            <button [disabled]="contactForm.invalid || isLoading">
+              <span *ngIf="!isLoading">Submit</span>
+              <span *ngIf="isLoading" class="spinner"></span>
             </button>
-
           </form>
         </div>
-
       </div>
     </div>
-
-    <!-- REVIEW -->
+    <!----Review Section----->
     <div class="contact-right" data-aos="fade-right">
       <div class="review">
-
-        <h2 class="heading2">
-          Reviews
-        </h2>
-
+        <h2 class="heading2">Reviews</h2>
         <canvas id="RatingChart"></canvas>
-
-        <h2
-          class="heading2"
-          style="font-size: medium; margin-top: 20px; cursor: pointer;"
-          (click)="giverReview()"
-          *ngIf="!isReviewed">
-          Write a Review
-        </h2>
-
-        <div
-          class="review-form"
-          *ngIf="isReviewSubmitted">
-
-          <form
-            [formGroup]="reviewForm"
-            (ngSubmit)="submitReview()"
-            id="reviewForm">
-
+        <h2 class="heading2" style="font-size: medium; margin-top: 20px;cursor: pointer;" (click)="giverReview()" *ngIf="!isReviewed">Write a Review</h2>
+        <div class="review-form" *ngIf="isReviewSubmitted">
+          <form [formGroup]="reviewForm" (ngSubmit)="submitReview()" id="reviewForm">
             <div class="form-group">
-              <label for="name">
-                Name:
-              </label>
-
-              <input
-                type="text"
-                id="name"
-                formControlName="userName"
-                required
-              />
+              <label for="rating">Name:</label>
+              <input type="text" id="name" formControlName="userName" required>
             </div>
-
             <div class="form-group">
-              <label for="rating">
-                Rating (Should be between 1-5):
-              </label>
-
-              <input
-                type="number"
-                id="rating"
-                formControlName="rating"
-                min="1"
-                max="5"
-                required
-              />
+              <label for="rating">Rating(Should be between 1-5):</label>
+              <input type="number" id="rating" formControlName="rating" min="1" max="5" required>
             </div>
-
             <div class="form-group">
-              <label for="comment">
-                Review:
-              </label>
-
-              <textarea
-                id="comment"
-                formControlName="comment"
-                required>
-              </textarea>
+              <label for="comment">Review:</label>
+              <textarea id="comment" formControlName="comment" required></textarea>
             </div>
-
             <div class="buttons">
-              <button
-                type="submit"
-                [disabled]="!reviewForm.valid">
-                Submit
-              </button>
-
-              <button
-                type="button"
-                (click)="closeReview()">
-                Close
-              </button>
+              <button type="submit" [disabled]="!reviewForm.valid">Submit</button>
+              <button type="button" (click)="closeReview()">Close</button>
             </div>
-
           </form>
         </div>
       </div>
     </div>
-
   </div>
-
-  <!-- ==================== YOUTUBE HIGHLIGHTS ==================== -->
+  <!------------------Highlights Section(YT Video)-------------->
   <div class="highlights">
-    <p class="heading2">
-      A Quick Overview
-    </p>
-
+    <p class="heading2">A Quick Overview</p>
     <iframe
       width="800"
       height="415"
@@ -776,56 +482,34 @@
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen>
-    </iframe>
+      allowfullscreen
+    ></iframe>
   </div>
-
-  <!-- ==================== FAQ ==================== -->
+  <!------------------FAQ Section-------------->
   <div class="c6-main">
-
     <div class="c6-inner">
       <div class="shape1" id="sh8"></div>
       <div class="shape1" id="sh9"></div>
       <div class="shape1" id="sh10"></div>
     </div>
-
     <div class="c6-outer">
       <div class="c6">
-
         <div class="faq-section">
-          <h2>
-            Frequently Asked Questions
-          </h2>
-
-          <div
-            class="faq-item"
-            *ngFor="let faq of faqs; let i = index">
-
-            <div
-              class="faq-question"
-              (click)="toggleFaq(i)">
-
-              <span>
-                {{ faq.question }}
-              </span>
-
-              <span class="plus-icon">
-                {{ openedFaqIndex === i ? "-" : "+" }}
-              </span>
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq-item" *ngFor="let faq of faqs; let i = index">
+            <div class="faq-question" (click)="toggleFaq(i)">
+              <span>{{ faq.question }}</span>
+              <span class="plus-icon">{{
+                openedFaqIndex === i ? "-" : "+"
+              }}</span>
             </div>
-
-            <div
-              class="faq-answer"
-              *ngIf="openedFaqIndex === i">
+            <div class="faq-answer" *ngIf="openedFaqIndex === i">
               {{ faq.answer }}
             </div>
-
           </div>
         </div>
-
       </div>
     </div>
   </div>
-
   <app-footer></app-footer>
 </div>
